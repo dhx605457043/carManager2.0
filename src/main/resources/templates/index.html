@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>车辆管理系统首页</title>
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/skins.css}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.2.0}" rel="stylesheet"/>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<div id="wrapper">
+
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close">
+            <i class="fa fa-times-circle"></i>
+        </div>
+        <a th:href="@{/index}">
+            <li class="logo hidden-xs">
+                <span class="logo-lg">Tom 车辆管理系统</span>
+            </li>
+        </a>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <li>
+                    <a th:class="menuItem">
+                        <i class="fa fa-automobile"></i>
+                        <span class="nav-label" th:utext="车辆管理"></span>
+                        <span th:class="|fa arrow|"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a th:class="menuItem" th:text="车辆信息" th:href="@{/carManager}"></a>
+                            <span class="|fa arrow|"></span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a th:class="menuItem">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-label" th:utext="司机管理"></span>
+                        <span th:class="|fa arrow|"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a th:class="menuItem" th:text="司机信息" th:href="@{/driverManager}"></a>
+                            <span class="|fa arrow|"></span>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a th:class="menuItem">
+                        <i class="fa fa-reorder"></i>
+                        <span class="nav-label" th:utext="订单管理"></span>
+                        <span th:class="|fa arrow|"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a th:class="menuItem" th:text="订单信息" th:href="@{/orderManager}"></a>
+                            <span class="|fa arrow|"></span>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left tabLeft">
+                <i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active menuTab" data-id="/system/main">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right tabRight">
+                <i class="fa fa-forward"></i>
+            </button>
+            <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
+        </div>
+
+        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
+
+        <div class="row mainContent" id="content-main">
+            <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
+                    th:src="@{/car/info}" frameborder="0" seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">© 地框 </div>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+<!-- 全局js -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.2.0}"></script>
+    <script th:src="@{/ruoyi/js/common.js?v=4.2.0}"></script>
+<script th:src="@{/ruoyi/index.js}"></script>
+
+
+<script th:inline="javascript">
+    var mode = "history";
+    // 历史访问路径缓存
+    /** 刷新时访问路径页签 */
+    function applyPath(url) {
+        $('a[href$="' + decodeURI(url) + '"]').click();
+        $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li :not(.user-panel)").addClass("active").end().parents("ul").addClass("in");
+    }
+    // 本地主题优先，未设置取系统配置
+    $(function() {
+        if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
+            var url = storage.get('publicPath');
+            if ($.common.isNotEmpty(url)) {
+                applyPath(url);
+            }
+        } else {
+            var hash = location.hash;
+            if ($.common.isNotEmpty(hash)) {
+                var url = hash.substring(1, hash.length);
+                applyPath(url);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

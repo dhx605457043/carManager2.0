@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.manager.dao.OrderListMapper">
+
+    <select id="selectAllOrder" resultType="com.car.manager.entity.Ex.OrderListEx" parameterType="com.car.manager.entity.Ex.OrderListEx">
+        select
+            orderId,
+            ownerOfCargo,
+            goodsName,
+            orderDate,
+            driverCost,
+            chinaCost,
+            koreaCost,
+            freight,
+            orderCar,
+            profit,
+            quarantineCost,
+            cargoName,
+            consignorName,
+            orderCarNumber,
+               orderType
+#             case orderType
+#                 when 1 then '是'
+#                 else '否' end as orderType
+        from orderlist
+                 left join carlist on orderlist.orderCar=carlist.carId
+                 left join consignorlist on orderlist.ownerOfCargo=consignorlist.consignorId
+                 left join cargolist on orderlist.goodsName=cargolist.cargoId
+    </select>
+
+</mapper>
