@@ -1,6 +1,6 @@
 package com.car.manager.service;
 
-import com.car.manager.entity.LicensePlateAreaList;
+import com.car.manager.controller.response.SelectAllCarLicenseResponse;
 import java.util.List;
 
 /**
@@ -10,5 +10,6 @@ import java.util.List;
  * @since 2020-05-15 15:22:19
  */
 public interface LicensePlateAreaListService {
+    List<SelectAllCarLicenseResponse> selectAllCarLicense ();
 
 }

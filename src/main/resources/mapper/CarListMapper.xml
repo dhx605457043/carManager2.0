@@ -17,5 +17,8 @@
             </if>
         </where>
     </select>
+    <insert id="carAdd" parameterType="com.car.manager.entity.CarList">
+        insert into carList (carNumber,carLicensePlateAreaCode) values (#{carNumber},#{carLicensePlateAreaCode})
+    </insert>
 
 </mapper>

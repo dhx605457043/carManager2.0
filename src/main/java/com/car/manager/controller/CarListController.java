@@ -1,11 +1,21 @@
 package com.car.manager.controller;
 
 
+import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
+import com.car.manager.controller.response.SelectAllCarLicenseResponse;
 import com.car.manager.controller.response.SelectAllCarResponse;
+import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.CarList;
 import com.car.manager.service.CarListService;
+import com.car.manager.service.LicensePlateAreaListService;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GeodeticCurve;
+import org.gavaghan.geodesy.GlobalCoordinates;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,9 +35,12 @@ public class CarListController extends BaseController{
     @Resource
     private CarListService carlistService;
 
+    @Resource
+    private LicensePlateAreaListService licensePlateAreaListService;
+
     private String prefix = "car";
 
-    @GetMapping()
+    @GetMapping("/carList")
     public String car() {
         return prefix + "/carList";
     }
@@ -37,41 +50,30 @@ public class CarListController extends BaseController{
      */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SelectAllCarRequest request) {
-//        startPage();
-        List<SelectAllCarResponse> list = carlistService.selectAllCars(request);
-        return getDataTable(list);
+    public TableDataInfo list(SelectAllCarRequest request,Model model) {
+        return getDataTable(carlistService.selectAllCars(request));
     }
-
-    /**
-     * 导出车辆列表
-     */
-//    @Log(title = "车辆", businessType = BusinessType.EXPORT)
-//    @PostMapping("/export")
-//    @ResponseBody
-//    public AjaxResult export(Car car) {
-//        List<Car> list = carService.selectCarList(car);
-//        ExcelUtil<Car> util = new ExcelUtil<Car>(Car.class);
-//        return util.exportExcel(list, "car");
-//    }
 
     /**
      * 新增车辆
      */
-    @GetMapping("/add")
-    public String add() {
-        return prefix + "/add";
+    @GetMapping("/toAddCar")
+    public String toAdd(Model model) {
+        model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
+
+        return prefix + "/carAdd";
     }
 
     /**
      * 新增保存车辆
      */
 //    @Log(title = "车辆", businessType = BusinessType.INSERT)
-//    @PostMapping("/add")
-//    @ResponseBody
-//    public AjaxResult addSave(Car car) {
-//        return toAjax(carService.insertCar(car));
-//    }
+    @PostMapping("/addCar")
+    @ResponseBody
+    public AjaxResult addSave(InsertCarRequest request) {
+        return toAjax(carlistService.insertCar(request));
+//        return null;
+    }
 
     /**
      * 修改车辆

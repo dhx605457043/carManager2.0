@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-car-add">
+        <div class="form-group">
+            <div class="col-sm-9">
+            <label class="col-sm-3 control-label">车辆号码：</label>
+                <select name="carn" id="carn" th:width="50px" th:height="40px" class="select-table2">
+                    <option th:selected="${license.licensePlateAreaCode == 1}"
+                            th:each="license:${licenseResponses}"
+                            th:value="${license.licensePlateAreaCode}"
+                            th:text="${license.licensePlateAreaName}">
+                    </option>
+                </select>
+                <input name="carNumber" class="input-s" type="text" th:width="50">
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+            console.log(234);
+    var prefix = "/carManager"
+    $("#form-car-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        console.log(234);
+
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/addCar", $('#form-car-add').serialize());
+        }
+    }
+</script>
+</body>
+</html>

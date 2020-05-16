@@ -97,13 +97,22 @@
                 {
                     field: 'orderType',
                     title: '结账状态',
-                    // style: 'background-color: #009688',
-                    bcolor: 'background-color: #009688',
-                    // background:'#009688',
-                    // style:'background-color',
+                    width:80,
+                    align: 'center',
+                    cellStyle:function(value,row,index){
+                        if (value == 2) {
+                            return {
+                                css:{
+                                    "background-color":"#ed5565",
+                                    "color":"#fff"
+                                }
+                            }
+                        } else {
+                            return {css:{"background-color":"#fff"}}
+                        }
+                    },
                     formatter:function (value, row, index) {
                         if (value == 1) {
-
                             return "是";
 
                         } else {

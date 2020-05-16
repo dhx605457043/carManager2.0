@@ -1,8 +1,10 @@
 package com.car.manager.service.impl;
 
+import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.dao.CarListMapper;
+import com.car.manager.entity.CarList;
 import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.util.BeanCopyUtils;
@@ -33,5 +35,11 @@ public class CarListServiceImpl implements CarListService {
         PageInfo<CarListEx> carListExPageInfo = new PageInfo<>(carListExes);
         List<SelectAllCarResponse> responseModel = (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(carListExPageInfo.getList(),SelectAllCarResponse.class);
         return responseModel;
+    }
+
+    @Override
+    public int insertCar(InsertCarRequest request) {
+        CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
+        return carlistMapper.carAdd(requestModel);
     }
 }

@@ -1,5 +1,6 @@
 package com.car.manager.service;
 
+import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.response.SelectAllCarResponse;
 
@@ -13,4 +14,6 @@ import java.util.List;
  */
 public interface CarListService {
     List<SelectAllCarResponse> selectAllCars (SelectAllCarRequest request);
+    int insertCar (InsertCarRequest request);
+
 }
