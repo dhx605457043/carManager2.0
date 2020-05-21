@@ -8,82 +8,73 @@
     <form class="form-horizontal m" id="form-car-carAdd">
         <div class="form-group">
             <div class="col-sm-9">
-<!--            <label class="col-sm-3 control-label">车辆号码：</label>-->
-                <select name="carLicensePlateAreaCode" id="carLicensePlateAreaCode" th:width="50px" th:height="40px" class="select-table2">
-                    <option th:selected="${license.licensePlateAreaCode == 1}"
-                            th:each="license:${licenseResponses}"
-                            th:value="${license.licensePlateAreaCode}"
-                            th:text="${license.licensePlateAreaName}">
-                    </option>
-                </select>
-                <input name="carNumber" class="input-s-car" type="text" th:width="50" th:placeholder="车辆号码" style="text-transform:uppercase;">
+                <!--            <label class="col-sm-3 control-label">车辆号码：</label>-->
+                <div class="input-group">
+
+
+                    <select name="carLicensePlateAreaCode" id="carLicensePlateAreaCode" class="form-control">
+                        <option th:selected="${license.licensePlateAreaCode == 1}"
+                                th:each="license:${licenseResponses}"
+                                th:value="${license.licensePlateAreaCode}"
+                                th:text="${license.licensePlateAreaName}">
+                        </option>
+                    </select>
+                    <input name="carNumber" class="input-s-car" type="text" th:width="50" th:placeholder="车辆号码" style="text-transform:uppercase;">
+                </div>
             </div>
         </div>
+        <!--        <div class="form-group">-->
+        <!--            <label class="col-sm-3 control-label">用户性别：</label>-->
+        <!--            <div class="col-sm-8">-->
+        <!--                <div class="input-group" style="width: 100%">-->
+        <!--                    <select name="userSex" class="form-control" th:with="type=${@dict.getType('sys_user_sex')}">-->
+        <!--                        <option th:selected="${license.licensePlateAreaCode == 1}"-->
+        <!--                                th:each="license:${licenseResponses}"-->
+        <!--                                th:value="${license.licensePlateAreaCode}"-->
+        <!--                                th:text="${license.licensePlateAreaName}">-->
+        <!--                        </option>-->
+        <!--                    </select>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </form>
 </div>
 
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/carManager"
-    $("#form-user-add").validate({
-        onkeyup: false,
-        rules:{
-            carNumber:{
-                minlength: 2,
-                maxlength: 20,
-                remote: {
-                    url: prefix + "/checkCarNumber",
-                    type: "post",
-                    dataType: "json",
-                    data: {
-                        "loginName": function() {
-                            return $.common.trim($("#loginName").val());
-                        }
-                    },
-                    dataFilter: function(data, type) {
-                        return $.validate.unique(data);
-                    }
-                }
-            },
-        },
-        messages: {
-            "carNumber": {
-                remote: "用户已经存在"
-            }
-        },
-        focusCleanup: true
-    });
-
+    var carNumber = $("#carNumber").val();
     function submitHandler() {
-        if ($.validate.form()) {
-            console.log("dd");
+        if (isVehicleNumber(carNumber)) {
+            console.log("1")
+            //     // $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serializeArray());
+        } else  {
+            console.log("0")
         }
-            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
-    }
-</script>
-<script>
-
-    function addCar() {
-        var carn = $("#carn").val();
-        var carnumber = $("#carnumber").val();
-        var licensePlateAreaName=$("#carn").find("option:selected").text();
-
-        var car = {
-            carNumber:carnumber.toUpperCase(),carLicensePlateAreaCode:carn,licensePlateAreaName:licensePlateAreaName
-        }
-        $.ajax({
-
-            type:"post",
-            url:"/carManage/addCar",
-            datatype:"json",
-            data:{car:JSON.stringify(car)},
-            success:function(data){
-                // alert(data) ;
-                location="[[@{/carManage/carLists}]]";
-            }
-        });
 
     }
+    function isVehicleNumber(vehicleNumber) {
+
+        var xreg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
+
+        var creg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+
+        if(vehicleNumber.length = 7){
+
+            return creg.test(vehicleNumber);
+
+        } else if(vehicleNumber.length = 8){
+
+            return xreg.test(vehicleNumber);
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
 </script>
 </body>
 </html>

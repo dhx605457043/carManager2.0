@@ -75,6 +75,11 @@ public class CarListController extends BaseController{
 //        return null;
     }
 
+    @PostMapping("/checkCarNumber")
+    public String checkCarNumber (CarList car) {
+        return "0";
+    }
+
     /**
      * 修改车辆
      */
