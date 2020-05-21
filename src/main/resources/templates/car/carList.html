@@ -67,8 +67,11 @@
                     title: '家庭住址:'
                 },
                 {
-                    field: 'cargoName' + '吨',
-                    title: '货物:'
+                    field: 'cargoName',
+                    title: '货物:',
+                    formatter:function (value,row,index) {
+                        return "30" + "吨";
+                    }
                 },
                 {
                     field: 'carNumber',

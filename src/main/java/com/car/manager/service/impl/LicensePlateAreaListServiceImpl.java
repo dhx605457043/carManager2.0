@@ -26,5 +26,6 @@ public class LicensePlateAreaListServiceImpl implements LicensePlateAreaListServ
         List<LicensePlateAreaList> licensePlateAreaLists = licensePlateAreaListMapper.selectAllLicense();
         List<SelectAllCarLicenseResponse> responses = (List<SelectAllCarLicenseResponse>) BeanCopyUtils.copyBeanList(licensePlateAreaLists,SelectAllCarLicenseResponse.class);
         return responses;
+
     }
 }

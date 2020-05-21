@@ -1806,6 +1806,11 @@ table.dataTable thead .sorting:after {
 .input-s {
     width: 200px;
 }
+.input-s-car {
+    /*border-radius: 3px;*/
+    border-radius:3px;
+    width: 200px;
+}
 
 .input-s-lg {
     width: 250px;

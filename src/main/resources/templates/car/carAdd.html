@@ -8,15 +8,15 @@
     <form class="form-horizontal m" id="form-car-carAdd">
         <div class="form-group">
             <div class="col-sm-9">
-            <label class="col-sm-3 control-label">车辆号码：</label>
-                <select name="licensePlateAreaCode" id="licensePlateAreaCode" th:width="50px" th:height="40px" class="select-table2">
+<!--            <label class="col-sm-3 control-label">车辆号码：</label>-->
+                <select name="carLicensePlateAreaCode" id="carLicensePlateAreaCode" th:width="50px" th:height="40px" class="select-table2">
                     <option th:selected="${license.licensePlateAreaCode == 1}"
                             th:each="license:${licenseResponses}"
                             th:value="${license.licensePlateAreaCode}"
                             th:text="${license.licensePlateAreaName}">
                     </option>
                 </select>
-                <input name="carNumber" class="input-s" type="text" th:width="50">
+                <input name="carNumber" class="input-s-car" type="text" th:width="50" th:placeholder="车辆号码" style="text-transform:uppercase;">
             </div>
         </div>
     </form>
@@ -25,14 +25,64 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/carManager"
-    $("#form-car-carAdd").validate({
+    $("#form-user-add").validate({
+        onkeyup: false,
+        rules:{
+            carNumber:{
+                minlength: 2,
+                maxlength: 20,
+                remote: {
+                    url: prefix + "/checkCarNumber",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "loginName": function() {
+                            return $.common.trim($("#loginName").val());
+                        }
+                    },
+                    dataFilter: function(data, type) {
+                        return $.validate.unique(data);
+                    }
+                }
+            },
+        },
+        messages: {
+            "carNumber": {
+                remote: "用户已经存在"
+            }
+        },
         focusCleanup: true
     });
 
     function submitHandler() {
         if ($.validate.form()) {
-            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
+            console.log("dd");
         }
+            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
+    }
+</script>
+<script>
+
+    function addCar() {
+        var carn = $("#carn").val();
+        var carnumber = $("#carnumber").val();
+        var licensePlateAreaName=$("#carn").find("option:selected").text();
+
+        var car = {
+            carNumber:carnumber.toUpperCase(),carLicensePlateAreaCode:carn,licensePlateAreaName:licensePlateAreaName
+        }
+        $.ajax({
+
+            type:"post",
+            url:"/carManage/addCar",
+            datatype:"json",
+            data:{car:JSON.stringify(car)},
+            success:function(data){
+                // alert(data) ;
+                location="[[@{/carManage/carLists}]]";
+            }
+        });
+
     }
 </script>
 </body>
