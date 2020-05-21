@@ -1201,6 +1201,7 @@ var table = {
         },
         // 校验封装处理
         validate: {
+
         	// 判断返回标识是否唯一 false 不存在 true 存在
         	unique: function (value) {
             	if (value == "0") {
@@ -1219,7 +1220,7 @@ var table = {
                 return $("#" + currentId).validate().resetForm();
             }
         },
-        // 树插件封装处理
+        // 树插件封装处理234
         tree: {
         	_option: {},
         	_lastValue: {},

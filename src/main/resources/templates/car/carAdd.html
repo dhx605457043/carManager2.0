@@ -5,11 +5,11 @@
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-car-add">
+    <form class="form-horizontal m" id="form-car-carAdd">
         <div class="form-group">
             <div class="col-sm-9">
             <label class="col-sm-3 control-label">车辆号码：</label>
-                <select name="carn" id="carn" th:width="50px" th:height="40px" class="select-table2">
+                <select name="licensePlateAreaCode" id="licensePlateAreaCode" th:width="50px" th:height="40px" class="select-table2">
                     <option th:selected="${license.licensePlateAreaCode == 1}"
                             th:each="license:${licenseResponses}"
                             th:value="${license.licensePlateAreaCode}"
@@ -24,17 +24,14 @@
 
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
-            console.log(234);
     var prefix = "/carManager"
-    $("#form-car-add").validate({
+    $("#form-car-carAdd").validate({
         focusCleanup: true
     });
 
     function submitHandler() {
-        console.log(234);
-
         if ($.validate.form()) {
-            $.operate.save(prefix + "/addCar", $('#form-car-add').serialize());
+            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
         }
     }
 </script>
