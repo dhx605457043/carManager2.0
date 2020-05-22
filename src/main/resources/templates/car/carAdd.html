@@ -19,7 +19,9 @@
                                 th:text="${license.licensePlateAreaName}">
                         </option>
                     </select>
-                    <input name="carNumber" class="input-s-car" type="text" th:width="50" th:placeholder="车辆号码" style="text-transform:uppercase;">
+                </div>
+                <div class="input-group">
+                    <input name="carNumber" id="carNumber" class="form-control" type="text" th:width="40" th:placeholder="车辆号码" style="text-transform:uppercase;">
                 </div>
             </div>
         </div>
@@ -43,15 +45,48 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/carManager"
-    var carNumber = $("#carNumber").val();
-    function submitHandler() {
-        if (isVehicleNumber(carNumber)) {
-            console.log("1")
-            //     // $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serializeArray());
-        } else  {
-            console.log("0")
-        }
+    var licensePlateAreaName = $("#carLicensePlateAreaCode").find("option:selected").text();
+    var carnumber = $("#carNumber").val();
+    // var carNumber = licensePlateAreaName + $("#carnumber").val();
+    console.log(carnumber);
+    // console.log($("#carnumber").val());
+    $("#form-car-carAdd").validate({
+        onkeyup: false,
+        rules:{
+            carNumber:{
+                required: true,
+                maxlength:6,
+                minlength:6,
+                isCarNumber:true,
+                remote: {
+                    url: prefix + "/checkCarNumber",
+                    type: "post",
+                    data: {
+                        "carNumber" : function() {
+                            console.log("11");
+                            return $.common.trim(licensePlateAreaName + carNumber.toUpperCase());
+                        }
+                    },
+                }
 
+            },
+        },
+        messages: {
+            carNumber: {
+                required: "请输入车号",
+                remote:"车辆存在,请勿重复添加"
+            },
+        },
+        focusCleanup: false
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            console.log("true");
+            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
+        } else  {
+            console.log("false");
+        }
     }
     function isVehicleNumber(vehicleNumber) {
 

@@ -38,6 +38,13 @@ $(document).ready(function(){
 		return this.optional(element) || (birth).test(value);
 	},"出生日期格式示例2000-01-01");
 	//校验IP地址
+	//校验车辆号码
+	jQuery.validator.addMethod("isCarNumber",function(value,element){
+		var id=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+		console.log(value);
+		return this.optional(element) || (id.test(value));
+	},"请输入正确的车辆号码");
+
 	jQuery.validator.addMethod("isIp",function(value,element){
 		var ip = /^(?:(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:1[0-9][0-9]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.)){3}(?:(?:2[0-4][0-9])|(?:25[0-5])|(?:1[0-9][0-9])|(?:[1-9][0-9])|(?:[0-9]))$/;
 		return this.optional(element) || (ip).test(value);
