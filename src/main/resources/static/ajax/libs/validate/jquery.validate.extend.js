@@ -1,10 +1,10 @@
 /*this is basic form validation using for validation person's basic information author:Clara Guo data:2017/07/20*/
 $(document).ready(function(){
-	$.validator.setDefaults({       
-		  submitHandler: function(form) {    
-		 		form.submit();    
-		}       
-	});  
+	$.validator.setDefaults({
+		submitHandler: function(form) {
+			form.submit();
+		}
+	});
 	//手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
 	jQuery.validator.addMethod("isPhone",function(value,element){
 		var length = value.length;
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		var userName=/^[a-zA-Z0-9]{2,13}$/;
 		return this.optional(element) || (userName).test(value);
 	},'请输入数字或者字母,不包含特殊字符');
-	
+
 	//校验身份证
 	jQuery.validator.addMethod("isIdentity",function(value,element){
 		var id= /^(\d{15}$|^\d{18}$|^\d{17}(\d|X))$/;
@@ -40,9 +40,15 @@ $(document).ready(function(){
 	//校验IP地址
 	//校验车辆号码
 	jQuery.validator.addMethod("isCarNumber",function(value,element){
+		let param = {
+			"1":"辽","2":"黑","3":"京","4":"津","5":"沪","6":"渝","7":"冀","8":"豫","9":"云","10":"琼","11":"湘","12":"皖","13":"鲁","14":"苏","15":"浙",
+			"16":"赣", "17":"鄂","18":"桂","19":"甘","20":"晋","21":"蒙","22":"陕","23":"吉","24":"闽","25":"贵","26":"粤","27":"青","28":"藏","29":"川","30":"宁"
+		};
+		var licensePlateAreaCode=$("#carLicensePlateAreaCode").val();
 		var id=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
-		console.log(value);
-		return this.optional(element) || (id.test(value));
+		var carNumber = param[licensePlateAreaCode] + value;
+		console.log(carNumber.toUpperCase);
+		return this.optional(element) || (id.test(carNumber.toUpperCase()));
 	},"请输入正确的车辆号码");
 
 	jQuery.validator.addMethod("isIp",function(value,element){
@@ -50,11 +56,11 @@ $(document).ready(function(){
 		return this.optional(element) || (ip).test(value);
 	},"IP地址格式示例127.0.0.1");
 	jQuery.validator.addMethod("notEqual", function(value, element, param) {
-        return value != param;
-    }, $.validator.format("输入值不允许为{0}"));
+		return value != param;
+	}, $.validator.format("输入值不允许为{0}"));
 	jQuery.validator.addMethod("gt", function(value, element, param) {
-        return value > param;
-    }, $.validator.format("输入值必须大于{0}"));
+		return value > param;
+	}, $.validator.format("输入值必须大于{0}"));
 	//校验新旧密码是否相同
 	jQuery.validator.addMethod("isdiff",function(){
 		var p1=$("#pwdOld").val();
@@ -62,9 +68,9 @@ $(document).ready(function(){
 		if(p1==p2){
 			return false;
 		}else{
-			 return true;
+			return true;
 		}
-		});
+	});
 	//校验新密码和确认密码是否相同
 	jQuery.validator.addMethod("issame",function(){
 		var p3=$("#confirm_password").val();
@@ -72,9 +78,9 @@ $(document).ready(function(){
 		if(p3==p4){
 			return true;
 		}else{
-			 return false;
+			return false;
 		}
-		});
+	});
 	//校验基础信息表单
 	$("#basicInfoForm").validate({
 		errorElement:'span',
@@ -86,7 +92,7 @@ $(document).ready(function(){
 			},
 			sex:"required",
 			birth:"required",
-            mobile:{
+			mobile:{
 				required:true,
 				isPhone:true
 			},
@@ -106,7 +112,7 @@ $(document).ready(function(){
 			birth:{
 				required:"请输入出生年月"
 			},
-            mobile:{
+			mobile:{
 				required:"请输入手机号",
 				isPhone:"请填写正确的11位手机号"
 			},
@@ -115,12 +121,12 @@ $(document).ready(function(){
 				email:"请填写正确的邮箱格式"
 			}
 		},
-	
+
 		errorPlacement:function(error,element){
 			element.next().remove();
 			element.closest('.gg-formGroup').append(error);
 		},
-		
+
 		highlight:function(element){
 			$(element).closest('.gg-formGroup').addClass('has-error has-feedback');
 		},
@@ -134,52 +140,52 @@ $(document).ready(function(){
 			alert("保存成功!");
 		}
 	});
-	
+
 	//校验修改密码表单
 	$("#modifyPwd").validate({
 		onfocusout: function(element) { $(element).valid()},
-		 debug:false, //表示校验通过后是否直接提交表单
-		 onkeyup:false, //表示按键松开时候监听验证
+		debug:false, //表示校验通过后是否直接提交表单
+		onkeyup:false, //表示按键松开时候监听验证
 		rules:{
 			pwdOld:{
 				required:true,
 				minlength:6
 			},
-            pwdNew:{
-			   required:true,
-			   minlength:6,
-			   isdiff:true,
-			   //issame:true,
-		   },
+			pwdNew:{
+				required:true,
+				minlength:6,
+				isdiff:true,
+				//issame:true,
+			},
 			confirm_password:{
-			  required:true,
-			  minlength:6,
-			  issame:true,
+				required:true,
+				minlength:6,
+				issame:true,
 			}
-		  
-		   },
+
+		},
 		messages:{
-			 	pwdOld : {
-					 required:'必填',
-					 minlength:$.validator.format('密码长度要大于6')
-				},
-            	pwdNew:{
-				   required:'必填',
-				   minlength:$.validator.format('密码长度要大于6'),
-				   isdiff:'原密码与新密码不能重复',
-				  
-			   },
-				confirm_password:{
-				   required:'必填',
-				   minlength:$.validator.format('密码长度要大于6'),
-				   issame:'新密码要与确认新密码一致',
-				}
-		
+			pwdOld : {
+				required:'必填',
+				minlength:$.validator.format('密码长度要大于6')
+			},
+			pwdNew:{
+				required:'必填',
+				minlength:$.validator.format('密码长度要大于6'),
+				isdiff:'原密码与新密码不能重复',
+
+			},
+			confirm_password:{
+				required:'必填',
+				minlength:$.validator.format('密码长度要大于6'),
+				issame:'新密码要与确认新密码一致',
+			}
+
 		},
 		errorElement:"mes",
 		errorClass:"gg-star",
-		errorPlacement: function(error, element) 
-		{ 
+		errorPlacement: function(error, element)
+		{
 			element.closest('.gg-formGroup').append(error);
 
 		}

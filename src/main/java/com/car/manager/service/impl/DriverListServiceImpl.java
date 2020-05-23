@@ -18,7 +18,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-15 14:21:56
  */
-@Service("driverlistService")
+@Service()
 public class DriverListServiceImpl implements DriverListService {
     @Resource
     private DriverListMapper driverlistMapper;

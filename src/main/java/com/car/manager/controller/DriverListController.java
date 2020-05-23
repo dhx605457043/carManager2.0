@@ -36,8 +36,7 @@ public class DriverListController extends BaseController{
     @ResponseBody
     public TableDataInfo list(SelectAllDriverRequest request) {
         startPage();
-        List<SelectAllDriversResponse> list = driverListService.selectAllDrivers(request);
-        return getDataTable(list);
+        return getDataTable(driverListService.selectAllDrivers(request));
     }
 
 }

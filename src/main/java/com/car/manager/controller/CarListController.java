@@ -48,6 +48,7 @@ public class CarListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectAllCarRequest request, Model model) {
+        startPage();
         return getDataTable(carlistService.selectAllCars(request));
     }
 

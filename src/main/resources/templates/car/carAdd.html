@@ -17,6 +17,7 @@
                                 th:each="license:${licenseResponses}"
                                 th:value="${license.licensePlateAreaCode}"
                                 th:text="${license.licensePlateAreaName}">
+
                         </option>
                     </select>
                 </div>
@@ -25,31 +26,13 @@
                 </div>
             </div>
         </div>
-        <!--        <div class="form-group">-->
-        <!--            <label class="col-sm-3 control-label">用户性别：</label>-->
-        <!--            <div class="col-sm-8">-->
-        <!--                <div class="input-group" style="width: 100%">-->
-        <!--                    <select name="userSex" class="form-control" th:with="type=${@dict.getType('sys_user_sex')}">-->
-        <!--                        <option th:selected="${license.licensePlateAreaCode == 1}"-->
-        <!--                                th:each="license:${licenseResponses}"-->
-        <!--                                th:value="${license.licensePlateAreaCode}"-->
-        <!--                                th:text="${license.licensePlateAreaName}">-->
-        <!--                        </option>-->
-        <!--                    </select>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
     </form>
 </div>
 
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/carManager"
-    var licensePlateAreaName = $("#carLicensePlateAreaCode").find("option:selected").text();
-    var carnumber = $("#carNumber").val();
-    // var carNumber = licensePlateAreaName + $("#carnumber").val();
-    console.log(carnumber);
-    // console.log($("#carnumber").val());
+
     $("#form-car-carAdd").validate({
         onkeyup: false,
         rules:{
@@ -57,24 +40,13 @@
                 required: true,
                 maxlength:6,
                 minlength:6,
-                isCarNumber:true,
-                remote: {
-                    url: prefix + "/checkCarNumber",
-                    type: "post",
-                    data: {
-                        "carNumber" : function() {
-                            console.log("11");
-                            return $.common.trim(licensePlateAreaName + carNumber.toUpperCase());
-                        }
-                    },
-                }
-
+                isCarNumber: true,
             },
         },
         messages: {
             carNumber: {
                 required: "请输入车号",
-                remote:"车辆存在,请勿重复添加"
+                remote:"车辆存在",
             },
         },
         focusCleanup: false
@@ -88,28 +60,6 @@
             console.log("false");
         }
     }
-    // function isVehicleNumber(vehicleNumber) {
-    //
-    //     var xreg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
-    //
-    //     var creg=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
-    //
-    //     if(vehicleNumber.length = 7){
-    //
-    //         return creg.test(vehicleNumber);
-    //
-    //     } else if(vehicleNumber.length = 8){
-    //
-    //         return xreg.test(vehicleNumber);
-    //
-    //     } else {
-    //
-    //         return false;
-    //
-    //     }
-    //
-    // }
-
 </script>
 </body>
 </html>

@@ -20,5 +20,10 @@
     <insert id="carAdd" parameterType="com.car.manager.entity.CarList">
         insert into carList (carNumber,carLicensePlateAreaCode) values (#{carNumber},#{carLicensePlateAreaCode})
     </insert>
+    <select id="selectCarById" parameterType="string" resultType="boolean">
+        select *
+        from carlist
+        where carId=#{carId}
+    </select>
 
 </mapper>

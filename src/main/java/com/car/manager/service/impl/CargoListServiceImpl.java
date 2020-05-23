@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2020-05-15 15:22:19
  */
-@Service("CargoListService")
+@Service()
 public class CargoListServiceImpl implements CargoListService {
     @Resource
     private CargoListMapper cargoListMapper;

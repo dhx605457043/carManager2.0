@@ -21,7 +21,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-14 17:58:00
  */
-@Service("CarListService")
+@Service()
 public class CarListServiceImpl implements CarListService {
 
     @Resource
@@ -30,16 +30,17 @@ public class CarListServiceImpl implements CarListService {
     @Override
     public List<SelectAllCarResponse> selectAllCars(SelectAllCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
-        PageHelper.startPage(requestModel.getPageNum(),requestModel.getPageSize());
         List<CarListEx> carListExes = carlistMapper.selectAllCar(requestModel);
-        PageInfo<CarListEx> carListExPageInfo = new PageInfo<>(carListExes);
-        List<SelectAllCarResponse> responseModel = (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(carListExPageInfo.getList(),SelectAllCarResponse.class);
-        return responseModel;
+        List<SelectAllCarResponse> response = (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(carListExes,SelectAllCarResponse.class);
+        return response;
     }
+
+
 
     @Override
     public int insertCar(InsertCarRequest request) {
         CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
+        requestModel.setCarNumber(requestModel.getCarNumber().toUpperCase());
         return carlistMapper.carAdd(requestModel);
     }
 }

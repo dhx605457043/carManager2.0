@@ -18,7 +18,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-15 15:21:43
  */
-@Service("OrderListService")
+@Service()
 public class OrderListServiceImpl implements OrderListService {
     @Resource
     private OrderListMapper orderListMapper;
