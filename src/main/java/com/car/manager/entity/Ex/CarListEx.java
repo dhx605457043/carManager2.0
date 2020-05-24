@@ -13,8 +13,6 @@ public class CarListEx extends CarList {
     private String driverIDCard;
     private String licensePlateAreaName;
     private Integer licensePlateAreaCode;
-    private Integer pageNum;
-    private Integer pageSize;
 
 }
 

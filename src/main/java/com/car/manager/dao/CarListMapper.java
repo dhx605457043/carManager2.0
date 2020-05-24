@@ -17,6 +17,5 @@ import java.util.List;
 public interface CarListMapper extends Mapper<CarList>, BaseMapper<CarList> {
     List<CarListEx>selectAllCar(CarListEx carListEx);
     int carAdd (CarList carList);
-    boolean selectCarById ();
-
+    CarList selectCarByCarNumber (CarList car);
 }

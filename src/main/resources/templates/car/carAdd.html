@@ -41,12 +41,22 @@
                 maxlength:6,
                 minlength:6,
                 isCarNumber: true,
+                remote: {
+                    url: prefix + "/checkCarNumber",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "carNumber": function () {
+                            return $.common.trim($("#carNumber").val().toUpperCase());
+                        }
+                    },
+                }
             },
         },
         messages: {
             carNumber: {
                 required: "请输入车号",
-                remote:"车辆存在",
+                remote:"车辆存在,请勿重复添加",
             },
         },
         focusCleanup: false

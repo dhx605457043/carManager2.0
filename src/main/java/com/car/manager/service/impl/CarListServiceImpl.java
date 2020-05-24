@@ -2,6 +2,7 @@ package com.car.manager.service.impl;
 
 import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
+import com.car.manager.controller.request.SelectCarRequest;
 import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.dao.CarListMapper;
 import com.car.manager.entity.CarList;
@@ -42,5 +43,12 @@ public class CarListServiceImpl implements CarListService {
         CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
         requestModel.setCarNumber(requestModel.getCarNumber().toUpperCase());
         return carlistMapper.carAdd(requestModel);
+    }
+
+    @Override
+    public boolean selectCarById(SelectCarRequest request) {
+        CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
+        CarList code = carlistMapper.selectCarByCarNumber(requestModel);
+        return code == null ? true: false;
     }
 }
