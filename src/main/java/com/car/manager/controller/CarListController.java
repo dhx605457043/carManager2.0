@@ -2,6 +2,7 @@ package com.car.manager.controller;
 
 
 import com.car.manager.controller.request.InsertCarRequest;
+import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.PageDomain;
@@ -33,8 +34,6 @@ public class CarListController extends BaseController{
 
     @Resource
     private CarListService carlistService;
-    @Resource
-    private CarListMapper carListMapper;
 
     @Resource
     private LicensePlateAreaListService licensePlateAreaListService;
@@ -50,34 +49,9 @@ public class CarListController extends BaseController{
      * 查询车辆列表
      */
     @PostMapping("/list")
-//    @ResponseBody
-//    public TableDataInfo list(SelectAllCarRequest request, Model model) {
-//        startPage();
-//        return getDataTable(carlistService.selectAllCars(request));
-//    }
-
     @ResponseBody
-    public TableDataInfo list(CarListEx carListEx) {
-        List<CarListEx> cars = carListMapper.selectAllCar(carListEx);
-        TableDataInfo rspData = new TableDataInfo();
-        List<CarListEx> userList = new ArrayList<CarListEx>(Arrays.asList(new CarListEx[cars.size()]));
-        Collections.copy(userList, cars);
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize())
-        {
-            rspData.setRows(userList);
-            rspData.setTotal(userList.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * 25;
-        Integer pageSize = pageDomain.getPageNum() * 25;
-        if (pageSize > userList.size())
-        {
-            pageSize = userList.size();
-        }
-        rspData.setRows(userList.subList(pageNum, pageSize));
-        rspData.setTotal(userList.size());
-        return rspData;
+    public TableDataInfo list(SelectAllCarRequest request) {
+        return carlistService.selectAllCars(request);
     }
 
     /**
@@ -86,19 +60,16 @@ public class CarListController extends BaseController{
     @GetMapping("/toAddCar")
     public String toAdd(Model model) {
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
-
         return prefix + "/carAdd";
     }
 
     /**
      * 新增保存车辆
      */
-//    @Log(title = "车辆", businessType = BusinessType.INSERT)
     @PostMapping("/addCar")
     @ResponseBody
     public AjaxResult addSave(InsertCarRequest request) {
         return toAjax(carlistService.insertCar(request));
-//        return null;
     }
 
     @PostMapping("/checkCarNumber")

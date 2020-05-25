@@ -14,16 +14,16 @@
 <!--<th:block th:include="include :: footer" />-->
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = "/carManager";
+    var prefix = "/orderManager";
     // alert(value);
     $(function() {
         var options = {
             url: prefix + "/list",
-            createUrl: prefix + "/toAddCar",
+            createUrl: prefix + "/toAddOrderCarInformation",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            modalName: "车辆列表",
+            modalName: "订单车辆信息",
             showPageGo: true,
             pageList:[5,10,15],
 
@@ -56,12 +56,8 @@
                     title: '车号:',
                 },
                 {
-                    field: 'orderDate',
+                    field: 'order_date',
                     title: '过江日期:',
-                },
-                {
-                    field: 'oderDriver',
-                    title: '临时司机:',
                 },
                 {
                     title: '操作',

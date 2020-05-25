@@ -6,4 +6,5 @@ import lombok.Data;
 public class SelectAllCarRequest {
 //    private Integer pageNum;
 //    private Integer pageSize;
+    private Integer pageList;
 }

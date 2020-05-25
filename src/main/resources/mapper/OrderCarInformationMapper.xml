@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.manager.dao.OrderCarInformationMapper">
+<select id="selectAllOrderCarInformation" resultType="com.car.manager.entity.Ex.OrderCarInformationEx" parameterType="com.car.manager.entity.Ex.OrderCarInformationEx">
+    SELECT
+	    car.vehicle_number AS vehicleNumber,
+	    driver.driver_name AS driverName,
+	    driver.driver_address AS driverAddress,
+	    driver.driver_ID_card AS driverIDCard,
+	    driver.driver_phone_number AS driverPhoneNumber,
+	    oci.order_date AS orderDate,
+	    cargo.cargo_name AS orderCargoName,
+	    oci.order_tonnage AS orderTonnage
+    FROM
+	    order_car_information oci
+	    LEFT JOIN car_list car ON oci.order_car_id = car.car_id
+	    LEFT JOIN driver_list driver ON oci.driver_id = driver.driver_id
+	    LEFT JOIN cargo_list cargo ON oci.cargo_id = cargo.cargo_id
+</select>
+
+
+
+
+
+    <!--通过实体作为筛选条件查询-->
+    <!--    <select id="queryAll" resultMap="OrderCarInformationMap">-->
+    <!--        select-->
+    <!--          id, order_car_id, order_driver_id, order_cargo_id, order_tonnage, order_date-->
+    <!--        from cardata.order_car_information-->
+    <!--        <where>-->
+    <!--            <if test="id != null">-->
+    <!--                and id = #{id}-->
+    <!--            </if>-->
+    <!--            <if test="orderCarId != null">-->
+    <!--                and order_car_id = #{orderCarId}-->
+    <!--            </if>-->
+    <!--            <if test="orderDriverId != null">-->
+    <!--                and order_driver_id = #{orderDriverId}-->
+    <!--            </if>-->
+    <!--            <if test="orderCargoId != null">-->
+    <!--                and order_cargo_id = #{orderCargoId}-->
+    <!--            </if>-->
+    <!--            <if test="orderTonnage != null">-->
+    <!--                and order_tonnage = #{orderTonnage}-->
+    <!--            </if>-->
+    <!--            <if test="orderDate != null">-->
+    <!--                and order_date = #{orderDate}-->
+    <!--            </if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into cardata.order_car_information(order_car_id, order_driver_id, order_cargo_id, order_tonnage, order_date)
+        values (#{orderCarId}, #{orderDriverId}, #{orderCargoId}, #{orderTonnage}, #{orderDate})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cardata.order_car_information
+        <set>
+            <if test="orderCarId != null">
+                order_car_id = #{orderCarId},
+            </if>
+            <if test="orderDriverId != null">
+                order_driver_id = #{orderDriverId},
+            </if>
+            <if test="orderCargoId != null">
+                order_cargo_id = #{orderCargoId},
+            </if>
+            <if test="orderTonnage != null">
+                order_tonnage = #{orderTonnage},
+            </if>
+            <if test="orderDate != null">
+                order_date = #{orderDate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cardata.order_car_information where id = #{id}
+    </delete>
+
+</mapper>
