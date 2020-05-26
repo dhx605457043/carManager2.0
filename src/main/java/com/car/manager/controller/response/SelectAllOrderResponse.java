@@ -13,7 +13,7 @@ public class SelectAllOrderResponse {
 
     private Integer goodsName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date orderDate;
 
     private Integer driverCost;

@@ -8,14 +8,14 @@
 <mapper namespace="com.car.manager.dao.CarListMapper">
 
     <select id="selectAllCar" resultType="com.car.manager.entity.Ex.CarListEx" parameterType="com.car.manager.entity.Ex.CarListEx">
-        select concat(licensePlateAreaName,carNumber) as carNumber,
-        driverName,
-        driverAddress,
-        driverIDCard,
-        driverPhoneNumber
-        from carList
-        left join driverList on carList.carDriverId=driverList.driverId
-        left join licenseplatearealist on carList.carLicensePlateAreaCode=licenseplatearealist.licensePlateAreaCode
+        select
+        car.vehicle_number as vehicleNumber,
+        driver.driver_name as driverName,
+        driver.driver_address as driverAddress,
+        driver.driver_ID_card as driverIDCard,
+        driver.driver_phone_number as driverPhoneNumber
+        from car_list car
+        left join driver_list driver on car.car_driver_id=driver.driver_id
         <where>
             <if test="carNumber != null and carNumber != ''">
                 carNumber like concat('%', #{carNumber}, '%')
@@ -23,13 +23,13 @@
         </where>
     </select>
     <insert id="carAdd" parameterType="com.car.manager.entity.CarList">
-        insert into carList (carNumber,carLicensePlateAreaCode) values (#{carNumber},#{carLicensePlateAreaCode})
+        insert into car_list (car_number,car_license_plate_area_code,vehicle_number) values (#{carNumber},#{carLicensePlateAreaCode},#{vehicleNumber})
     </insert>
     <select id="selectCarByCarNumber" parameterType="com.car.manager.entity.CarList" resultType="com.car.manager.entity.CarList">
         select *
-        from carlist
+        from car_list
         where
-        carNumber = #{carNumber}
+        car_number = #{carNumber}
     </select>
 
 </mapper>

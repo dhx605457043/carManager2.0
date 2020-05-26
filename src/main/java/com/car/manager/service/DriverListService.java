@@ -12,5 +12,5 @@ import java.util.List;
  * @since 2020-05-15 14:21:56
  */
 public interface DriverListService {
-    List<SelectAllDriversResponse> selectAllDrivers (SelectAllDriverRequest request);
+    List<SelectAllDriversResponse> selectAllDriver (SelectAllDriverRequest request);
 }

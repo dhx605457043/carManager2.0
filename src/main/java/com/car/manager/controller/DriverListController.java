@@ -35,8 +35,8 @@ public class DriverListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectAllDriverRequest request) {
-        startPage();
-        return getDataTable(driverListService.selectAllDrivers(request));
+//        startPage();
+        return getDataTable(driverListService.selectAllDriver(request));
     }
 
 }

@@ -7,7 +7,7 @@ public class SelectAllCarResponse {
     private Integer carId;
     private Integer driverId;
 
-    private String carNumber;
+    private String vehicleNumber;
     private String driverName;
     private String driverAddress;
     private String driverPhoneNumber;

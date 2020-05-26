@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.car.manager.dao.LicensePlateAreaListMapper">
     <select id="selectAllLicense" resultType="com.car.manager.entity.LicensePlateAreaList">
-        select * from licenseplatearealist
+        select
+            license_plate_area_code as licensePlateAreaCode,
+            license_plate_area_name as licensePlateAreaName
+        from license_plate_area_list
     </select>
 
 </mapper>

@@ -4,21 +4,21 @@
 
     <select id="selectAllDriver" resultType="com.car.manager.entity.DriverList" parameterType="com.car.manager.entity.DriverList">
         select
-        driverName,
-        driverAddress,
-        driverIDCard,
-        driverPhoneNumber
-        from driverlist
+        driver_name as driverName,
+        driver_address as driverAddress,
+        driver_ID_card as driverIDCard,
+        driver_phone_number as driverPhoneNumber
+        from driver_list
 
         <where>
             <if test="driverIDCard != null and driverIDCard != ''">
-                and driverIDCard like concat('%', #{driverIDCard}, '%')
+                and driver_ID_card like concat('%', #{driverIDCard}, '%')
             </if>
             <if test="driverPhoneNumber != null and driverPhoneNumber != ''">
-                and driverPhoneNumber like concat('%', #{driverPhoneNumber}, '%')
+                and driver_phone_number like concat('%', #{driverPhoneNumber}, '%')
             </if>
             <if test="driverName != null and driverName != ''">
-                and driverName like concat('%', #{driverName}, '%')
+                and driver_name like concat('%', #{driverName}, '%')
             </if>
         </where>
     </select>

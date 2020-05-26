@@ -19,5 +19,7 @@ public class CarList implements Serializable {
     private Integer carDriverId;
     
     private Integer carLicensePlateAreaCode;
+    private String vehicleNumber;
+
 
 }

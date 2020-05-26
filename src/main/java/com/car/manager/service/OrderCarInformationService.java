@@ -1,7 +1,8 @@
 package com.car.manager.service;
 
-import com.car.manager.entity.OrderCarInformation;
-import java.util.List;
+import com.car.manager.controller.request.InsertOrderCarInformationRequest;
+import com.car.manager.controller.request.SelectAllOrderCarInformationRequest;
+import com.car.manager.core.page.TableDataInfo;
 
 /**
  * (OrderCarInformation)表服务接口
@@ -10,8 +11,8 @@ import java.util.List;
  * @since 2020-05-25 22:24:55
  */
 public interface OrderCarInformationService {
-
-
+    TableDataInfo selectAllOrderCarInformation (SelectAllOrderCarInformationRequest request);
+    int insertOrderCarInformation (InsertOrderCarInformationRequest request);
 //    /**
 //     * 通过ID查询单条数据
 //     *

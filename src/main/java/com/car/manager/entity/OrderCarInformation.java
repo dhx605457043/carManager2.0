@@ -1,5 +1,6 @@
 package com.car.manager.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -24,7 +25,8 @@ public class OrderCarInformation implements Serializable {
     private Integer orderCargoId;
     
     private Integer orderTonnage;
-    
-    private String orderDate;
+
+    @JsonFormat(pattern = "YYYY-MM-dd")
+    private Date orderDate;
 
 }

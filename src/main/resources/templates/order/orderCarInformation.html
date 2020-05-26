@@ -6,6 +6,15 @@
 <body class="gray-bg">
 <div class="container-div">
     <div class="row">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" >
+                <i class="fa fa-plus"></i> 添加
+            </a>
+
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" >
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table"></table>
         </div>
@@ -14,11 +23,11 @@
 <!--<th:block th:include="include :: footer" />-->
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = "/orderManager";
+    var prefix = "/orderCarInformationManager";
     // alert(value);
     $(function() {
         var options = {
-            url: prefix + "/list",
+            url: prefix + "/orderCarInformationList",
             createUrl: prefix + "/toAddOrderCarInformation",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
@@ -30,33 +39,34 @@
             columns: [
                 {
                     field: 'driverName',
-                    title: '姓名:'
+                    title: '司机姓名:'
                 },
                 {
                     field: 'driverPhoneNumber',
-                    title: '电话:'
+                    title: '司机电话:'
                 },
                 {
                     field: 'driverIDCard',
-                    title: '身份证:'
+                    title: '司机身份证:'
                 },
                 {
                     field: 'driverAddress',
-                    title: '家庭住址:'
+                    title: '司机家庭住址:'
                 },
                 {
-                    field: 'cargoName',
+                    field: 'orderCargoName',
                     title: '货物:',
                     formatter:function (value,row,index) {
-                        return "30" + "吨";
-                    }
+                        return value + row.orderTonnage + "吨";
+                    },
+
                 },
                 {
-                    field: 'carNumber',
+                    field: 'vehicleNumber',
                     title: '车号:',
                 },
                 {
-                    field: 'order_date',
+                    field: 'orderDate',
                     title: '过江日期:',
                 },
                 {

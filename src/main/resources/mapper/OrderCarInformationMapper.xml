@@ -3,20 +3,26 @@
 <mapper namespace="com.car.manager.dao.OrderCarInformationMapper">
 <select id="selectAllOrderCarInformation" resultType="com.car.manager.entity.Ex.OrderCarInformationEx" parameterType="com.car.manager.entity.Ex.OrderCarInformationEx">
     SELECT
-	    car.vehicle_number AS vehicleNumber,
-	    driver.driver_name AS driverName,
-	    driver.driver_address AS driverAddress,
-	    driver.driver_ID_card AS driverIDCard,
-	    driver.driver_phone_number AS driverPhoneNumber,
-	    oci.order_date AS orderDate,
-	    cargo.cargo_name AS orderCargoName,
-	    oci.order_tonnage AS orderTonnage
+        car.vehicle_number AS vehicleNumber,
+        driver.driver_name AS driverName,
+        driver.driver_address AS driverAddress,
+        driver.driver_ID_card AS driverIDCard,
+        driver.driver_phone_number AS driverPhoneNumber,
+        oci.order_date AS orderDate,
+        cargo.cargo_name AS orderCargoName,
+        oci.order_tonnage AS orderTonnage
     FROM
-	    order_car_information oci
-	    LEFT JOIN car_list car ON oci.order_car_id = car.car_id
-	    LEFT JOIN driver_list driver ON oci.driver_id = driver.driver_id
-	    LEFT JOIN cargo_list cargo ON oci.cargo_id = cargo.cargo_id
+        order_car_information oci
+            LEFT JOIN car_list car ON oci.order_car_id = car.car_id
+            LEFT JOIN driver_list driver ON oci.order_driver_id = driver.driver_id
+            LEFT JOIN cargo_list cargo ON oci.order_cargo_id = cargo.cargo_id
 </select>
+    <insert id="insertOrderCarInformation" parameterType="com.car.manager.entity.OrderCarInformation">
+        insert into
+            order_car_information (order_car_id,order_driver_id,order_cargo_id,order_tonnage,order_date)
+        values
+        (#{orderCarId},#{orderDriverId},#{orderCargoId},#{orderTonnage},#{orderDate});
+    </insert>
 
 
 

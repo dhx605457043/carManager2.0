@@ -12,7 +12,8 @@ import java.util.List;
  * @since 2020-05-25 22:24:55
  */
 public interface OrderCarInformationMapper {
-List<OrderCarInformationEx> selectAllOrderCarInformation (OrderCarInformationEx orderCarInformationEx);
+    List<OrderCarInformationEx> selectAllOrderCarInformation (OrderCarInformationEx orderCarInformationEx);
+    int insertOrderCarInformation (OrderCarInformation orderCarInformation);
 //    /**
 //     * 通过ID查询单条数据
 //     *

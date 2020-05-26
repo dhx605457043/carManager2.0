@@ -18,16 +18,15 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-15 14:21:56
  */
-@Service()
+@Service
 public class DriverListServiceImpl implements DriverListService {
     @Resource
     private DriverListMapper driverlistMapper;
 
     @Override
-    public List<SelectAllDriversResponse> selectAllDrivers(SelectAllDriverRequest request) {
+    public List<SelectAllDriversResponse> selectAllDriver(SelectAllDriverRequest request) {
         DriverList requestModel = BeanCopyUtils.copyBean(request,new DriverList());
         List<DriverList> driverLists = driverlistMapper.selectAllDriver(requestModel);
-        List<SelectAllDriversResponse> responseModel = (List<SelectAllDriversResponse>) BeanCopyUtils.copyBeanList(driverLists, SelectAllDriversResponse.class);
-        return responseModel;
+        return (List<SelectAllDriversResponse>) BeanCopyUtils.copyBeanList(driverLists, SelectAllDriversResponse.class);
     }
 }

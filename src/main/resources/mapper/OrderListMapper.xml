@@ -4,28 +4,24 @@
 
     <select id="selectAllOrder" resultType="com.car.manager.entity.Ex.OrderListEx" parameterType="com.car.manager.entity.Ex.OrderListEx">
         select
-            orderId,
-            ownerOfCargo,
-            goodsName,
-            orderDate,
-            driverCost,
-            chinaCost,
-            koreaCost,
+            order_id as orderId,
+            owner_of_cargo as ownerOfCargo,
+            cargo_name as cargoName,
+            order_date as orderDate,
+            driver_cost as driverCost,
+            china_cost as chinaCost,
+            korea_cost as koreaCost,
             freight,
-            orderCar,
+            order_car as orderCar,
             profit,
-            quarantineCost,
-            cargoName,
-            consignorName,
-            orderCarNumber,
-               orderType
-#             case orderType
-#                 when 1 then '是'
-#                 else '否' end as orderType
-        from orderlist
-                 left join carlist on orderlist.orderCar=carlist.carId
-                 left join consignorlist on orderlist.ownerOfCargo=consignorlist.consignorId
-                 left join cargolist on orderlist.goodsName=cargolist.cargoId
+            quarantine_cost as quarantineCost,
+            consignor_name as consignorName,
+            order_car_number as orderCarNumber,
+            order_type as orderType
+        from order_list ord
+                 left join car_list car on ord.order_car=car.car_id
+                 left join consignor_list con on ord.owner_of_cargo=con.consignor_id
+                 left join cargo_list cargo on ord.cargo_name=cargo.cargo_id
     </select>
 
 </mapper>

@@ -12,8 +12,6 @@ import com.car.manager.entity.CarList;
 import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.util.BeanCopyUtils;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,16 +26,15 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-14 17:58:00
  */
-@Service()
+@Service
 public class CarListServiceImpl implements CarListService {
 
     @Resource
     private CarListMapper carListMapper;
 
     @Override
-    public TableDataInfo selectAllCars(SelectAllCarRequest request) {
+    public TableDataInfo selectAllCarPage(SelectAllCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
-
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
         TableDataInfo rspData = new TableDataInfo();
         List<CarListEx> userList = new ArrayList<CarListEx>(Arrays.asList(new CarListEx[cars.size()]));
@@ -58,7 +55,12 @@ public class CarListServiceImpl implements CarListService {
         return rspData;
     }
 
-
+    @Override
+    public List<SelectAllCarResponse> selectAllCar(SelectAllCarRequest request) {
+        CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
+        List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
+        return (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(cars,SelectAllCarResponse.class);
+    }
 
     @Override
     public int insertCar(InsertCarRequest request) {

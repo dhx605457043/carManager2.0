@@ -16,7 +16,7 @@ import java.util.List;
  * @author makejava
  * @since 2020-05-15 15:22:19
  */
-@Service()
+@Service
 public class LicensePlateAreaListServiceImpl implements LicensePlateAreaListService {
     @Resource
     private LicensePlateAreaListMapper licensePlateAreaListMapper;

@@ -329,7 +329,7 @@
 
 label.error {
 	position: absolute;
-	right: 18px;
+	right: 35px;
 	top: 10px;
 	color: #ef392b;
 	font-size: 12px;
@@ -593,8 +593,28 @@ label.error {
 .time-input {
 	display: block;
 	width: 100%;
-	padding-left: 10px;
+	background: #FFFFFF none;
+	border: 1px solid #e5e6e7;
+	border-radius: 1px;
+	color: inherit;
+	padding: 6px 12px;
+	-webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;
+	font-size: 14px;
 }
+
+/*.time-input2 {*/
+/*	display: block;*/
+/*	width: 100%;*/
+/*	background: #FFFFFF none;*/
+/*	border: 1px solid #e5e6e7;*/
+/*	border-radius: 1px;*/
+/*	color: inherit;*/
+/*	padding: 6px 12px;*/
+/*	-webkit-transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;*/
+/*	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s  ease-in-out 0s;*/
+/*	font-size: 14px;*/
+/*}*/
 
 label {
 	font-weight: normal;

@@ -51,13 +51,13 @@ public class CarListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectAllCarRequest request) {
-        return carlistService.selectAllCars(request);
+        return carlistService.selectAllCarPage(request);
     }
 
     /**
      * 新增车辆
      */
-    @GetMapping("/toAddCar")
+    @PostMapping("/toAddCar")
     public String toAdd(Model model) {
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
         return prefix + "/carAdd";

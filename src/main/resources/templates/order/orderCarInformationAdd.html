@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-order-orderCarInformation">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江车号：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="orderCarId">
+<!--                                <option th:text="请选择车辆"></option>-->
+
+                                <option
+                                        th:each="car:${carResponses}"
+                                        th:selected="${car.carId == 1}"
+                                        th:value="${car.carId}"
+                                        th:text="${car.vehicleNumber}">
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江司机：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="orderDriverId">
+<!--                                <option th:text="请选择司机"></option>-->
+                                <option
+                                        th:each="driver:${driverResponses}"
+                                        th:selected="${driver.driverId == 1}"
+                                        th:value="${driver.driverId}"
+                                        th:text="${driver.driverName} + ' ' + ${driver.driverIDCard}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">货品：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="orderCargoId">
+<!--                                <option th:text="请选择货物"></option>-->
+                                <option
+                                        th:each="cargo:${cargoResponses}"
+                                        th:selected="${cargo.cargoId == 1}"
+                                        th:value="${cargo.cargoId}"
+                                        th:text="${cargo.cargoName}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">吨位：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="orderTonnage" class="form-control" placeholder="请输入货物吨位">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江日期：</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                <input type="text" class="time-input" name="orderDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/orderCarInformationManager"
+
+    $("#form-order-orderCarInformation").validate({
+        onkeyup: false,
+        rules:{
+            orderDriverId:{
+                required: true,
+            },
+            orderCarId:{
+                required: true,
+            },
+            orderCargoId:{
+                required: true,
+            },
+            orderTonnage:{
+                required: true,
+                digits:true,
+            },
+            orderDate:{
+                required: true,
+                date:true,
+            },
+        },
+        messages: {
+            orderCarId: {
+                required: "请选择车辆",
+            },
+            orderDriverId: {
+                required: "请选择司机",
+            },
+            orderCargoId: {
+                required: "请选择货品",
+            },
+            orderTonnage: {
+                required: "请输入吨位",
+            },
+            orderDate: {
+                required: "请选择日期",
+            },
+        },
+        focusCleanup: false
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            console.log("true");
+            $.operate.save(prefix + "/addOrderCarInformation", $('#form-order-orderCarInformation').serialize());
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>
