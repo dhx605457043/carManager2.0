@@ -16,5 +16,5 @@ public class InsertOrderCarInformationRequest {
     private Integer orderTonnage;
 
 //    @JsonFormat(pattern = "YYYY-MM-dd")
-    private Date orderDate;
+    private String orderDate;
 }

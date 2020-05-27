@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">过江司机：</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="orderDriverId">
+                            <select class="form-control" name="orderDriverId" id="orderDriverId">
                                 <option
                                         th:each="driver:${driverResponses}"
 
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">货品：</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="orderCargoId">
+                            <select class="form-control" name="orderCargoId" id="orderCargoId">
 <!--                                <option th:text="请选择货物"></option>-->
                                 <option
                                         th:each="cargo:${cargoResponses}"
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">吨位：</label>
                         <div class="col-sm-9">
-                            <input type="text" name="orderTonnage" class="form-control" placeholder="请输入货物吨位">
+                            <input type="text" name="orderTonnage" id="orderTonnage" class="form-control" placeholder="请输入货物吨位">
                         </div>
                     </div>
                     <div class="form-group">
@@ -62,7 +62,7 @@
                         <div class="col-sm-9">
                             <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 
-                                <input type="text" class="time-input" name="orderDate">
+                                <input type="text" class="time-input" id="orderDate" name="orderDate">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            console.log($("#orderDate").val());
+            console.log($("#orderTonnage").val());
             $.operate.save(prefix + "/addOrderCarInformation", $('#form-order-orderCarInformation').serialize());
         } else  {
             console.log("false");

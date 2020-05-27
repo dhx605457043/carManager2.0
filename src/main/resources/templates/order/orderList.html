@@ -16,7 +16,7 @@
                         </li>
                         <li>
                             <label>订单车号：</label>
-                            <input type="text" name="driverIDCard"/>
+                            <input type="text" class="form-control"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -43,12 +43,12 @@
 </div>
 <th:block th:include="include :: footer" />
 <script th:inline="javascript">
-    var prefix = "/orderCarInformationManager";
+    var prefix = "/orderManager";
     // alert(value);
     $(function() {
         var options = {
-            url: prefix + "/orderCarInformationList",
-            createUrl: prefix + "/toAddOrderCarInformation",
+            url: prefix + "/list",
+            createUrl: prefix + "/toAddOrder",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",

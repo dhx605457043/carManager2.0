@@ -21,6 +21,5 @@ public class SelectAllOrderCarInformationResponse {
     private String orderCargoName;
     private Integer orderTonnage;
     private String vehicleNumber;
-    @JsonFormat(pattern = "YYYY-MM-dd")
-    private Date orderDate;
+    private String orderDate;
 }

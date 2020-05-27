@@ -8,7 +8,7 @@
         driver.driver_address AS driverAddress,
         driver.driver_ID_card AS driverIDCard,
         driver.driver_phone_number AS driverPhoneNumber,
-        oci.order_date AS orderDate,
+        DATE_FORMAT( oci.order_date, '%Y-%m-%d' ) AS orderDate,
         cargo.cargo_name AS orderCargoName,
         oci.order_tonnage AS orderTonnage
     FROM

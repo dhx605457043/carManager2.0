@@ -26,7 +26,7 @@ public class OrderListController extends BaseController{
 
     private String prefix = "order";
 
-    @GetMapping()
+    @GetMapping("/orderList")
     public String car() {
         return prefix + "/orderList";
     }

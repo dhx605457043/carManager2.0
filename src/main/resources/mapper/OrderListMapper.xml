@@ -4,20 +4,20 @@
 
     <select id="selectAllOrder" resultType="com.car.manager.entity.Ex.OrderListEx" parameterType="com.car.manager.entity.Ex.OrderListEx">
         select
-            order_id as orderId,
-            owner_of_cargo as ownerOfCargo,
-            cargo_name as cargoName,
-            order_date as orderDate,
-            driver_cost as driverCost,
-            china_cost as chinaCost,
-            korea_cost as koreaCost,
-            freight,
-            order_car as orderCar,
-            profit,
-            quarantine_cost as quarantineCost,
-            consignor_name as consignorName,
-            order_car_number as orderCarNumber,
-            order_type as orderType
+            ord.order_id as orderId,
+            ord.owner_of_cargo as ownerOfCargo,
+            cargo.cargo_name as cargoName,
+            ord.order_date as orderDate,
+            ord.driver_cost as driverCost,
+            ord.china_cost as chinaCost,
+            ord.korea_cost as koreaCost,
+            ord.freight,
+            ord.order_car as orderCar,
+            ord.profit,
+            ord.quarantine_cost as quarantineCost,
+            con.consignor_name as consignorName,
+            ord.order_car_number as orderCarNumber,
+            ord.order_type as orderType
         from order_list ord
                  left join car_list car on ord.order_car=car.car_id
                  left join consignor_list con on ord.owner_of_cargo=con.consignor_id
