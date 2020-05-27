@@ -12,12 +12,11 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">过江车号：</label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="orderCarId">
+                            <select class="form-control" id="orderCarId" name="orderCarId">
 <!--                                <option th:text="请选择车辆"></option>-->
 
                                 <option
                                         th:each="car:${carResponses}"
-                                        th:selected="${car.carId == 1}"
                                         th:value="${car.carId}"
                                         th:text="${car.vehicleNumber}">
                                 </option>
@@ -29,10 +28,9 @@
                         <label class="col-sm-3 control-label">过江司机：</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="orderDriverId">
-<!--                                <option th:text="请选择司机"></option>-->
                                 <option
                                         th:each="driver:${driverResponses}"
-                                        th:selected="${driver.driverId == 1}"
+
                                         th:value="${driver.driverId}"
                                         th:text="${driver.driverName} + ' ' + ${driver.driverIDCard}">
                                 </option>
@@ -46,7 +44,7 @@
 <!--                                <option th:text="请选择货物"></option>-->
                                 <option
                                         th:each="cargo:${cargoResponses}"
-                                        th:selected="${cargo.cargoId == 1}"
+
                                         th:value="${cargo.cargoId}"
                                         th:text="${cargo.cargoName}">
                                 </option>
@@ -81,10 +79,10 @@
     $("#form-order-orderCarInformation").validate({
         onkeyup: false,
         rules:{
-            orderDriverId:{
+            orderCarId:{
                 required: true,
             },
-            orderCarId:{
+            orderDriverId:{
                 required: true,
             },
             orderCargoId:{
@@ -121,7 +119,7 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            console.log("true");
+            console.log($("#orderDate").val());
             $.operate.save(prefix + "/addOrderCarInformation", $('#form-order-orderCarInformation').serialize());
         } else  {
             console.log("false");

@@ -4,6 +4,7 @@
 
     <select id="selectAllDriver" resultType="com.car.manager.entity.DriverList" parameterType="com.car.manager.entity.DriverList">
         select
+        driver_id as driverId,
         driver_name as driverName,
         driver_address as driverAddress,
         driver_ID_card as driverIDCard,

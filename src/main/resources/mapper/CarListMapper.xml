@@ -9,6 +9,8 @@
 
     <select id="selectAllCar" resultType="com.car.manager.entity.Ex.CarListEx" parameterType="com.car.manager.entity.Ex.CarListEx">
         select
+        car.car_id as carId,
+        car.car_driver_id as carDriverId,
         car.vehicle_number as vehicleNumber,
         driver.driver_name as driverName,
         driver.driver_address as driverAddress,

@@ -25,7 +25,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("/orderCarInformationManager")
-public class OrderCarInformationController {
+public class OrderCarInformationController extends BaseController{
     private String prefix = "order";
     /**
      * 服务对象
@@ -58,8 +58,9 @@ public class OrderCarInformationController {
         return prefix + "/orderCarInformationAdd";
     }
     @PostMapping("/addOrderCarInformation")
+    @ResponseBody
     public AjaxResult addOrderCarInformation (InsertOrderCarInformationRequest request) {
 
-        return null;
+        return toAjax(orderCarInformationService.insertOrderCarInformation(request));
     }
 }

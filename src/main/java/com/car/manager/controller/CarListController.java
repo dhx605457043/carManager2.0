@@ -5,11 +5,7 @@ import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
 import com.car.manager.core.domain.AjaxResult;
-import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.core.page.TableSupport;
-import com.car.manager.dao.CarListMapper;
-import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.LicensePlateAreaListService;
 import org.springframework.stereotype.Controller;
@@ -17,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+
 
 /**
  * (CarList)表控制层

@@ -8,6 +8,7 @@ public class CarListEx extends CarList {
     private String carNumber;
     private String driverName;
     private String driverAddress;
+    private Integer carDriverId;
     private Integer driverId;
     private String driverPhoneNumber;
     private String driverIDCard;

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SelectAllCarResponse {
     private Integer carId;
-    private Integer driverId;
+    private Integer carDriverId;
 
     private String vehicleNumber;
     private String driverName;
