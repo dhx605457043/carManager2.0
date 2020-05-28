@@ -3,7 +3,7 @@ package com.car.manager.controller.response;
 import lombok.Data;
 
 @Data
-public class SelectAllCarResponse {
+public class SelectCarResponse {
     private Integer carId;
     private Integer carDriverId;
 

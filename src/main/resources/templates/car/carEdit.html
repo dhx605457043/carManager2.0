@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-car-carAdd">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <!--            <label class="col-sm-3 control-label">车辆号码：</label>-->
+                <div class="input-group">
+
+
+                    <select name="carLicensePlateAreaCode" id="carLicensePlateAreaCode" class="form-control">
+                        <option th:selected="${license.licensePlateAreaCode == 1}"
+                                th:each="license:${licenseResponses}"
+                                th:value="${license.licensePlateAreaCode}"
+                                th:text="${license.licensePlateAreaName}">
+
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <input name="carNumber" id="carNumber" class="form-control" type="text" th:width="40" th:placeholder="车辆号码" style="text-transform:uppercase;">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/carManager"
+
+    $("#form-car-carAdd").validate({
+        onkeyup: false,
+        rules:{
+            carNumber:{
+                required: true,
+                maxlength:6,
+                minlength:6,
+                isCarNumber: true,
+                remote: {
+                    url: prefix + "/checkCarNumber",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "carNumber": function () {
+                            return $.common.trim($("#carNumber").val().toUpperCase());
+                        }
+                    },
+                }
+            },
+        },
+        messages: {
+            carNumber: {
+                required: "请输入车号",
+                remote:"车辆存在,请勿重复添加",
+            },
+        },
+        focusCleanup: false
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            console.log("true");
+            $.operate.save(prefix + "/addCar", $('#form-car-carAdd').serialize());
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>

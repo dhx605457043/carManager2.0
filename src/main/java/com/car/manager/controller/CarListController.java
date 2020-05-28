@@ -6,10 +6,12 @@ import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.LicensePlateAreaListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -68,18 +70,21 @@ public class CarListController extends BaseController{
     @PostMapping("/checkCarNumber")
     @ResponseBody
     public boolean checkCarNumber (SelectCarRequest request) {
-        return carlistService.selectCarById(request);
+        return carlistService.selectCarByCarNumber(request);
     }
 
     /**
      * 修改车辆
      */
-//    @GetMapping("/edit/{id}")
-//    public String edit(@PathVariable("id") int id, ModelMap mmap) {
-//        Car car = carService.selectCarById(id);
-//        mmap.put("car", car);
-//        return prefix + "/edit";
-//    }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, ModelMap mmap) {
+        SelectCarRequest request = new SelectCarRequest();
+        request.setCarId(id);
+         responseModel = carlistService.selectCarById(request);
+        Car car = carService.selectCarById(car);
+        mmap.put("car", car);
+        return prefix + "/edit";
+    }
 
     /**
      * 修改保存车辆

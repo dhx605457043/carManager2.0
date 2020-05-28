@@ -3,7 +3,7 @@ package com.car.manager.service.impl;
 import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
-import com.car.manager.controller.response.SelectAllCarResponse;
+import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.core.page.TableSupport;
@@ -56,10 +56,10 @@ public class CarListServiceImpl implements CarListService {
     }
 
     @Override
-    public List<SelectAllCarResponse> selectAllCar(SelectAllCarRequest request) {
+    public List<SelectCarResponse> selectAllCar(SelectAllCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
-        return (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(cars,SelectAllCarResponse.class);
+        return (List<SelectCarResponse>) BeanCopyUtils.copyBeanList(cars, SelectCarResponse.class);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CarListServiceImpl implements CarListService {
     }
 
     @Override
-    public boolean selectCarById(SelectCarRequest request) {
+    public boolean selectCarByCarNumber(SelectCarRequest request) {
         CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
         CarList code = carListMapper.selectCarByCarNumber(requestModel);
         return code == null ? true: false;
