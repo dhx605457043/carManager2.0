@@ -3,18 +3,17 @@ package com.car.manager.controller;
 
 import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
+import com.car.manager.controller.request.SelectAllDriverRequest;
 import com.car.manager.controller.request.SelectCarRequest;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.dao.CarListMapper;
-import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
+import com.car.manager.service.CargoListService;
+import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
-import com.car.manager.util.BeanCopyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,6 +31,10 @@ public class CarListController extends BaseController{
 
     @Resource
     private CarListService carlistService;
+    @Resource
+    private DriverListService driverListService;
+    @Resource
+    private CargoListService cargoListService;
 
     @Resource
     private LicensePlateAreaListService licensePlateAreaListService;
@@ -55,7 +58,7 @@ public class CarListController extends BaseController{
     /**
      * 新增车辆
      */
-    @PostMapping("/toAddCar")
+    @GetMapping("/toAddCar")
     public String toAdd(Model model) {
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
         return prefix + "/carAdd";
@@ -80,12 +83,13 @@ public class CarListController extends BaseController{
      * 修改车辆
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") int id, Model model) {
+    public String edit(@PathVariable("id") Integer id, Model model) {
         SelectCarRequest request = new SelectCarRequest();
-        request.setCarId(id);
-        SelectCarResponse response = carlistService.selectCarById(request);
-        model.addAttribute("car",response);
-        return prefix + "/edit";
+        request.setId(id);
+        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectAllDriverRequest()));
+        model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
+        model.addAttribute("carResponses",carlistService.selectCarById(request));
+        return prefix + "/carEdit";
     }
 
     /**

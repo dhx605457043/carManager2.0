@@ -12,7 +12,7 @@ public class SelectAllOrderCarInformationResponse {
     private Integer orderCarId;
     private Integer orderDriverId;
 
-    private Integer carId;
+    private Integer id;
     private Integer driverId;
     private Integer carDriverId;
 

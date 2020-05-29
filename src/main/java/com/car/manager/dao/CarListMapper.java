@@ -18,5 +18,5 @@ public interface CarListMapper extends Mapper<CarList>, BaseMapper<CarList> {
     List<CarListEx>selectAllCar(CarListEx carListEx);
     int carAdd (CarList carList);
     CarList selectCarByCarNumber (CarList car);
-    CarListEx selectCarById (CarListEx car);
+    CarList selectCarById (CarList car);
 }

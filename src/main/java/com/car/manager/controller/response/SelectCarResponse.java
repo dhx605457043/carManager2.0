@@ -4,14 +4,12 @@ import lombok.Data;
 
 @Data
 public class SelectCarResponse {
-    private Integer carId;
+    private Integer id;
+
+    private String carNumber;
+
     private Integer carDriverId;
 
+    private Integer carLicensePlateAreaCode;
     private String vehicleNumber;
-    private String driverName;
-    private String driverAddress;
-    private String driverPhoneNumber;
-    private String driverIDCard;
-
-
 }

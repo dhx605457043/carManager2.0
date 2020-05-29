@@ -37,6 +37,7 @@ public class OrderCarInformationController extends BaseController{
     private DriverListService driverListService;
     @Resource
     private CargoListService cargoListService;
+
     @GetMapping("/orderCarInformationList")
     public String carInformation() {
         return prefix + "/orderCarInformation";

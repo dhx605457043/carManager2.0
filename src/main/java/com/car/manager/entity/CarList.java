@@ -12,7 +12,7 @@ import lombok.Data;
 public class CarList implements Serializable {
     private static final long serialVersionUID = -82997136110213858L;
     
-    private Integer carId;
+    private Integer id;
     
     private String carNumber;
     
