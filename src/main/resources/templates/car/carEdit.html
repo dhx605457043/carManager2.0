@@ -5,24 +5,67 @@
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-car-carAdd">
+    <form class="form-horizontal m" id="form-car-carUpdate">
         <div class="form-group">
             <div class="col-sm-9">
-                <!--            <label class="col-sm-3 control-label">车辆号码：</label>-->
-                <div class="input-group">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江车号：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="orderCarId" name="orderCarId">
+                                <!--                                <option th:text="请选择车辆"></option>-->
 
+                                <option
+                                        th:each="car:${carResponses}"
+                                        th:value="${car.carId}"
+                                        th:text="${car.vehicleNumber}">
+                                </option>
+                            </select>
 
-                    <select name="carLicensePlateAreaCode" id="carLicensePlateAreaCode" class="form-control">
-                        <option th:selected="${license.licensePlateAreaCode == 1}"
-                                th:each="license:${licenseResponses}"
-                                th:value="${license.licensePlateAreaCode}"
-                                th:text="${license.licensePlateAreaName}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江司机：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="orderDriverId" id="orderDriverId">
+                                <option
+                                        th:each="driver:${driverResponses}"
 
-                        </option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <input name="carNumber" id="carNumber" class="form-control" type="text" th:width="40" th:placeholder="车辆号码" style="text-transform:uppercase;">
+                                        th:value="${driver.driverId}"
+                                        th:text="${driver.driverName} + ' ' + ${driver.driverIDCard}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">货品：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="orderCargoId" id="orderCargoId">
+                                <!--                                <option th:text="请选择货物"></option>-->
+                                <option
+                                        th:each="cargo:${cargoResponses}"
+
+                                        th:value="${cargo.cargoId}"
+                                        th:text="${cargo.cargoName}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">吨位：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="orderTonnage" id="orderTonnage" class="form-control" placeholder="请输入货物吨位">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江日期：</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                <input type="text" class="time-input" id="orderDate" name="orderDate">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,7 +76,7 @@
 <script type="text/javascript">
     var prefix = "/carManager"
 
-    $("#form-car-carAdd").validate({
+    $("#form-car-carUpdate").validate({
         onkeyup: false,
         rules:{
             carNumber:{

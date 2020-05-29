@@ -19,5 +19,5 @@ public interface CarListService {
     TableDataInfo selectAllCarPage (SelectAllCarRequest request);
     int insertCar (InsertCarRequest request);
     boolean selectCarByCarNumber (SelectCarRequest request);
-    SelectCarResponse selectCarById ();
+    SelectCarResponse selectCarById (SelectCarRequest request);
 }

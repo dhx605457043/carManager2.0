@@ -75,4 +75,12 @@ public class CarListServiceImpl implements CarListService {
         CarList code = carListMapper.selectCarByCarNumber(requestModel);
         return code == null ? true: false;
     }
+
+    @Override
+    public SelectCarResponse selectCarById(SelectCarRequest request) {
+        CarListEx requestModel = BeanCopyUtils.copyBean(request, new CarListEx());
+        CarListEx responseModel = carListMapper.selectCarById(requestModel);
+        SelectCarResponse response = BeanCopyUtils.copyBean(responseModel,new SelectCarResponse());
+        return response;
+    }
 }

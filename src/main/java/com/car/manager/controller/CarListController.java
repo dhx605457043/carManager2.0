@@ -4,11 +4,14 @@ package com.car.manager.controller;
 import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
+import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.dao.CarListMapper;
 import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.LicensePlateAreaListService;
+import com.car.manager.util.BeanCopyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -77,12 +80,11 @@ public class CarListController extends BaseController{
      * 修改车辆
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") int id, ModelMap mmap) {
+    public String edit(@PathVariable("id") int id, Model model) {
         SelectCarRequest request = new SelectCarRequest();
         request.setCarId(id);
-         responseModel = carlistService.selectCarById(request);
-        Car car = carService.selectCarById(car);
-        mmap.put("car", car);
+        SelectCarResponse response = carlistService.selectCarById(request);
+        model.addAttribute("car",response);
         return prefix + "/edit";
     }
 

@@ -33,5 +33,11 @@
         where
         car_number = #{carNumber}
     </select>
+    <select id="selectCarById" parameterType="com.car.manager.entity.Ex.CarListEx" resultType="com.car.manager.entity.Ex.CarListEx">
+        select *
+        from car_list
+        where
+        car_id = #{carId}
+    </select>
 
 </mapper>
