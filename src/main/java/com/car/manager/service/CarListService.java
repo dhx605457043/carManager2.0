@@ -3,6 +3,7 @@ package com.car.manager.service;
 import com.car.manager.controller.request.InsertCarRequest;
 import com.car.manager.controller.request.SelectAllCarRequest;
 import com.car.manager.controller.request.SelectCarRequest;
+import com.car.manager.controller.request.UpdateCarRequest;
 import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.page.TableDataInfo;
@@ -21,4 +22,5 @@ public interface CarListService {
     int insertCar (InsertCarRequest request);
     boolean selectCarByCarNumber (SelectCarRequest request);
     SelectCarResponse selectCarById (SelectCarRequest request);
+    int updateCar (UpdateCarRequest request);
 }

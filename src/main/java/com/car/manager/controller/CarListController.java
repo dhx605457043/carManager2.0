@@ -1,10 +1,7 @@
 package com.car.manager.controller;
 
 
-import com.car.manager.controller.request.InsertCarRequest;
-import com.car.manager.controller.request.SelectAllCarRequest;
-import com.car.manager.controller.request.SelectAllDriverRequest;
-import com.car.manager.controller.request.SelectCarRequest;
+import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
@@ -12,6 +9,7 @@ import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -88,7 +86,9 @@ public class CarListController extends BaseController{
         request.setId(id);
         model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectAllDriverRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
-        model.addAttribute("carResponses",carlistService.selectCarById(request));
+        model.addAttribute("carResponse",carlistService.selectCarById(request));
+        model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
+
         return prefix + "/carEdit";
     }
 
@@ -96,11 +96,11 @@ public class CarListController extends BaseController{
      * 修改保存车辆
      */
 //    @Log(title = "import", businessType = BusinessType.UPDATE)
-//    @PostMapping("/edit")
-//    @ResponseBody
-//    public AjaxResult editSave(Car car) {
-//        return toAjax(carService.updateCar(car));
-//    }
+    @PostMapping("/updateCar")
+    @ResponseBody
+    public AjaxResult editSave(UpdateCarRequest request) {
+        return toAjax(carlistService.updateCar(request));
+    }
 
     /**
      * 删除车辆
