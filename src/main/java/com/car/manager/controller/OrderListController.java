@@ -1,12 +1,15 @@
 package com.car.manager.controller;
 
-import com.car.manager.controller.request.SelectAllOrderRequest;
+import com.car.manager.controller.request.*;
+import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.service.OrderListService;
+import com.car.manager.service.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.List;
 
 /**
@@ -23,6 +26,14 @@ public class OrderListController extends BaseController{
      */
     @Resource
     private OrderListService orderListService;
+    @Resource
+    private DriverListService driverListService;
+    @Resource
+    private CargoListService cargoListService;
+    @Resource
+    private ConsignorListService consignorListService;
+    @Resource
+    private CarListService carListService;
 
     private String prefix = "order";
 
@@ -33,8 +44,65 @@ public class OrderListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectAllOrderRequest request) {
-//        startPage();
-        return getDataTable(orderListService.selectAllOrder(request));
+        return orderListService.selectAllOrderPage(request);
+    }
+    /**
+     * 新增订单
+     */
+    @GetMapping("/toAddOrder")
+    public String toAdd(Model model) {
+        model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
+        model.addAttribute("consignorResponses",consignorListService.selectAllConsignor());
+        return prefix + "/orderAdd";
     }
 
+    /**
+     * 新增保存订单
+     */
+    @PostMapping("/addOrder")
+    @ResponseBody
+    public AjaxResult addSave(InsertOrderRequest request) {
+
+        return toAjax(orderListService.insertOrder(request));
+    }
+
+//    @PostMapping("/checkDriverIdCard")
+//    @ResponseBody
+//    public boolean checkCarNumber (SelectDriverRequest request) {
+//        return driverListService.selectDriverByIDCard(request);
+//    }
+
+    /**
+     * 修改订单
+     */
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, Model model) {
+        SelectOrderRequest request = new SelectOrderRequest();
+        request.setId(id);
+        model.addAttribute("orderResponse",orderListService.selectOrderById(request));
+        model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
+        model.addAttribute("consignorResponses",consignorListService.selectAllConsignor());
+        return prefix + "/orderEdit";
+    }
+
+    /**
+     * 修改保存订单
+     */
+//    @Log(title = "import", businessType = BusinessType.UPDATE)
+    @PostMapping("/updateOrder")
+    @ResponseBody
+    public AjaxResult editSave(UpdateOrderRequest request) {
+        return toAjax(orderListService.updateOrder(request));
+    }
+
+    /**
+     * 删除订单
+     */
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(int ids) {
+        return toAjax(orderListService.deleteOrderById(ids));
+    }
 }

@@ -2,26 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.car.manager.dao.OrderListMapper">
 
-    <select id="selectAllOrder" resultType="com.car.manager.entity.Ex.OrderListEx" parameterType="com.car.manager.entity.Ex.OrderListEx">
+    <select id="selectAllOrder" resultType="com.car.manager.entity.OrderList" parameterType="com.car.manager.entity.Ex.OrderListEx">
         select
-            ord.order_id as orderId,
-            ord.owner_of_cargo as ownerOfCargo,
-            cargo.cargo_name as cargoName,
+            ord.id as id,
+            ord.consignor_id as consignorId,
+            cargo.id as cargoId,
             ord.order_date as orderDate,
             ord.driver_cost as driverCost,
             ord.china_cost as chinaCost,
             ord.korea_cost as koreaCost,
             ord.freight,
-            ord.order_car as orderCar,
+            ord.order_car_id as orderCarId,
             ord.profit,
             ord.quarantine_cost as quarantineCost,
             con.consignor_name as consignorName,
             ord.order_car_number as orderCarNumber,
             ord.order_type as orderType
         from order_list ord
-                 left join car_list car on ord.order_car=car.id
-                 left join consignor_list con on ord.owner_of_cargo=con.consignor_id
-                 left join cargo_list cargo on ord.cargo_name=cargo.cargo_id
+                 left join car_list car on ord.order_car_id=car.id
+                 left join consignor_list con on ord.consignor_id=con.id
+                 left join cargo_list cargo on ord.cargo_id=cargo.id
+    </select>
+    <select id="selectOrderById" parameterType="com.car.manager.entity.Ex.OrderListEx" resultType="com.car.manager.entity.Ex.OrderListEx">
+        select
+        id as id
+        from order_list
+        <where>
+            id=#{id}
+        </where>
+
     </select>
 
 </mapper>

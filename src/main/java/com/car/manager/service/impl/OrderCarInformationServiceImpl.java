@@ -33,10 +33,7 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
         OrderCarInformationEx requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformationEx());
         List<OrderCarInformationEx> responseModel = orderCarInformationMapper.selectAllOrderCarInformation(requestModel);
         List<SelectAllOrderCarInformationResponse> responses = (List<SelectAllOrderCarInformationResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAllOrderCarInformationResponse.class);
-//        return responses;
         TableDataInfo rspData = new TableDataInfo();
-//        List<SelectAllOrderCarInformationResponse> orderCarInformationResponseList = new ArrayList<SelectAllOrderCarInformationResponse>(Arrays.asList(new CarListEx[cars.size()]));
-//        Collections.copy(userList, cars);
         PageDomain pageDomain = TableSupport.buildPageRequest();
         if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
             rspData.setRows(responses);
@@ -56,65 +53,7 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
     @Override
     public int insertOrderCarInformation(InsertOrderCarInformationRequest request) {
         OrderCarInformation requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformation());
-//        requestModel.setCarNumber(requestModel.getCarNumber().toUpperCase());
         return orderCarInformationMapper.insertOrderCarInformation(requestModel);
     }
 
-    //    /**
-//     * 通过ID查询单条数据
-//     *
-//     * @param id 主键
-//     * @return 实例对象
-//     */
-//    @Override
-//    public OrderCarInformation queryById(Integer id) {
-//        return this.orderCarInformationDao.queryById(id);
-//    }
-//
-//    /**
-//     * 查询多条数据
-//     *
-//     * @param offset 查询起始位置
-//     * @param limit 查询条数
-//     * @return 对象列表
-//     */
-//    @Override
-//    public List<OrderCarInformation> queryAllByLimit(int offset, int limit) {
-//        return this.orderCarInformationDao.queryAllByLimit(offset, limit);
-//    }
-//
-//    /**
-//     * 新增数据
-//     *
-//     * @param orderCarInformation 实例对象
-//     * @return 实例对象
-//     */
-//    @Override
-//    public OrderCarInformation insert(OrderCarInformation orderCarInformation) {
-//        this.orderCarInformationDao.insert(orderCarInformation);
-//        return orderCarInformation;
-//    }
-//
-//    /**
-//     * 修改数据
-//     *
-//     * @param orderCarInformation 实例对象
-//     * @return 实例对象
-//     */
-//    @Override
-//    public OrderCarInformation update(OrderCarInformation orderCarInformation) {
-//        this.orderCarInformationDao.update(orderCarInformation);
-//        return this.queryById(orderCarInformation.getId());
-//    }
-//
-//    /**
-//     * 通过主键删除数据
-//     *
-//     * @param id 主键
-//     * @return 是否成功
-//     */
-//    @Override
-//    public boolean deleteById(Integer id) {
-//        return this.orderCarInformationDao.deleteById(id) > 0;
-//    }
 }

@@ -11,7 +11,7 @@ public class SelectAllCarResponse {
     private String driverName;
     private String driverAddress;
     private String driverPhoneNumber;
-    private String driverIDCard;
+    private String driverIdCard;
 
 
 }

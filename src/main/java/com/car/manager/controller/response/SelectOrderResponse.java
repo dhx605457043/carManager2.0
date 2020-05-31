@@ -5,16 +5,16 @@ import lombok.Data;
 
 import java.util.Date;
 
+
 @Data
-public class SelectAllOrderResponse {
-    private Integer orderId;
+public class SelectOrderResponse {
+    private Integer id;
 
-    private Integer ownerOfCargo;
+    private Integer consignorId;
 
-    private Integer goodsName;
+    private Integer cargoId;
 
-    @JsonFormat(pattern = "YYYY-MM-dd")
-    private Date orderDate;
+    private String orderDate;
 
     private Integer driverCost;
 
@@ -24,7 +24,7 @@ public class SelectAllOrderResponse {
 
     private Integer freight;
 
-    private Integer orderCar;
+    private Integer orderCarId;
 
     private Integer profit;
 

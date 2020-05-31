@@ -1,10 +1,15 @@
 package com.car.manager.entity;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import sun.util.calendar.BaseCalendar;
+import sun.util.calendar.LocalGregorianCalendar;
+
+import javax.persistence.Id;
+
 @Data
 /**
  * (OrderList)实体类
@@ -14,15 +19,16 @@ import lombok.Data;
  */
 public class OrderList implements Serializable {
     private static final long serialVersionUID = -70482371480244817L;
-    
-    private Integer orderId;
-    
-    private Integer ownerOfCargo;
-    
-    private Integer goodsName;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date orderDate;
+    @Id
+    private Integer id;
+    
+    private Integer consignorId;
+    
+    private Integer cargoId;
+
+
+    private String orderDate;
     
     private Integer driverCost;
     
@@ -32,7 +38,7 @@ public class OrderList implements Serializable {
     
     private Integer freight;
     
-    private Integer orderCar;
+    private Integer orderCarId;
     
     private Integer profit;
     

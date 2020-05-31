@@ -3,8 +3,8 @@ package com.car.manager.controller.response;
 import lombok.Data;
 
 @Data
-public class SelectAllCargoResponse {
+public class SelectAllConsignorResponse {
     private Integer id;
 
-    private String cargoName;
+    private String consignorName;
 }

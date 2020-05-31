@@ -56,7 +56,7 @@ public class DriverListController extends BaseController{
         return toAjax(driverListService.insertDriver(request));
     }
 
-    @PostMapping("/checkDriverIDCard")
+    @PostMapping("/checkDriverIdCard")
     @ResponseBody
     public boolean checkCarNumber (SelectDriverRequest request) {
         return driverListService.selectDriverByIDCard(request);

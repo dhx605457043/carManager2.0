@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 public class InsertOrderCarInformationRequest {
-    private Integer orderCarId;
+    private Integer id;
 
     private Integer orderDriverId;
 

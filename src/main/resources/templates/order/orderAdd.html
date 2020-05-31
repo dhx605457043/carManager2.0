@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-order-orderAdd">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江日期：</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                <input type="text" class="time-input" id="orderDate" name="orderDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江车号：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="orderCarId" name="orderCarId">
+                                <option
+                                        th:each="car:${carResponses}"
+                                        th:value="${car.id}"
+                                        th:text="${car.vehicleNumber}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">货主：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="consignorId" name="consignorId">
+                                <option
+                                        th:each="consignor:${consignorResponses}"
+                                        th:value="${consignor.id}"
+                                        th:text="${consignor.consignorName}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">货物：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="cargoId" name="cargoId">
+                                <option
+                                        th:each="cargo:${cargoResponses}"
+                                        th:value="${cargo.id}"
+                                        th:text="${cargo.cargoName}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">运费：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="freight" id="freight" class="form-control" placeholder="请输入费用">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverCost" id="driverCost" class="form-control" placeholder="请输入司机费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">隔离费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="quarantineCost" id="quarantineCost" class="form-control" placeholder="请输入隔离费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">中国费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="chinaCost" id="chinaCost" class="form-control" placeholder="请输入中国费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">朝鲜费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="koreaCost" id="koreaCost" class="form-control" placeholder="请输入朝鲜费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">结账状态：</label>
+                        <div class="col-sm-9">
+                            <input type="radio" name="orderType" value="1" title="是">
+                            <input type="radio" name="orderType" value="2" title="否" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/orderManager"
+
+    $("#form-order-orderAdd").validate({
+        onkeyup: false,
+        rules:{
+            orderDate:{
+                required: true,
+            },
+            orderCarId:{
+                required: true,
+            },
+            consignorId:{
+                required: true,
+            },
+            cargoId:{
+                required: true,
+            },
+            freight:{
+                required: true,
+            },
+            driverCost:{
+                required: true,
+            },
+            quarantineCost:{
+                required: true,
+            },
+            chinaCost:{
+                required: true,
+            },
+            koreaCost:{
+                required: true,
+            },
+            orderType:{
+                required: true,
+            },
+        },
+        messages: {
+            orderDate: {
+                required: "日期不能为空",
+            },
+            orderCarId: {
+                required: "车辆不能为空",
+            },
+            consignorId: {
+                required: "货主不能为空",
+            },
+            cargoId: {
+                required: "货物不能为空",
+            },
+            freight: {
+                required: "运费不能为空",
+            },
+            driverCost: {
+                required: "司机费用不能为空",
+            },
+            quarantineCost: {
+                required: "隔离费用不能为空",
+            },
+            chinaCost: {
+                required: "中国费用不能为空",
+            },
+            koreaCost: {
+                required: "朝鲜费用不能为空",
+            },
+            orderType: {
+                required: "结账状态不能为空",
+
+            },
+        },
+        focusCleanup: false
+    });
+    var carNumber = $("#orderCarId").find("option:selected").text();
+    var freight = $("#freight").val();
+    var driverCost = $("#driverCost").val();
+    var quarantineCost = $("#quarantineCost").val();
+    var chinaCost = $("#chinaCost").val();
+    var koreaCost = $("#koreaCost").val();
+    var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost;
+    function submitHandler() {
+        if ($.validate.form()) {
+            var data = $('#form-order-orderAdd').serializeArray();
+            data.push({"name": "orderCarNumber", "value": carNumber});
+            data.push({"name": "profit", "value": profit});
+            $.operate.save(prefix + "/addOrder", data);
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>

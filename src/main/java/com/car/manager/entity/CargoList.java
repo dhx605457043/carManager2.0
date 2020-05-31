@@ -2,6 +2,9 @@ package com.car.manager.entity;
 
 import java.io.Serializable;
 import lombok.Data;
+
+import javax.persistence.Id;
+
 @Data
 /**
  * (CargoList)实体类
@@ -11,8 +14,8 @@ import lombok.Data;
  */
 public class CargoList implements Serializable {
     private static final long serialVersionUID = 721217886093767087L;
-    
-    private Integer cargoId;
+    @Id
+    private Integer id;
     
     private String cargoName;
 

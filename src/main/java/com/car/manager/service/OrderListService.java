@@ -1,7 +1,8 @@
 package com.car.manager.service;
 
-import com.car.manager.controller.request.SelectAllOrderRequest;
-import com.car.manager.controller.response.SelectAllOrderResponse;
+import com.car.manager.controller.request.*;
+import com.car.manager.controller.response.SelectOrderResponse;
+import com.car.manager.core.page.TableDataInfo;
 
 import java.util.List;
 
@@ -12,5 +13,10 @@ import java.util.List;
  * @since 2020-05-15 15:21:43
  */
 public interface OrderListService {
-    List<SelectAllOrderResponse>selectAllOrder(SelectAllOrderRequest request);
+    TableDataInfo selectAllOrderPage(SelectAllOrderRequest request);
+//    List<SelectOrderResponse> selectAllOrder();
+    int insertOrder (InsertOrderRequest request);
+    SelectOrderResponse selectOrderById (SelectOrderRequest request);
+    int updateOrder (UpdateOrderRequest request);
+    int deleteOrderById (int id);
 }

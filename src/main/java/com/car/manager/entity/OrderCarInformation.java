@@ -28,6 +28,6 @@ public class OrderCarInformation implements Serializable {
     private Integer orderTonnage;
 
     @JsonFormat(pattern = "YYYY-MM-dd")
-    private String orderDate;
+    private Date orderDate;
 
 }

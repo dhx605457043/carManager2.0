@@ -11,7 +11,7 @@ public class OrderCarInformationEx extends OrderCarInformation {
     private String driverName;
     private String driverAddress;
     private String driverPhoneNumber;
-    private String driverIDCard;
+    private String driverIdCard;
     private String orderCargoName;
     private String vehicleNumber;
 

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SelectAllDriversResponse {
-    private Integer driverId;
+    private Integer id;
 
     private String driverName;
     private String driverPhoneNumber;

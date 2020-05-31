@@ -3,7 +3,7 @@
 <mapper namespace="com.car.manager.dao.CargoListMapper">
 <select id="selectAllCargo" resultType="com.car.manager.entity.CargoList">
     select
-        cargo_id as cargoId,
+        id as id,
         cargo_name as cargoName
     from cargo_list
 </select>
