@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class SelectOrderRequest {
     private Integer id;
-
+    private String orderDate;
+    private String orderCarNumber;
 }

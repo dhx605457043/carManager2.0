@@ -13,8 +13,7 @@ import java.util.List;
  * @since 2020-05-15 15:21:43
  */
 public interface OrderListService {
-    TableDataInfo selectAllOrderPage(SelectAllOrderRequest request);
-//    List<SelectOrderResponse> selectAllOrder();
+    TableDataInfo selectAllOrderPage(SelectOrderRequest request);
     int insertOrder (InsertOrderRequest request);
     SelectOrderResponse selectOrderById (SelectOrderRequest request);
     int updateOrder (UpdateOrderRequest request);

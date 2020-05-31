@@ -43,7 +43,7 @@ public class OrderListController extends BaseController{
     }
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SelectAllOrderRequest request) {
+    public TableDataInfo list(SelectOrderRequest request) {
         return orderListService.selectAllOrderPage(request);
     }
     /**

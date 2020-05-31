@@ -28,8 +28,8 @@
                             <select class="form-control" name="carDriverId" id="carDriverId">
                                 <option
                                         th:each="driver:${driverResponses}"
-                                        th:selected="${driver.driverId} == ${carResponse.carDriverId}"
-                                        th:value="${driver.driverId}"
+                                        th:selected="${driver.id} == ${carResponse.carDriverId}"
+                                        th:value="${driver.id}"
                                         th:text="${driver.driverName}">
                                 </option>
                             </select>

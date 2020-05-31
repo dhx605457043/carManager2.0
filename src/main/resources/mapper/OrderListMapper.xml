@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.car.manager.dao.OrderListMapper">
 
-    <select id="selectAllOrder" resultType="com.car.manager.entity.OrderList" parameterType="com.car.manager.entity.Ex.OrderListEx">
+    <select id="selectAllOrder" resultType="com.car.manager.entity.Ex.OrderListEx" parameterType="com.car.manager.entity.OrderList">
         select
             ord.id as id,
             ord.consignor_id as consignorId,
@@ -22,6 +22,17 @@
                  left join car_list car on ord.order_car_id=car.id
                  left join consignor_list con on ord.consignor_id=con.id
                  left join cargo_list cargo on ord.cargo_id=cargo.id
+        <where>
+            1=1
+            <if test="orderDate != null and orderDate != ''">
+                and order_date like concat('%', #{orderDate}, '%')
+            </if>
+            <if test="orderCarNumber != null and orderCarNumber != ''">
+                and order_car_number like concat('%', #{orderCarNumber}, '%')
+            </if>
+
+        </where>
+
     </select>
     <select id="selectOrderById" parameterType="com.car.manager.entity.Ex.OrderListEx" resultType="com.car.manager.entity.Ex.OrderListEx">
         select

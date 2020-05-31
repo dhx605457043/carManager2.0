@@ -2,7 +2,6 @@ package com.car.manager.service.impl;
 
 
 import com.car.manager.controller.request.InsertOrderRequest;
-import com.car.manager.controller.request.SelectAllOrderRequest;
 import com.car.manager.controller.request.SelectOrderRequest;
 import com.car.manager.controller.request.UpdateOrderRequest;
 import com.car.manager.controller.response.SelectOrderResponse;
@@ -10,7 +9,6 @@ import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.core.page.TableSupport;
 import com.car.manager.dao.OrderListMapper;
-import com.car.manager.entity.DriverList;
 import com.car.manager.entity.Ex.OrderListEx;
 import com.car.manager.entity.OrderList;
 import com.car.manager.service.OrderListService;
@@ -35,7 +33,7 @@ public class OrderListServiceImpl implements OrderListService {
     private OrderListMapper orderListMapper;
 
     @Override
-    public TableDataInfo selectAllOrderPage(SelectAllOrderRequest request) {
+    public TableDataInfo selectAllOrderPage(SelectOrderRequest request) {
 
         OrderList requestModel = BeanCopyUtils.copyBean(request,new OrderList());
         List<OrderListEx> orders = orderListMapper.selectAllOrder(requestModel);

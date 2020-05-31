@@ -44,10 +44,10 @@ $(document).ready(function(){
 			"1":"辽","2":"黑","3":"京","4":"津","5":"沪","6":"渝","7":"冀","8":"豫","9":"云","10":"琼","11":"湘","12":"皖","13":"鲁","14":"苏","15":"浙",
 			"16":"赣", "17":"鄂","18":"桂","19":"甘","20":"晋","21":"蒙","22":"陕","23":"吉","24":"闽","25":"贵","26":"粤","27":"青","28":"藏","29":"川","30":"宁"
 		};
-		var licensePlateAreaCode=$("#carLicensePlateAreaCode").val();
+		var licensePlateAreaCode = $("#carLicensePlateAreaCode").val();
 		var id=/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
 		var carNumber = param[licensePlateAreaCode] + value;
-		console.log(carNumber.toUpperCase);
+		console.log(licensePlateAreaCode);
 		return this.optional(element) || (id.test(carNumber.toUpperCase()));
 	},"请输入正确的车辆号码");
 
