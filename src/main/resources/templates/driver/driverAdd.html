@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-driver-driverAdd">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机姓名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverName" id="driverName" class="form-control" placeholder="请输入司机姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机身份证号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverIdCard" id="driverIdCard" class="form-control" placeholder="请输入司机身份证号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机电话：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverPhoneNumber" id="driverPhoneNumber" class="form-control" placeholder="请输入司机电话">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机住址：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverAddress" id="driverAddress" class="form-control" placeholder="请输司机住址">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/driverManager"
+
+    $("#form-driver-driverAdd").validate({
+        onkeyup: false,
+        rules:{
+            driverName:{
+                required: true,
+                isName:true,
+            },
+            driverIdCard:{
+                required: true,
+                isIdentity:true,
+                remote: {
+                    url: prefix + "/checkDriverIDCard",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        "driverIDCard": function () {
+                            return $.common.trim($("#driverIDCard").val());
+                        }
+                    },
+                }
+            },
+            driverPhoneNumber:{
+                required: true,
+                isPhone:true,
+            },
+            driverAddress:{
+                required: true,
+            },
+
+        },
+        messages: {
+            driverName: {
+                required: "名字不能为空",
+            },
+            driverIdCard: {
+                required: "身份证号不能为空",
+                remote:"司机已存在,请勿重复添加",
+            },
+            driverPhoneNumber: {
+                required: "电话号不能为空",
+            },
+            driverAddress: {
+                required: "住址不能为空",
+            },
+        },
+        focusCleanup: false
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            var data = $('#form-driver-driverAdd').serializeArray();
+            $.operate.save(prefix + "/addDriver", data);
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>

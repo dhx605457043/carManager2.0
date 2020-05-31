@@ -16,7 +16,7 @@
                         </li>
                         <li>
                             <label>司机身份证：</label>
-                            <input type="text" name="driverIDCard"/>
+                            <input type="text" name="driverIdCard"/>
                         </li>
                         <li>
                             <label>驾驶人电话：</label>
@@ -52,11 +52,13 @@
     $(function() {
         var options = {
             url: prefix + "/list",
-            createUrl: prefix + "/add",
+            createUrl: prefix + "/toAddDriver",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
             modalName: "车辆列表",
+            showPageGo: true,
+            pageList:[5,10,15],
             columns: [
                 {
                     field: 'driverName',
@@ -67,7 +69,7 @@
                     title: '司机电话'
                 },
                 {
-                    field: 'driverIDCard',
+                    field: 'driverIdCard',
                     title: '驾驶人身份证'
                 },
                 {

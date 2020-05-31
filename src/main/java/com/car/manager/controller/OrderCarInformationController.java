@@ -51,7 +51,7 @@ public class OrderCarInformationController extends BaseController{
 
     @GetMapping("/toAddOrderCarInformation")
     public String toAdd(Model model) {
-        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectAllDriverRequest()));
+        model.addAttribute("driverResponses",driverListService.selectAllDriver());
         model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
 

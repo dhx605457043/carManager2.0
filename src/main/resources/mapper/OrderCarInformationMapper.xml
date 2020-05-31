@@ -6,7 +6,7 @@
         car.vehicle_number AS vehicleNumber,
         driver.driver_name AS driverName,
         driver.driver_address AS driverAddress,
-        driver.driver_ID_card AS driverIDCard,
+        driver.driver_id_card AS driverIDCard,
         driver.driver_phone_number AS driverPhoneNumber,
         DATE_FORMAT( oci.order_date, '%Y-%m-%d' ) AS orderDate,
         cargo.cargo_name AS orderCargoName,

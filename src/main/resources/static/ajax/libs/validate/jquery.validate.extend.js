@@ -31,7 +31,7 @@ $(document).ready(function(){
 	jQuery.validator.addMethod("isIdentity",function(value,element){
 		var id= /^(\d{15}$|^\d{18}$|^\d{17}(\d|X))$/;
 		return this.optional(element) || (id.test(value));
-	},"请输入正确的15或18位身份证号,末尾为大写X");
+	},"请输入正确的15或18位身份证号");
 	//校验出生日期
 	jQuery.validator.addMethod("isBirth",function(value,element){
 		var birth = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;

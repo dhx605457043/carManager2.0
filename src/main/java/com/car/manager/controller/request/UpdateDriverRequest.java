@@ -1,11 +1,10 @@
-package com.car.manager.controller.response;
+package com.car.manager.controller.request;
 
 import lombok.Data;
 
 @Data
-public class SelectAllDriversResponse {
-    private Integer driverId;
-
+public class UpdateDriverRequest {
+    private Integer id;
     private String driverName;
     private String driverPhoneNumber;
     private String driverAddress;

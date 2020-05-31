@@ -1,9 +1,6 @@
 package com.car.manager.service.impl;
 
-import com.car.manager.controller.request.InsertCarRequest;
-import com.car.manager.controller.request.SelectAllCarRequest;
-import com.car.manager.controller.request.SelectCarRequest;
-import com.car.manager.controller.request.UpdateCarRequest;
+import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.page.PageDomain;
@@ -92,9 +89,13 @@ public class CarListServiceImpl implements CarListService {
     public int updateCar(UpdateCarRequest request) {
         CarList requestModel = BeanCopyUtils.copyBean(request,new CarList());
         requestModel.setCarNumber(requestModel.getCarNumber().toUpperCase());
-//        requestModel.setVehicleNumber(requestModel.ge);
-//        Example example = new Example(CarList.class);
-//        example.createCriteria().andEqualTo("id", id);
         return carListMapper.updateByPrimaryKey(requestModel);
+    }
+
+    @Override
+    public int deleteCarById(int id) {
+        CarList requestModel = new CarList();
+        requestModel.setId(id);
+        return carListMapper.deleteByPrimaryKey(requestModel);
     }
 }

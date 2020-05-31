@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class SelectAllDriverRequest {
-    private Integer pageNum;
-    private Integer pageSize;
+private String driverIdCard;
+    private String driverPhoneNumber;
+    private String driverName;
+
 }

@@ -2,14 +2,12 @@ package com.car.manager.controller;
 
 
 import com.car.manager.controller.request.*;
-import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +82,7 @@ public class CarListController extends BaseController{
     public String edit(@PathVariable("id") Integer id, Model model) {
         SelectCarRequest request = new SelectCarRequest();
         request.setId(id);
-        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectAllDriverRequest()));
+        model.addAttribute("driverResponses",driverListService.selectAllDriver());
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
         model.addAttribute("carResponse",carlistService.selectCarById(request));
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
@@ -106,11 +104,11 @@ public class CarListController extends BaseController{
      * 删除车辆
      */
 //    @Log(title = "车辆", businessType = BusinessType.DELETE)
-//    @PostMapping( "/remove")
-//    @ResponseBody
-//    public AjaxResult remove(String ids) {
-//        return toAjax(carService.deleteCarByIds(ids));
-//    }
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(int ids) {
+        return toAjax(carlistService.deleteCarById(ids));
+    }
 
 
 

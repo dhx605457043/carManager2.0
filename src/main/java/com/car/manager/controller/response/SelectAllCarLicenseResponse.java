@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SelectAllCarLicenseResponse {
-    private int licensePlateAreaCode;
+    private Integer licensePlateAreaCode;
     private String licensePlateAreaName;
 }

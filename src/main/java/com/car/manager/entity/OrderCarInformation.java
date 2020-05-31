@@ -3,6 +3,7 @@ package com.car.manager.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import javax.persistence.Id;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @Data
 public class OrderCarInformation implements Serializable {
     private static final long serialVersionUID = 270410872438457209L;
-    
+    @Id
     private Integer id;
     
     private Integer orderCarId;

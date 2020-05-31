@@ -65,11 +65,8 @@
 
     function submitHandler() {
         if ($.validate.form()) {
-            var data = $('#form-car-carAdd').serialize();
-            // data.set("vehicleNumber", licensePlateAreaName + $("#carNumber").val().toUpperCase());
-            // data.vehicleNumber = licensePlateAreaName + $("#carNumber").val();
-            // console.log(licensePlateAreaName + $("#carNumber").val());
-data.push();
+            var data = $('#form-car-carAdd').serializeArray();
+            data.push({"name": "vehicleNumber", "value": licensePlateAreaName + $("#carNumber").val().toUpperCase()});
             $.operate.save(prefix + "/addCar", data);
         } else  {
             console.log("false");

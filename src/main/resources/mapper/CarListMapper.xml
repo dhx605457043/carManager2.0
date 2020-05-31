@@ -14,13 +14,13 @@
         car.vehicle_number as vehicleNumber,
         driver.driver_name as driverName,
         driver.driver_address as driverAddress,
-        driver.driver_ID_card as driverIDCard,
+        driver.driver_id_card as driverIdCard,
         driver.driver_phone_number as driverPhoneNumber
         from car_list car
-        left join driver_list driver on car.car_driver_id=driver.driver_id
+        left join driver_list driver on car.car_driver_id=driver.id
         <where>
-            <if test="carNumber != null and carNumber != ''">
-                carNumber like concat('%', #{carNumber}, '%')
+            <if test="vehicleNumber != null and vehicleNumber != ''">
+                car.vehicle_number like concat('%', #{vehicleNumber}, '%')
             </if>
         </where>
     </select>
@@ -36,13 +36,14 @@
     <select id="selectCarById" parameterType="com.car.manager.entity.CarList" resultType="com.car.manager.entity.CarList">
         select
         id as id,
-car_driver_id as carDriverId,
-car_number as carNumber,
-car_license_plate_area_code as carLicensePlateAreaCode,
-vehicle_number as vehicleNumber
+        car_driver_id as carDriverId,
+        car_number as carNumber,
+        car_license_plate_area_code as carLicensePlateAreaCode,
+        vehicle_number as vehicleNumber
         from car_list
         where
         id = #{id}
     </select>
+
 
 </mapper>
