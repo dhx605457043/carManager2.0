@@ -3,25 +3,35 @@
 <mapper namespace="com.car.manager.dao.OrderCarInformationMapper">
 <select id="selectAllOrderCarInformation" resultType="com.car.manager.entity.Ex.OrderCarInformationEx" parameterType="com.car.manager.entity.Ex.OrderCarInformationEx">
     SELECT
-          id as id
+        oci.id as id,
         car.vehicle_number AS vehicleNumber,
         driver.driver_name AS driverName,
         driver.driver_address AS driverAddress,
         driver.driver_id_card AS driverIdCard,
         driver.driver_phone_number AS driverPhoneNumber,
-        DATE_FORMAT( oci.order_date, '%Y-%m-%d' ) AS orderDate,
+        oci.order_date AS orderDate,
         cargo.cargo_name AS orderCargoName,
         oci.order_tonnage AS orderTonnage
     FROM
         order_car_information oci
             LEFT JOIN car_list car ON oci.order_car_id = car.id
             LEFT JOIN driver_list driver ON oci.order_driver_id = driver.id
-            LEFT JOIN cargo_list cargo ON oci.order_cargo_id = cargo.cargo_id
+            LEFT JOIN cargo_list cargo ON oci.order_cargo_id = cargo.id
+    <where>
+            1=1
+            <if test="orderDate != null and orderDate != ''">
+                and order_date like concat('%', #{orderDate}, '%')
+            </if>
+
+        </where>
 </select>
-    <insert id="insertOrderCarInformation" parameterType="com.car.manager.entity.OrderCarInformation">
-        insert into
-            order_car_information (order_car_id,order_driver_id,order_cargo_id,order_tonnage,order_date)
-        values
-        (#{orderCarId},#{orderDriverId},#{orderCargoId},#{orderTonnage},#{orderDate});
-    </insert>
+    <select id="selectOrderCarInformationById" parameterType="com.car.manager.entity.OrderCarInformation" resultType="com.car.manager.entity.OrderCarInformation">
+        select
+        id as id
+        from order_car_information
+        <where>
+            id=#{id}
+        </where>
+
+    </select>
 </mapper>

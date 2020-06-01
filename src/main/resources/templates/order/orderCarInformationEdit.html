@@ -5,7 +5,7 @@
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-    <form class="form-horizontal m" id="form-order-orderCarInformation">
+    <form class="form-horizontal m" id="form-orderCarInformation-orderCarInformationUpdate">
         <div class="form-group">
             <div class="col-sm-9">
                 <div class="col-md-12">
@@ -16,6 +16,7 @@
                                 <option
                                         th:each="car:${carResponses}"
                                         th:value="${car.id}"
+                                        th:selected="${car.id} == ${orderCarInformationResponse.orderCarId}"
                                         th:text="${car.vehicleNumber}">
                                 </option>
                             </select>
@@ -27,7 +28,7 @@
                             <select class="form-control" name="orderDriverId" id="orderDriverId">
                                 <option
                                         th:each="driver:${driverResponses}"
-
+                                        th:selected="${driver.id} == ${orderCarInformationResponse.orderDriverId}"
                                         th:value="${driver.id}"
                                         th:text="${driver.driverName} + ' ' + ${driver.driverIdCard}">
                                 </option>
@@ -38,10 +39,10 @@
                         <label class="col-sm-3 control-label">货品：</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="orderCargoId" id="orderCargoId">
-<!--                                <option th:text="请选择货物"></option>-->
+                                <!--                                <option th:text="请选择货物"></option>-->
                                 <option
                                         th:each="cargo:${cargoResponses}"
-
+                                        th:selected="${cargo.id} == ${orderCarInformationResponse.orderCargoId}"
                                         th:value="${cargo.id}"
                                         th:text="${cargo.cargoName}">
                                 </option>
@@ -51,7 +52,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">吨位：</label>
                         <div class="col-sm-9">
-                            <input type="text" name="orderTonnage" id="orderTonnage" class="form-control" placeholder="请输入货物吨位">
+                            <input type="text" name="orderTonnage" id="orderTonnage" class="form-control" th:value="${orderCarInformationResponse.orderTonnage}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -59,7 +60,14 @@
                         <div class="col-sm-9">
                             <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 
-                                <input type="text" class="time-input" id="orderDate" name="orderDate">
+                                <input type="text" class="time-input" id="orderDate" name="orderDate" th:value="${orderCarInformationResponse.orderDate}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <div class="input-group date">
+                                <input id="id" name="id" th:value="${orderCarInformationResponse.id}" type="hidden">
                             </div>
                         </div>
                     </div>
@@ -73,7 +81,7 @@
 <script type="text/javascript">
     var prefix = "/orderCarInformationManager"
 
-    $("#form-order-orderCarInformation").validate({
+    $("#form-orderCarInformation-orderCarInformationUpdate").validate({
         onkeyup: false,
         rules:{
             orderCarId:{
@@ -113,11 +121,9 @@
         },
         focusCleanup: false
     });
-
     function submitHandler() {
         if ($.validate.form()) {
-            console.log($("#orderTonnage").val());
-            $.operate.save(prefix + "/addOrderCarInformation", $('#form-order-orderCarInformation').serialize());
+            $.operate.save(prefix + "/updateOrderCarInformation", $('#form-orderCarInformation-orderCarInformationUpdate').serialize());
         } else  {
             console.log("false");
         }

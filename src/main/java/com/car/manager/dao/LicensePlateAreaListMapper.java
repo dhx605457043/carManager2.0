@@ -13,5 +13,5 @@ import java.util.List;
  * @since 2020-05-15 15:22:19
  */
 public interface LicensePlateAreaListMapper extends Mapper<LicensePlateAreaList>, BaseMapper<LicensePlateAreaList> {
-    List<LicensePlateAreaList> selectAllLicense ();
+//    List<LicensePlateAreaList> selectAllLicense ();
 }

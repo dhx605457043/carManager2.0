@@ -1,12 +1,13 @@
 package com.car.manager.service.impl;
 
 import com.car.manager.controller.request.InsertOrderCarInformationRequest;
-import com.car.manager.controller.request.SelectAllOrderCarInformationRequest;
+import com.car.manager.controller.request.SelectOrderCarInformationRequest;
+import com.car.manager.controller.request.UpdateOrderCarInformationRequest;
 import com.car.manager.controller.response.SelectAllOrderCarInformationResponse;
+import com.car.manager.controller.response.SelectOrderCarInformationResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.core.page.TableSupport;
-import com.car.manager.entity.CarList;
 import com.car.manager.entity.Ex.OrderCarInformationEx;
 import com.car.manager.dao.OrderCarInformationMapper;
 import com.car.manager.entity.OrderCarInformation;
@@ -29,7 +30,7 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
     private OrderCarInformationMapper orderCarInformationMapper;
 
     @Override
-    public TableDataInfo selectAllOrderCarInformation(SelectAllOrderCarInformationRequest request) {
+    public TableDataInfo selectAllOrderCarInformationPage(SelectOrderCarInformationRequest request) {
         OrderCarInformationEx requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformationEx());
         List<OrderCarInformationEx> responseModel = orderCarInformationMapper.selectAllOrderCarInformation(requestModel);
         List<SelectAllOrderCarInformationResponse> responses = (List<SelectAllOrderCarInformationResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAllOrderCarInformationResponse.class);
@@ -53,7 +54,27 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
     @Override
     public int insertOrderCarInformation(InsertOrderCarInformationRequest request) {
         OrderCarInformation requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformation());
-        return orderCarInformationMapper.insertOrderCarInformation(requestModel);
+        return orderCarInformationMapper.insert(requestModel);
     }
 
+    @Override
+    public SelectOrderCarInformationResponse selectOrderCarInformationById(SelectOrderCarInformationRequest request) {
+        OrderCarInformation requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformation());
+        OrderCarInformation responseModel = orderCarInformationMapper.selectByPrimaryKey(requestModel);
+        SelectOrderCarInformationResponse response = BeanCopyUtils.copyBean(responseModel,new SelectOrderCarInformationResponse());
+        return response;
+    }
+
+    @Override
+    public int updateOrderCarInformation(UpdateOrderCarInformationRequest request) {
+        OrderCarInformation requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformation());
+        return orderCarInformationMapper.updateByPrimaryKey(requestModel);
+    }
+
+    @Override
+    public int deleteOrderCarInformationById(int id) {
+        OrderCarInformation requestModel = new OrderCarInformation();
+        requestModel.setId(id);
+        return orderCarInformationMapper.deleteByPrimaryKey(requestModel);
+    }
 }

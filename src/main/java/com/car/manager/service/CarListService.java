@@ -14,8 +14,8 @@ import java.util.List;
  * @since 2020-05-14 17:58:00
  */
 public interface CarListService {
-    List<SelectAllCarResponse> selectAllCar (SelectAllCarRequest request);
-    TableDataInfo selectAllCarPage (SelectAllCarRequest request);
+    List<SelectAllCarResponse> selectAllCar (SelectCarRequest request);
+    TableDataInfo selectAllCarPage (SelectCarRequest request);
     int insertCar (InsertCarRequest request);
     boolean selectCarByCarNumber (SelectCarRequest request);
     SelectCarResponse selectCarById (SelectCarRequest request);

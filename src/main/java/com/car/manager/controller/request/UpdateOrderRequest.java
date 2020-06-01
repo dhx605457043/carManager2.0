@@ -13,7 +13,6 @@ public class UpdateOrderRequest {
 
     private Integer cargoId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private String orderDate;
 
     private Integer driverCost;

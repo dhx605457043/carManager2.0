@@ -1,3 +1,6 @@
+car:
+  profile: D:/car/uploadPath
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -14,6 +17,7 @@ spring:
     encoding: utf-8
     # 禁用缓存 
     cache: false
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

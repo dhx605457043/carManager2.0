@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.persistence.PrimaryKeyJoinColumn;
-import java.util.List;
 
 /**
  * (Orderlist)表控制层
@@ -52,7 +50,7 @@ public class OrderListController extends BaseController{
     @GetMapping("/toAddOrder")
     public String toAdd(Model model) {
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
-        model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
         model.addAttribute("consignorResponses",consignorListService.selectAllConsignor());
         return prefix + "/orderAdd";
     }
@@ -67,12 +65,6 @@ public class OrderListController extends BaseController{
         return toAjax(orderListService.insertOrder(request));
     }
 
-//    @PostMapping("/checkDriverIdCard")
-//    @ResponseBody
-//    public boolean checkCarNumber (SelectDriverRequest request) {
-//        return driverListService.selectDriverByIDCard(request);
-//    }
-
     /**
      * 修改订单
      */
@@ -82,7 +74,7 @@ public class OrderListController extends BaseController{
         request.setId(id);
         model.addAttribute("orderResponse",orderListService.selectOrderById(request));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
-        model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
         model.addAttribute("consignorResponses",consignorListService.selectAllConsignor());
         return prefix + "/orderEdit";
     }
@@ -90,7 +82,6 @@ public class OrderListController extends BaseController{
     /**
      * 修改保存订单
      */
-//    @Log(title = "import", businessType = BusinessType.UPDATE)
     @PostMapping("/updateOrder")
     @ResponseBody
     public AjaxResult editSave(UpdateOrderRequest request) {

@@ -1,9 +1,6 @@
 package com.car.manager.controller;
 
-import com.car.manager.controller.request.InsertOrderCarInformationRequest;
-import com.car.manager.controller.request.SelectAllCarRequest;
-import com.car.manager.controller.request.SelectAllDriverRequest;
-import com.car.manager.controller.request.SelectAllOrderCarInformationRequest;
+import com.car.manager.controller.request.*;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.service.CarListService;
@@ -45,22 +42,64 @@ public class OrderCarInformationController extends BaseController{
 
     @PostMapping("/orderCarInformationList")
     @ResponseBody
-    public TableDataInfo orderCarInformationList (SelectAllOrderCarInformationRequest request) {
-        return orderCarInformationService.selectAllOrderCarInformation(request);
+    public TableDataInfo orderCarInformationList (SelectOrderCarInformationRequest request) {
+        return orderCarInformationService.selectAllOrderCarInformationPage(request);
     }
 
+    /**
+     * 新增订单车辆信息
+     * @param model
+     * @return
+     */
     @GetMapping("/toAddOrderCarInformation")
     public String toAdd(Model model) {
         model.addAttribute("driverResponses",driverListService.selectAllDriver());
-        model.addAttribute("carResponses",carListService.selectAllCar(new SelectAllCarRequest()));
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
 
         return prefix + "/orderCarInformationAdd";
     }
+
+    /**
+     * 新增订单车辆保存
+     * @param request
+     * @return
+     */
     @PostMapping("/addOrderCarInformation")
     @ResponseBody
     public AjaxResult addOrderCarInformation (InsertOrderCarInformationRequest request) {
 
         return toAjax(orderCarInformationService.insertOrderCarInformation(request));
+    }
+    /**
+     * 修改订单车辆信息
+     */
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int id, Model model) {
+        SelectOrderCarInformationRequest request = new SelectOrderCarInformationRequest();
+        request.setId(id);
+        model.addAttribute("orderCarInformationResponse",orderCarInformationService.selectOrderCarInformationById(request));;
+        model.addAttribute("driverResponses",driverListService.selectAllDriver());
+        model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
+        model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
+        return prefix + "/OrderCarInformationEdit";
+    }
+
+    /**
+     * 修改保存订单车辆信息
+     */
+    @PostMapping("/updateOrderCarInformation")
+    @ResponseBody
+    public AjaxResult editSave(UpdateOrderCarInformationRequest request) {
+        return toAjax(orderCarInformationService.updateOrderCarInformation(request));
+    }
+
+    /**
+     * 删除订单车辆信息
+     */
+    @PostMapping( "/remove")
+    @ResponseBody
+    public AjaxResult remove(int ids) {
+        return toAjax(orderCarInformationService.deleteOrderCarInformationById(ids));
     }
 }

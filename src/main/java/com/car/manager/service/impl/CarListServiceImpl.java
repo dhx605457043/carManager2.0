@@ -12,7 +12,6 @@ import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.util.BeanCopyUtils;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class CarListServiceImpl implements CarListService {
     private CarListMapper carListMapper;
 
     @Override
-    public TableDataInfo selectAllCarPage(SelectAllCarRequest request) {
+    public TableDataInfo selectAllCarPage(SelectCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
         TableDataInfo rspData = new TableDataInfo();
@@ -56,7 +55,7 @@ public class CarListServiceImpl implements CarListService {
     }
 
     @Override
-    public List<SelectAllCarResponse> selectAllCar(SelectAllCarRequest request) {
+    public List<SelectAllCarResponse> selectAllCar(SelectCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
         return (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(cars, SelectAllCarResponse.class);

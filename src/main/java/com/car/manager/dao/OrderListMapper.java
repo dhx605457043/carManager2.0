@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface OrderListMapper extends Mapper<OrderList>, BaseMapper<OrderList> {
     List<OrderListEx>selectAllOrder(OrderList orderList);
-    OrderList selectOrderById (OrderList driverList);
+//    OrderList selectOrderById (OrderList driverList);
 }

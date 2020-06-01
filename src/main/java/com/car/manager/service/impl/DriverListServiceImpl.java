@@ -1,7 +1,6 @@
 package com.car.manager.service.impl;
 
 import com.car.manager.controller.request.InsertDriverRequest;
-import com.car.manager.controller.request.SelectAllDriverRequest;
 import com.car.manager.controller.request.SelectDriverRequest;
 import com.car.manager.controller.request.UpdateDriverRequest;
 import com.car.manager.controller.response.SelectAllDriversResponse;
@@ -11,7 +10,6 @@ import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.core.page.TableSupport;
 import com.car.manager.dao.DriverListMapper;
 
-import com.car.manager.entity.CarList;
 import com.car.manager.entity.DriverList;
 import com.car.manager.service.DriverListService;
 import com.car.manager.util.BeanCopyUtils;
@@ -35,7 +33,7 @@ public class DriverListServiceImpl implements DriverListService {
     private DriverListMapper driverlistMapper;
 
     @Override
-    public TableDataInfo selectAllDriverPage(SelectAllDriverRequest request) {
+    public TableDataInfo selectAllDriverPage(SelectDriverRequest request) {
 
         DriverList requestModel = BeanCopyUtils.copyBean(request,new DriverList());
         List<DriverList> drivers = driverlistMapper.selectAllDriver(requestModel);

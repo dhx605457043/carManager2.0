@@ -1,7 +1,6 @@
 package com.car.manager.controller;
 
 import com.car.manager.controller.request.*;
-import com.car.manager.controller.response.SelectAllDriversResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.service.DriverListService;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * (DriverList)表控制层
@@ -36,7 +34,7 @@ public class DriverListController extends BaseController{
 
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SelectAllDriverRequest request) {
+    public TableDataInfo list(SelectDriverRequest request) {
         return driverListService.selectAllDriverPage(request);
     }
     /**

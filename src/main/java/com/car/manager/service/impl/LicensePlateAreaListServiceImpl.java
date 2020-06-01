@@ -23,7 +23,7 @@ public class LicensePlateAreaListServiceImpl implements LicensePlateAreaListServ
 
     @Override
     public List<SelectAllCarLicenseResponse> selectAllCarLicense() {
-        List<LicensePlateAreaList> licensePlateAreaLists = licensePlateAreaListMapper.selectAllLicense();
+        List<LicensePlateAreaList> licensePlateAreaLists = licensePlateAreaListMapper.selectAll();
         List<SelectAllCarLicenseResponse> responses = (List<SelectAllCarLicenseResponse>) BeanCopyUtils.copyBeanList(licensePlateAreaLists,SelectAllCarLicenseResponse.class);
         return responses;
 

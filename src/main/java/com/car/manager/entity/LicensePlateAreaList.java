@@ -11,8 +11,9 @@ import lombok.Data;
  */
 public class LicensePlateAreaList implements Serializable {
     private static final long serialVersionUID = -40880977805377393L;
-    
-    private int licensePlateAreaCode;
+
+
+    private Integer licensePlateAreaCode;
     
     private String licensePlateAreaName;
 

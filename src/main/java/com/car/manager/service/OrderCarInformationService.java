@@ -1,7 +1,7 @@
 package com.car.manager.service;
 
-import com.car.manager.controller.request.InsertOrderCarInformationRequest;
-import com.car.manager.controller.request.SelectAllOrderCarInformationRequest;
+import com.car.manager.controller.request.*;
+import com.car.manager.controller.response.SelectOrderCarInformationResponse;
 import com.car.manager.core.page.TableDataInfo;
 
 /**
@@ -11,6 +11,9 @@ import com.car.manager.core.page.TableDataInfo;
  * @since 2020-05-25 22:24:55
  */
 public interface OrderCarInformationService {
-    TableDataInfo selectAllOrderCarInformation (SelectAllOrderCarInformationRequest request);
+    TableDataInfo selectAllOrderCarInformationPage (SelectOrderCarInformationRequest request);
     int insertOrderCarInformation (InsertOrderCarInformationRequest request);
+    SelectOrderCarInformationResponse selectOrderCarInformationById (SelectOrderCarInformationRequest request);
+    int updateOrderCarInformation (UpdateOrderCarInformationRequest request);
+    int deleteOrderCarInformationById (int id);
 }

@@ -2,17 +2,21 @@ package com.car.manager.controller;
 
 
 import com.car.manager.controller.request.*;
+import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
+import com.car.manager.util.poi.ExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -26,7 +30,7 @@ import javax.annotation.Resource;
 public class CarListController extends BaseController{
 
     @Resource
-    private CarListService carlistService;
+    private CarListService carListService;
     @Resource
     private DriverListService driverListService;
     @Resource
@@ -47,8 +51,8 @@ public class CarListController extends BaseController{
      */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(SelectAllCarRequest request) {
-        return carlistService.selectAllCarPage(request);
+    public TableDataInfo list(SelectCarRequest request) {
+        return carListService.selectAllCarPage(request);
     }
 
     /**
@@ -66,13 +70,13 @@ public class CarListController extends BaseController{
     @PostMapping("/addCar")
     @ResponseBody
     public AjaxResult addSave(InsertCarRequest request) {
-        return toAjax(carlistService.insertCar(request));
+        return toAjax(carListService.insertCar(request));
     }
 
     @PostMapping("/checkCarNumber")
     @ResponseBody
     public boolean checkCarNumber (SelectCarRequest request) {
-        return carlistService.selectCarByCarNumber(request);
+        return carListService.selectCarByCarNumber(request);
     }
 
     /**
@@ -84,7 +88,7 @@ public class CarListController extends BaseController{
         request.setId(id);
         model.addAttribute("driverResponses",driverListService.selectAllDriver());
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
-        model.addAttribute("carResponse",carlistService.selectCarById(request));
+        model.addAttribute("carResponse",carListService.selectCarById(request));
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
 
         return prefix + "/carEdit";
@@ -97,7 +101,7 @@ public class CarListController extends BaseController{
     @PostMapping("/updateCar")
     @ResponseBody
     public AjaxResult editSave(UpdateCarRequest request) {
-        return toAjax(carlistService.updateCar(request));
+        return toAjax(carListService.updateCar(request));
     }
 
     /**
@@ -107,9 +111,18 @@ public class CarListController extends BaseController{
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(int ids) {
-        return toAjax(carlistService.deleteCarById(ids));
+        return toAjax(carListService.deleteCarById(ids));
     }
-
+    /**
+     * 导出
+     */
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(SelectCarRequest request) {
+        List<SelectAllCarResponse> list = carListService.selectAllCar(request);
+        ExcelUtil<SelectAllCarResponse> util = new ExcelUtil<SelectAllCarResponse>(SelectAllCarResponse.class);
+        return util.exportExcel(list, "车辆列表");
+    }
 
 
 }
