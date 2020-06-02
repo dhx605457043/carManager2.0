@@ -1,6 +1,6 @@
 package com.car.manager.service.impl;
 
-import com.car.manager.controller.response.SelectAllConsignorResponse;
+import com.car.manager.controller.response.SelectConsignorResponse;
 import com.car.manager.dao.ConsignorListMapper;
 import com.car.manager.entity.ConsignorList;
 import com.car.manager.service.ConsignorListService;
@@ -22,9 +22,9 @@ public class ConsignorListServiceImpl implements ConsignorListService {
     private ConsignorListMapper consignorListMapper;
 
     @Override
-    public List<SelectAllConsignorResponse> selectAllConsignor() {
+    public List<SelectConsignorResponse> selectAllConsignor() {
         List<ConsignorList> responseModel = consignorListMapper.selectAll();
-        List<SelectAllConsignorResponse> response = (List<SelectAllConsignorResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAllConsignorResponse.class);
+        List<SelectConsignorResponse> response = (List<SelectConsignorResponse>) BeanCopyUtils.copyBeanList(responseModel, SelectConsignorResponse.class);
         return response;
     }
 }

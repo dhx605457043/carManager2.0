@@ -3,7 +3,6 @@ package com.car.manager.service.impl;
 import com.car.manager.controller.request.InsertOrderCarInformationRequest;
 import com.car.manager.controller.request.SelectOrderCarInformationRequest;
 import com.car.manager.controller.request.UpdateOrderCarInformationRequest;
-import com.car.manager.controller.response.SelectAllOrderCarInformationResponse;
 import com.car.manager.controller.response.SelectOrderCarInformationResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
@@ -33,7 +32,7 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
     public TableDataInfo selectAllOrderCarInformationPage(SelectOrderCarInformationRequest request) {
         OrderCarInformationEx requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformationEx());
         List<OrderCarInformationEx> responseModel = orderCarInformationMapper.selectAllOrderCarInformation(requestModel);
-        List<SelectAllOrderCarInformationResponse> responses = (List<SelectAllOrderCarInformationResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAllOrderCarInformationResponse.class);
+        List<SelectOrderCarInformationResponse> responses = (List<SelectOrderCarInformationResponse>) BeanCopyUtils.copyBeanList(responseModel, SelectOrderCarInformationResponse.class);
         TableDataInfo rspData = new TableDataInfo();
         PageDomain pageDomain = TableSupport.buildPageRequest();
         if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {

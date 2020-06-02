@@ -183,17 +183,16 @@
         },
         focusCleanup: false
     });
-    var carNumber = $("#orderCarId").find("option:selected").text();
-    var freight = $("#freight").val();
-    var driverCost = $("#driverCost").val();
-    var quarantineCost = $("#quarantineCost").val();
-    var chinaCost = $("#chinaCost").val();
-    var koreaCost = $("#koreaCost").val();
-    var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost;
     function submitHandler() {
         if ($.validate.form()) {
-            console.log("true");
             var data = $('#form-order-orderUpdate').serializeArray();
+            var carNumber = $("#orderCarId").find("option:selected").text();
+            var freight = $("#freight").val();
+            var driverCost = $("#driverCost").val();
+            var quarantineCost = $("#quarantineCost").val();
+            var chinaCost = $("#chinaCost").val();
+            var koreaCost = $("#koreaCost").val();
+            var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost;
             data.push({"name": "orderCarNumber", "value": carNumber});
             data.push({"name": "profit", "value": profit});
 

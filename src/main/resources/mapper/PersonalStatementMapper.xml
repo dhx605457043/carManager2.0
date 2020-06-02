@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.manager.dao.PersonalStatementMapper">
+    <select id="selectAllPersonalStatement" resultType="com.car.manager.entity.PersonalStatement" parameterType="com.car.manager.entity.PersonalStatement">
+        select
+            id as id,
+            statement_date as statementDate,
+            freight,
+            driver_cost as driverCost,
+            china_cost as chinaCost,
+            korea_cost as koreaCost,
+            quarantine_cost as quarantineCost,
+            insurance,
+            car_repair as carRepair,
+            oil_cost as oilCost,
+            text_cost as textCost,
+            other_cost as otherCost,
+            remark,
+            profit,
+            statement_type as statementType
+        from personal_statement
+        <where>
+            1=1
+            <if test="statementDate != null and statementDate != ''">
+                and statement_date like concat('%', #{statementDate}, '%')
+            </if>
+        </where>
+        order by statement_date asc
+    </select>
+
+</mapper>

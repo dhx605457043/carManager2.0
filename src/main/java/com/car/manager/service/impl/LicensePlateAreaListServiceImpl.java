@@ -1,6 +1,6 @@
 package com.car.manager.service.impl;
 
-import com.car.manager.controller.response.SelectAllCarLicenseResponse;
+import com.car.manager.controller.response.SelectCarLicenseResponse;
 import com.car.manager.dao.LicensePlateAreaListMapper;
 import com.car.manager.entity.LicensePlateAreaList;
 import com.car.manager.service.LicensePlateAreaListService;
@@ -22,9 +22,9 @@ public class LicensePlateAreaListServiceImpl implements LicensePlateAreaListServ
     private LicensePlateAreaListMapper licensePlateAreaListMapper;
 
     @Override
-    public List<SelectAllCarLicenseResponse> selectAllCarLicense() {
+    public List<SelectCarLicenseResponse> selectAllCarLicense() {
         List<LicensePlateAreaList> licensePlateAreaLists = licensePlateAreaListMapper.selectAll();
-        List<SelectAllCarLicenseResponse> responses = (List<SelectAllCarLicenseResponse>) BeanCopyUtils.copyBeanList(licensePlateAreaLists,SelectAllCarLicenseResponse.class);
+        List<SelectCarLicenseResponse> responses = (List<SelectCarLicenseResponse>) BeanCopyUtils.copyBeanList(licensePlateAreaLists, SelectCarLicenseResponse.class);
         return responses;
 
     }

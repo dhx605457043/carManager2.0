@@ -1,7 +1,6 @@
 package com.car.manager.service;
 
-import com.car.manager.controller.response.SelectAllCargoResponse;
-import com.car.manager.entity.CargoList;
+import com.car.manager.controller.response.SelectCargoResponse;
 
 import java.util.List;
 
@@ -12,5 +11,5 @@ import java.util.List;
  * @since 2020-05-15 15:22:19
  */
 public interface CargoListService {
-    List<SelectAllCargoResponse> selectAllCargo ();
+    List<SelectCargoResponse> selectAllCargo ();
 }

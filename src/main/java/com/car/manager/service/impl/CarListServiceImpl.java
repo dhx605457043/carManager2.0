@@ -1,7 +1,6 @@
 package com.car.manager.service.impl;
 
 import com.car.manager.controller.request.*;
-import com.car.manager.controller.response.SelectAllCarResponse;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
@@ -55,10 +54,10 @@ public class CarListServiceImpl implements CarListService {
     }
 
     @Override
-    public List<SelectAllCarResponse> selectAllCar(SelectCarRequest request) {
+    public List<SelectCarResponse> selectAllCar(SelectCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
-        return (List<SelectAllCarResponse>) BeanCopyUtils.copyBeanList(cars, SelectAllCarResponse.class);
+        return (List<SelectCarResponse>) BeanCopyUtils.copyBeanList(cars, SelectCarResponse.class);
     }
 
     @Override

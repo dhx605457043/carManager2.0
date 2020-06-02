@@ -2,10 +2,9 @@ package com.car.manager.controller;
 
 
 import com.car.manager.controller.request.*;
-import com.car.manager.controller.response.SelectAllCarResponse;
+import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
@@ -119,8 +118,8 @@ public class CarListController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SelectCarRequest request) {
-        List<SelectAllCarResponse> list = carListService.selectAllCar(request);
-        ExcelUtil<SelectAllCarResponse> util = new ExcelUtil<SelectAllCarResponse>(SelectAllCarResponse.class);
+        List<SelectCarResponse> list = carListService.selectAllCar(request);
+        ExcelUtil<SelectCarResponse> util = new ExcelUtil<SelectCarResponse>(SelectCarResponse.class);
         return util.exportExcel(list, "车辆列表");
     }
 

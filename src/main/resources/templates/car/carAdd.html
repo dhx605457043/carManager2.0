@@ -32,7 +32,6 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/carManager"
-    var licensePlateAreaName=$("#carLicensePlateAreaCode").find("option:selected").text();
 
     $("#form-car-carAdd").validate({
         onkeyup: false,
@@ -66,6 +65,7 @@
     function submitHandler() {
         if ($.validate.form()) {
             var data = $('#form-car-carAdd').serializeArray();
+            var licensePlateAreaName=$("#carLicensePlateAreaCode").find("option:selected").text();
             data.push({"name": "vehicleNumber", "value": licensePlateAreaName + $("#carNumber").val().toUpperCase()});
             $.operate.save(prefix + "/addCar", data);
         } else  {

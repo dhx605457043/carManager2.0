@@ -1,6 +1,6 @@
 package com.car.manager.service;
 
-import com.car.manager.controller.response.SelectAllConsignorResponse;
+import com.car.manager.controller.response.SelectConsignorResponse;
 import java.util.List;
 
 /**
@@ -10,5 +10,5 @@ import java.util.List;
  * @since 2020-05-15 15:22:19
  */
 public interface ConsignorListService {
-    List<SelectAllConsignorResponse> selectAllConsignor ();
+    List<SelectConsignorResponse> selectAllConsignor ();
 }

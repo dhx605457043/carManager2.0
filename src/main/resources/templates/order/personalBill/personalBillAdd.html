@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-personalStatement-personalStatementAdd">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江日期：</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                <input type="text" class="time-input" id="statementDate" name="statementDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">运费：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="freight" id="freight" class="form-control" placeholder="请输入费用">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">司机费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="driverCost" id="driverCost" class="form-control" placeholder="请输入司机费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">隔离费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="quarantineCost" id="quarantineCost" class="form-control" placeholder="请输入隔离费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">中国费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="chinaCost" id="chinaCost" class="form-control" placeholder="请输入中国费用">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">朝鲜费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="koreaCost" id="koreaCost" class="form-control" placeholder="请输入朝鲜费用">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">保险金额：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="insurance" id="insurance" class="form-control" placeholder="保险金额">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">修车金额：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="carRepair" id="carRepair" class="form-control" placeholder="请输入修车金额">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">油费：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="oilCost" id="oilCost" class="form-control" placeholder="请输入油费">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">检测费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="textCost" id="textCost" class="form-control" placeholder="检测费用(血清,核酸)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">其他费用：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="otherCost" id="otherCost" class="form-control" placeholder="其他费用(提车,送车,装货等)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="remark" id="remark" class="form-control" placeholder="其他费用备注信息">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">结账状态：</label>
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio" checked="" value="1" id="statementType" name="statementType">是</label>
+                            <label>
+                                <input type="radio" value="2" id="statementType" name="statementType">否</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/personalStatementManager"
+
+    $("#form-personalStatement-personalStatementAdd").validate({
+        onkeyup: false,
+        rules:{
+            statementDate:{
+                required: true,
+            },
+            freight:{
+                required: true,
+                digits:true,
+            },
+            driverCost:{
+                required: true,
+                digits:true,
+            },
+            chinaCost:{
+                required: true,
+                digits:true,
+            },
+            koreaCost:{
+                required: true,
+                digits:true,
+            },
+            quarantineCost:{
+                required: true,
+                digits:true,
+            },
+
+            insurance:{
+                number:true
+            },
+            carRepair:{
+                digits:true,
+            },
+            oilCost:{
+                digits:true,
+            },
+
+            textCost:{
+                number:true
+            },
+            otherCost:{
+                number:true
+            },
+
+            statementType:{
+                required: true,
+            },
+        },
+        messages: {
+            statementDate: {
+                required: "日期不能为空",
+            },
+            freight: {
+                required: "运费不能为空",
+            },
+            driverCost: {
+                required: "司机费用不能为空",
+            },
+            chinaCost: {
+                required: "中国费用不能为空",
+            },
+            koreaCost: {
+                required: "朝鲜不能为空",
+            },
+            quarantineCost: {
+                required: "隔离费用费用不能为空",
+            },
+            statementType: {
+                required: "结账状态不能为空",
+
+            },
+        },
+        focusCleanup: false
+    });
+    function submitHandler() {
+        if ($.validate.form()) {
+            var data = $('#form-personalStatement-personalStatementAdd').serializeArray();
+
+            var freight = $("#freight").val();
+            var driverCost = $("#driverCost").val();
+            var quarantineCost = $("#quarantineCost").val();
+            var chinaCost = $("#chinaCost").val();
+            var koreaCost = $("#koreaCost").val();
+
+            var insurance = $("#insurance").val();
+            var carRepair = $("#carRepair").val();
+            var oilCost = $("#oilCost").val();
+            var textCost = $("#textCost").val();
+            var otherCost = $("#otherCost").val();
+
+            var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost - insurance - carRepair - oilCost - textCost - otherCost;
+            data.push({"name": "profit", "value": profit});
+            $.operate.save(prefix + "/addPersonalStatement", data);
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>

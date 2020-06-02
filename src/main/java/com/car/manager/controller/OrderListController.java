@@ -25,8 +25,6 @@ public class OrderListController extends BaseController{
     @Resource
     private OrderListService orderListService;
     @Resource
-    private DriverListService driverListService;
-    @Resource
     private CargoListService cargoListService;
     @Resource
     private ConsignorListService consignorListService;

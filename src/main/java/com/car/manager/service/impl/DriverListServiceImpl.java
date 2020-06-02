@@ -3,7 +3,6 @@ package com.car.manager.service.impl;
 import com.car.manager.controller.request.InsertDriverRequest;
 import com.car.manager.controller.request.SelectDriverRequest;
 import com.car.manager.controller.request.UpdateDriverRequest;
-import com.car.manager.controller.response.SelectAllDriversResponse;
 import com.car.manager.controller.response.SelectDriverResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
@@ -57,9 +56,9 @@ public class DriverListServiceImpl implements DriverListService {
     }
 
     @Override
-    public List<SelectAllDriversResponse> selectAllDriver() {
+    public List<SelectDriverResponse> selectAllDriver() {
         List<DriverList> drivers = driverlistMapper.selectAll();
-        return (List<SelectAllDriversResponse>) BeanCopyUtils.copyBeanList(drivers, SelectAllDriversResponse.class);
+        return (List<SelectDriverResponse>) BeanCopyUtils.copyBeanList(drivers, SelectDriverResponse.class);
     }
 
     @Override

@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/orderCarInformationManager")
 public class OrderCarInformationController extends BaseController{
-    private String prefix = "order";
+    private String prefix = "order/orderCarInfromation";
     /**
      * 服务对象
      */

@@ -5,7 +5,6 @@ package com.car.manager.service;
 import com.car.manager.controller.request.InsertDriverRequest;
 import com.car.manager.controller.request.SelectDriverRequest;
 import com.car.manager.controller.request.UpdateDriverRequest;
-import com.car.manager.controller.response.SelectAllDriversResponse;
 import com.car.manager.controller.response.SelectDriverResponse;
 import com.car.manager.core.page.TableDataInfo;
 
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public interface DriverListService {
     TableDataInfo selectAllDriverPage (SelectDriverRequest request);
-    List<SelectAllDriversResponse> selectAllDriver ();
+    List<SelectDriverResponse> selectAllDriver ();
     int insertDriver (InsertDriverRequest request);
     boolean selectDriverByIDCard (SelectDriverRequest request);
     SelectDriverResponse selectDriverById (SelectDriverRequest request);

@@ -1,6 +1,6 @@
 package com.car.manager.service.impl;
 
-import com.car.manager.controller.response.SelectAllCargoResponse;
+import com.car.manager.controller.response.SelectCargoResponse;
 import com.car.manager.dao.CargoListMapper;
 import com.car.manager.entity.CargoList;
 import com.car.manager.service.CargoListService;
@@ -22,8 +22,8 @@ public class CargoListServiceImpl implements CargoListService {
     private CargoListMapper cargoListMapper;
 
     @Override
-    public List<SelectAllCargoResponse> selectAllCargo() {
+    public List<SelectCargoResponse> selectAllCargo() {
         List<CargoList> responseModel = cargoListMapper.selectAllCargo();
-        return (List<SelectAllCargoResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAllCargoResponse.class);
+        return (List<SelectCargoResponse>) BeanCopyUtils.copyBeanList(responseModel, SelectCargoResponse.class);
     }
 }
