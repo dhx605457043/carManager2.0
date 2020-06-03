@@ -88,7 +88,7 @@ public class PersonalStatement implements Serializable {
     * 订单结算类型
     */
     @Excel(name = "结账状态")
-    private Integer statementType;
+    private String statementType;
     /**
     * 订单车辆id
     */

@@ -48,7 +48,7 @@ public class SelectPersonalStatementResponse {
     private Double profit;
 
     @Excel(name = "结账状态")
-    private Integer statementType;
+    private String statementType;
 
     private Integer orderCarId;
 

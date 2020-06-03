@@ -90,11 +90,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">结账状态：</label>
-                        <div class="radio">
+                        <div class="radio check-box">
                             <label>
-                                <input type="radio" checked="" value="1" id="orderType" name="orderType" th:checked="${orderResponse.orderType} == 1">是</label>
+                                <input type="radio" value="是" id="orderType" name="orderType"> <i></i>是</label>
+                        </div>
+                        <div class="radio check-box">
                             <label>
-                                <input type="radio" value="2" id="orderType" name="orderType" th:checked="${orderResponse.orderType} == 2">否</label>
+                                <input type="radio" checked="" value="否" id="orderType" name="orderType"> <i></i>否</label>
                         </div>
                     </div>
                     <div class="form-group">

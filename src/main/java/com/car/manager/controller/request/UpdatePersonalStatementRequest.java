@@ -18,7 +18,7 @@ public class UpdatePersonalStatementRequest {
 
     private Integer quarantineCost;
 
-    private Integer statementType;
+    private String statementType;
 
     private Double profit;
 

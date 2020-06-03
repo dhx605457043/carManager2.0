@@ -102,7 +102,7 @@
                     width:80,
                     align: 'center',
                     cellStyle:function(value,row,index){
-                        if (value == 2) {
+                        if (value == "否") {
                             return {
                                 css:{
                                     "background-color":"#ed5565",
@@ -113,14 +113,6 @@
                             return {css:{"background-color":"#fff"}}
                         }
                     },
-                    formatter:function (value, row, index) {
-                        if (value == 1) {
-                            return "是";
-
-                        } else {
-                            return "否";
-                        }
-                    }
                 },
 
                 {

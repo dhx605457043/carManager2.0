@@ -42,7 +42,7 @@ public class SelectOrderResponse {
     private Integer profit;
 
     @Excel(name = "结账状态")
-    private Integer orderType;
+    private String orderType;
 
     private Integer consignorId;
 

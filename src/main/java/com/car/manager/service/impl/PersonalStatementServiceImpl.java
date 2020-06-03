@@ -59,7 +59,10 @@ public class PersonalStatementServiceImpl implements PersonalStatementService {
 
     @Override
     public List<SelectPersonalStatementResponse> selectAllPersonalStatement() {
-        List<PersonalStatement> responseModel = personalStatementMapper.selectAll();
+        Example example = new Example(PersonalStatement.class);
+//        example.createCriteria().an("id", requestModel.getId());
+        example.setOrderByClause("statement_type");
+        List<PersonalStatement> responseModel = personalStatementMapper.selectByExample(example);
         List<SelectPersonalStatementResponse> response = (List<SelectPersonalStatementResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectPersonalStatementResponse.class);
         return response;
     }
@@ -67,7 +70,7 @@ public class PersonalStatementServiceImpl implements PersonalStatementService {
     @Override
     public int insertPersonalStatement(InsertPersonalStatementRequest request) {
         PersonalStatement requestModel = BeanCopyUtils.copyBean(request,new PersonalStatement());
-        return personalStatementMapper.insert(requestModel);
+        return personalStatementMapper.insertSelective(requestModel);
     }
 
     @Override

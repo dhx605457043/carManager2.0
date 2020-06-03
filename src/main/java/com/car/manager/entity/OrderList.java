@@ -42,7 +42,7 @@ public class OrderList implements Serializable {
     
     private Integer profit;
     
-    private Integer orderType;
+    private String orderType;
     
     private Integer quarantineCost;
     

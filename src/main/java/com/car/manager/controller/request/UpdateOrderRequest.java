@@ -27,7 +27,7 @@ public class UpdateOrderRequest {
 
     private Integer profit;
 
-    private Integer orderType;
+    private String orderType;
 
     private Integer quarantineCost;
 

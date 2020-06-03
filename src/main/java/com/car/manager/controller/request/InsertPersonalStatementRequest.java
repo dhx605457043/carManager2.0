@@ -18,7 +18,7 @@ public class InsertPersonalStatementRequest {
 
     private Integer quarantineCost;
 
-    private Integer statementType;
+    private String statementType;
 
     private Double profit;
 
