@@ -32,59 +32,66 @@
         </a>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-
-                <li>
-                    <a th:class="menuItem">
-                        <i class="fa fa-automobile"></i>
-                        <span class="nav-label" th:utext="车辆管理"></span>
-                        <span th:class="|fa arrow|"></span>
+                <li th:each="menu : ${menus}">
+                    <a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
+                        <i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
+                        <span class="nav-label" th:text="${menu.menuName}">一级菜单</span>
+                        <span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
                     </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a th:class="menuItem" th:text="车辆信息" th:href="@{/carManager/carList}"></a>
-                            <span class="|fa arrow|"></span>
-                        </li>
-
-                    </ul>
-
                 </li>
-                <li>
-                    <a th:class="menuItem">
-                        <i class="fa fa-users"></i>
-                        <span class="nav-label" th:utext="司机管理"></span>
-                        <span th:class="|fa arrow|"></span>
-                    </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a th:class="menuItem" th:text="司机信息" th:href="@{/driverManager}"></a>
-                            <span class="|fa arrow|"></span>
-                        </li>
+<!--                <li>-->
+<!--                    <a th:class="menuItem">-->
+<!--                        <i class="fa fa-automobile"></i>-->
+<!--                        <span class="nav-label" th:utext="车辆管理"></span>-->
+<!--                        <span th:class="|fa arrow|"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="nav nav-second-level collapse">-->
+<!--                        <li>-->
+<!--                            <a th:class="menuItem" th:text="车辆信息" th:href="@{/carManager/carList}"></a>-->
+<!--                            <span class="|fa arrow|"></span>-->
+<!--                        </li>-->
 
-                    </ul>
-                </li>
-                <li>
-                    <a th:class="menuItem">
-                        <i class="fa fa-reorder"></i>
-                        <span class="nav-label" th:utext="订单管理"></span>
-                        <span th:class="|fa arrow|"></span>
-                    </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a th:class="menuItem" th:text="订单信息" th:href="@{/orderManager/orderList}"></a>
-                            <span class="|fa arrow|"></span>
-                        </li>
-                        <li>
-                            <a th:class="menuItem" th:text="订单车辆信息" th:href="@{/orderCarInformationManager/orderCarInformationList}"></a>
-                            <span class="|fa arrow|"></span>
-                        </li>
-                        <li>
-                            <a th:class="menuItem" th:text="个人对账单" th:href="@{/personalStatementManager/personalStatementList}"></a>
-                            <span class="|fa arrow|"></span>
-                        </li>
+<!--                    </ul>-->
 
-                    </ul>
-                </li>
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a th:class="menuItem">-->
+<!--                        <i class="fa fa-users"></i>-->
+<!--                        <span class="nav-label" th:utext="司机管理"></span>-->
+<!--                        <span th:class="|fa arrow|"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="nav nav-second-level collapse">-->
+<!--                        <li>-->
+<!--                            <a th:class="menuItem" th:text="司机信息" th:href="@{/driverManager}"></a>-->
+<!--                            <span class="|fa arrow|"></span>-->
+<!--                        </li>-->
+
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a th:class="menuItem">-->
+<!--                        <i class="fa fa-reorder"></i>-->
+<!--                        <span class="nav-label" th:utext="订单管理"></span>-->
+<!--                        <span th:class="|fa arrow|"></span>-->
+<!--                    </a>-->
+<!--                    <ul class="nav nav-second-level collapse">-->
+<!--                        <li>-->
+<!--                            <a th:class="menuItem" th:text="订单信息" th:href="@{/orderManager/orderList}"></a>-->
+<!--                            <span class="|fa arrow|"></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:class="menuItem" th:text="订单车辆信息" th:href="@{/orderCarInformationManager/orderCarInformationList}"></a>-->
+<!--                            <span class="|fa arrow|"></span>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a th:class="menuItem" th:text="个人对账单" th:href="@{/personalStatementManager/personalStatementList}"></a>-->
+<!--                            <span class="|fa arrow|"></span>-->
+<!--                        </li>-->
+
+<!--                    </ul>-->
+<!--                </li>-->
             </ul>
+
         </div>
     </nav>
     <!--左侧导航结束-->
@@ -143,11 +150,20 @@
 
 <script th:inline="javascript">
     var mode = "history";
+    // // 皮肤缓存
+    var skin = storage.get("skin");
     // 历史访问路径缓存
     /** 刷新时访问路径页签 */
     function applyPath(url) {
         $('a[href$="' + decodeURI(url) + '"]').click();
         $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li :not(.user-panel)").addClass("active").end().parents("ul").addClass("in");
+    }
+    if($.common.isNotEmpty(skin)){
+        $("body").addClass(skin.split('|')[0]);
+        $("body").addClass(skin.split('|')[1]);
+    } else {
+        $("body").addClass("theme-dark");
+        $("body").addClass("skin-blue");
     }
     // 本地主题优先，未设置取系统配置
     $(function() {

@@ -17,6 +17,11 @@ spring:
     encoding: utf-8
     # 禁用缓存 
     cache: false
+shiro:
+  user:
+    # 首页地址
+    indexUrl: /index
+
 
 
 mybatis:
