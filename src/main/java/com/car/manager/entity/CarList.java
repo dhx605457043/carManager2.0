@@ -1,6 +1,8 @@
 package com.car.manager.entity;
 
 import java.io.Serializable;
+
+import com.car.manager.util.poi.Excel;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -20,10 +22,13 @@ public class CarList implements Serializable {
 
     private String carNumber;
 
+//    @Excel(name = "车辆号码")
+    private String vehicleNumber;
+
     private Integer carDriverId;
 
     private Integer carLicensePlateAreaCode;
-    private String vehicleNumber;
+
 
 
 }

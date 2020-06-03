@@ -3,14 +3,18 @@ package com.car.manager.controller;
 import com.car.manager.controller.request.InsertPersonalStatementRequest;
 import com.car.manager.controller.request.SelectPersonalStatementRequest;
 import com.car.manager.controller.request.UpdatePersonalStatementRequest;
+import com.car.manager.controller.response.SelectOrderResponse;
+import com.car.manager.controller.response.SelectPersonalStatementResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.service.PersonalStatementService;
+import com.car.manager.util.poi.ExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (PersonalStatement)表控制层
@@ -82,5 +86,14 @@ public class PersonalStatementController extends BaseController{
     public AjaxResult remove(int ids) {
         return toAjax(personalStatementService.deletePersonalStatementById(ids));
     }
-
+    /**
+     * 导出
+     */
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export() {
+        List<SelectPersonalStatementResponse> list = personalStatementService.selectAllPersonalStatement();
+        ExcelUtil<SelectPersonalStatementResponse> util = new ExcelUtil<SelectPersonalStatementResponse>(SelectPersonalStatementResponse.class);
+        return util.exportExcel(list, "个人对账单");
+    }
 }

@@ -6,6 +6,8 @@ import com.car.manager.controller.request.UpdatePersonalStatementRequest;
 import com.car.manager.controller.response.SelectPersonalStatementResponse;
 import com.car.manager.core.page.TableDataInfo;
 
+import java.util.List;
+
 /**
  * (PersonalStatement)表服务接口
  *
@@ -14,6 +16,7 @@ import com.car.manager.core.page.TableDataInfo;
  */
 public interface PersonalStatementService {
     TableDataInfo selectAllPersonalStatementPage(SelectPersonalStatementRequest request);
+    List<SelectPersonalStatementResponse> selectAllPersonalStatement ();
     int insertPersonalStatement (InsertPersonalStatementRequest request);
     SelectPersonalStatementResponse selectPersonalStatementById (SelectPersonalStatementRequest request);
     int updatePersonalStatement (UpdatePersonalStatementRequest request);

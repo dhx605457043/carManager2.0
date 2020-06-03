@@ -3,6 +3,7 @@ package com.car.manager.service.impl;
 import com.car.manager.controller.request.InsertPersonalStatementRequest;
 import com.car.manager.controller.request.SelectPersonalStatementRequest;
 import com.car.manager.controller.request.UpdatePersonalStatementRequest;
+import com.car.manager.controller.response.SelectOrderResponse;
 import com.car.manager.controller.response.SelectPersonalStatementResponse;
 import com.car.manager.core.page.PageDomain;
 import com.car.manager.core.page.TableDataInfo;
@@ -54,6 +55,13 @@ public class PersonalStatementServiceImpl implements PersonalStatementService {
         rspData.setRows(personalStatementList.subList(pageNum, pageSize));
         rspData.setTotal(personalStatementList.size());
         return rspData;
+    }
+
+    @Override
+    public List<SelectPersonalStatementResponse> selectAllPersonalStatement() {
+        List<PersonalStatement> responseModel = personalStatementMapper.selectAll();
+        List<SelectPersonalStatementResponse> response = (List<SelectPersonalStatementResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectPersonalStatementResponse.class);
+        return response;
     }
 
     @Override

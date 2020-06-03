@@ -56,10 +56,12 @@ public class OrderListServiceImpl implements OrderListService {
         return rspData;
     }
 
-//    @Override
-//    public List<SelectOrderResponse> selectAllOrder() {
-//        return null;
-//    }
+    @Override
+    public List<SelectOrderResponse> selectAllOrder() {
+        List<OrderListEx> responseModel = orderListMapper.selectAllOrder(new OrderList());
+        List<SelectOrderResponse> response = (List<SelectOrderResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectOrderResponse.class);
+        return response;
+    }
 
     @Override
     public int insertOrder(InsertOrderRequest request) {

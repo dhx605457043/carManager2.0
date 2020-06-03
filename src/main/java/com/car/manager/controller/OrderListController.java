@@ -1,14 +1,18 @@
 package com.car.manager.controller;
 
 import com.car.manager.controller.request.*;
+import com.car.manager.controller.response.SelectDriverResponse;
+import com.car.manager.controller.response.SelectOrderResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.service.*;
+import com.car.manager.util.poi.ExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Orderlist)表控制层
@@ -93,5 +97,16 @@ public class OrderListController extends BaseController{
     @ResponseBody
     public AjaxResult remove(int ids) {
         return toAjax(orderListService.deleteOrderById(ids));
+    }
+
+    /**
+     * 导出
+     */
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export() {
+        List<SelectOrderResponse> list = orderListService.selectAllOrder();
+        ExcelUtil<SelectOrderResponse> util = new ExcelUtil<SelectOrderResponse>(SelectOrderResponse.class);
+        return util.exportExcel(list, "订单列表");
     }
 }

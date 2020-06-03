@@ -14,6 +14,7 @@ import java.util.List;
  */
 public interface OrderListService {
     TableDataInfo selectAllOrderPage(SelectOrderRequest request);
+    List<SelectOrderResponse> selectAllOrder ();
     int insertOrder (InsertOrderRequest request);
     SelectOrderResponse selectOrderById (SelectOrderRequest request);
     int updateOrder (UpdateOrderRequest request);
