@@ -1,10 +1,14 @@
 package com.car.manager.controller.response;
 
+import com.car.manager.entity.Ex.ManagerSystemMenuEx;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class selectManagerSystemMenuResponse {
-    private Integer id;
+    private int id;
     /**
      * 菜单名称
      */
@@ -12,11 +16,11 @@ public class selectManagerSystemMenuResponse {
     /**
      * 父菜单ID
      */
-    private Integer parentId;
+    private int parentId;
     /**
      * 显示顺序
      */
-    private Integer orderNum;
+    private int orderNum;
     /**
      * 请求地址
      */
@@ -41,4 +45,6 @@ public class selectManagerSystemMenuResponse {
      * 备注
      */
     private String remark;
+
+    private List<ManagerSystemMenuEx> children = new ArrayList<ManagerSystemMenuEx>();
 }

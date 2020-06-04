@@ -1,5 +1,6 @@
 package com.car.manager.dao;
 
+import com.car.manager.entity.Ex.ManagerSystemMenuEx;
 import com.car.manager.entity.ManagerSystemMenu;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface ManagerSystemMenuMapper extends Mapper<ManagerSystemMenu>, Base
      *
      * @return 菜单列表
      */
-    public List<ManagerSystemMenu> selectMenuAll();
+    public List<ManagerSystemMenuEx> selectMenuAll();
 
     /**
      * 根据用户ID查询菜单

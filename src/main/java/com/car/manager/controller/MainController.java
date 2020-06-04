@@ -12,9 +12,9 @@ public class MainController extends BaseController{
     @Resource
     ManagerSystemMenuService managerSystemMenuService;
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute(managerSystemMenuService.selectAllManagerSystemMenu());
+        model.addAttribute("menus",managerSystemMenuService.selectAllManagerSystemMenu());
         return "index";
     }
 }

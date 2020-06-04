@@ -10,9 +10,9 @@ import lombok.Data;
  * @since 2020-06-03 17:14:19
  */
 public class ManagerSystemMenu implements Serializable {
-    private static final long serialVersionUID = 234967551483323648L;
+    private static final Long serialVersionUID = 234967551483323648L;
     
-    private Integer id;
+    private int id;
     /**
     * 菜单名称
     */
@@ -20,11 +20,11 @@ public class ManagerSystemMenu implements Serializable {
     /**
     * 父菜单ID
     */
-    private Integer parentId;
+    private int parentId;
     /**
     * 显示顺序
     */
-    private Integer orderNum;
+    private int orderNum;
     /**
     * 请求地址
     */

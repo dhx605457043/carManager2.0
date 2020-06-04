@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.car.manager.dao.ManagerSystemMenuMapper">
-
+    <select id="selectMenuAll" resultType="com.car.manager.entity.Ex.ManagerSystemMenuEx" >
+		SELECT DISTINCT
+	m.id as id,
+	m.parent_id as parentId,
+	m.menu_name as menuName,
+	m.url,
+	m.visible ,
+	m.menu_type as menuType,
+	m.icon,
+	m.order_num as orderNum
+FROM
+	manager_system_menu m
+WHERE
+	m.menu_type IN ( 'M', 'C' )
+	AND m.visible = 0
+ORDER BY
+	m.parent_id,
+	m.order_num
+	</select>
 
 </mapper>
