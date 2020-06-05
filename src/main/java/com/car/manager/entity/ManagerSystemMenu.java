@@ -12,7 +12,7 @@ import lombok.Data;
 public class ManagerSystemMenu implements Serializable {
     private static final Long serialVersionUID = 234967551483323648L;
     
-    private int id;
+    private Integer id;
     /**
     * 菜单名称
     */
@@ -40,7 +40,7 @@ public class ManagerSystemMenu implements Serializable {
     /**
     * 菜单状态（0显示 1隐藏）
     */
-    private String visible;
+//    private String visible;
     /**
     * 菜单图标
     */
@@ -48,6 +48,6 @@ public class ManagerSystemMenu implements Serializable {
     /**
     * 备注
     */
-    private String remark;
+//    private String remark;
 
 }

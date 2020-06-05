@@ -38,6 +38,18 @@
                         <span class="nav-label" th:text="${menu.menuName}">一级菜单</span>
                         <span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
                     </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li th:each="cmenu : ${menu.children}">
+                            <a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == '' || cmenu.target == null} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
+                            <a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
+                            <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
+                                <li th:each="emenu : ${cmenu.children}">
+                                    <a th:if="${#lists.isEmpty(emenu.children)}" th:class="${emenu.target == '' || cmenu.target == null} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
+                                    <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
 <!--                <li>-->
 <!--                    <a th:class="menuItem">-->
@@ -114,7 +126,7 @@
             </button>
             <nav class="page-tabs menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active menuTab" data-id="/carManager/carList">首页</a>
+                    <a href="javascript:;" class="active menuTab" data-id="/index">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right tabRight">

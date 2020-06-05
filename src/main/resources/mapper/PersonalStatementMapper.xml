@@ -20,7 +20,7 @@
             statement_type as statementType
         from personal_statement
         <where>
-            1=1
+            order_car_number = #{orderCarNumber}
             <if test="statementDate != null and statementDate != ''">
                 and statement_date like concat('%', #{statementDate}, '%')
             </if>

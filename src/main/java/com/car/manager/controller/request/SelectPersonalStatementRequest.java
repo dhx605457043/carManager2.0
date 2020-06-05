@@ -6,4 +6,5 @@ import lombok.Data;
 public class SelectPersonalStatementRequest {
     private Integer id;
     private String statementDate;
+    private String orderCarNumber;
 }

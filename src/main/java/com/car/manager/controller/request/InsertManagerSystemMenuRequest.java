@@ -1,4 +1,4 @@
-package com.car.manager.controller.response;
+package com.car.manager.controller.request;
 
 import com.car.manager.entity.Ex.ManagerSystemMenuEx;
 import lombok.Data;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class selectManagerSystemMenuResponse {
-    private int id;
+public class InsertManagerSystemMenuRequest {
+
     /**
      * 菜单名称
      */
@@ -36,7 +36,7 @@ public class selectManagerSystemMenuResponse {
     /**
      * 菜单状态（0显示 1隐藏）
      */
-    private String visible;
+//    private String visible;
     /**
      * 菜单图标
      */
@@ -44,7 +44,6 @@ public class selectManagerSystemMenuResponse {
     /**
      * 备注
      */
-    private String remark;
+//    private String remark;
 
-    private List<ManagerSystemMenuEx> children = new ArrayList<ManagerSystemMenuEx>();
 }

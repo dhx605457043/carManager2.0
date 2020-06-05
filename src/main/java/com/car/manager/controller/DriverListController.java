@@ -31,7 +31,7 @@ public class DriverListController extends BaseController{
 
     private String prefix = "driver";
 
-    @GetMapping()
+    @GetMapping("/driverList")
     public String car() {
         return prefix + "/driverList";
     }

@@ -32,13 +32,16 @@ public class PersonalStatementController extends BaseController{
     private PersonalStatementService personalStatementService;
     private String prefix = "order/personalBill";
 
-    @GetMapping("/personalStatementList")
-    public String car() {
+    @GetMapping("/personalStatementList/{carNumber}")
+    public String car(@PathVariable("carNumber") String carNumber,Model model) {
+        model.addAttribute("carNumber",carNumber);
         return prefix + "/personalBill";
     }
-    @PostMapping("/list")
+    @PostMapping("/list/{carNumber}")
     @ResponseBody
-    public TableDataInfo list(SelectPersonalStatementRequest request) {
+    public TableDataInfo list(@PathVariable("carNumber") String carNumber) {
+        SelectPersonalStatementRequest request = new SelectPersonalStatementRequest();
+        request.setOrderCarNumber(carNumber);
         return personalStatementService.selectAllPersonalStatementPage(request);
     }
     /**
