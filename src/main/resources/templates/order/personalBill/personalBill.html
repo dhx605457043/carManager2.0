@@ -48,11 +48,14 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     var prefix = "/personalStatementManager";
+    var carNumber = [[${carNumber}]];
+    console.log(carNumber);
+
     // alert(value);
     $(function() {
         var options = {
             url: prefix + "/list/" + [[${carNumber}]],
-            createUrl: prefix + "/toAddPersonalStatement",
+            createUrl: prefix + "/toAddPersonalStatement/" + [[${carNumber}]],
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",

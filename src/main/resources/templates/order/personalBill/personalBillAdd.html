@@ -110,6 +110,7 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/personalStatementManager"
+    var carNumber = "[[${carNumber}]]";
 
     $("#form-personalStatement-personalStatementAdd").validate({
         onkeyup: false,
@@ -200,9 +201,11 @@
             var oilCost = $("#oilCost").val();
             var textCost = $("#textCost").val();
             var otherCost = $("#otherCost").val();
-
+            console.log(carNumber);
             var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost - insurance - carRepair - oilCost - textCost - otherCost;
-            data.push({"name": "profit", "value": profit / 2});
+            data.push({"name": "profit", "value": profit});
+            data.push({"name": "orderCarNumber", "value": carNumber});
+
             $.operate.save(prefix + "/addPersonalStatement", data);
         } else  {
             console.log("false");

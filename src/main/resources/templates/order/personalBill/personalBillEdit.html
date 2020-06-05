@@ -209,7 +209,9 @@
 
             var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost - insurance - carRepair - oilCost - textCost - otherCost;
             console.log(textCost);
-            data.push({"name": "profit", "value": profit / 2});
+            data.push({"name": "profit", "value": profit});
+            data.push({"name": "profit", "value": profit});
+
             $.operate.save(prefix + "/updatePersonalStatement", data);
         } else  {
             console.log("false");

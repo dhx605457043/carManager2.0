@@ -47,8 +47,9 @@ public class PersonalStatementController extends BaseController{
     /**
      * 新增订单
      */
-    @GetMapping("/toAddPersonalStatement")
-    public String toAdd(Model model) {
+    @GetMapping("/toAddPersonalStatement/{carNumber}")
+    public String toAdd(@PathVariable("carNumber") String carNumber, Model model) {
+        model.addAttribute("carNumber",carNumber);
         return prefix + "/personalBillAdd";
     }
 
