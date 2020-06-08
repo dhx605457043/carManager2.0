@@ -2,6 +2,9 @@ package com.car.manager.entity;
 
 import java.io.Serializable;
 import lombok.Data;
+
+import javax.persistence.Id;
+
 @Data
 /**
  * (ManagerSystemMenu)实体类
@@ -11,7 +14,8 @@ import lombok.Data;
  */
 public class ManagerSystemMenu implements Serializable {
     private static final Long serialVersionUID = 234967551483323648L;
-    
+
+    @Id
     private Integer id;
     /**
     * 菜单名称

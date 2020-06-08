@@ -31,33 +31,10 @@ public class CarListServiceImpl implements CarListService {
     private CarListMapper carListMapper;
 
     @Override
-    public TableDataInfo selectAllCarPage(SelectCarRequest request) {
+    public List<CarListEx> selectAllCar(SelectCarRequest request) {
         CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
         List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
-        TableDataInfo rspData = new TableDataInfo();
-        List<CarListEx> userList = new ArrayList<CarListEx>(Arrays.asList(new CarListEx[cars.size()]));
-        Collections.copy(userList, cars);
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
-            rspData.setRows(userList);
-            rspData.setTotal(userList.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
-        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
-        if (pageSize > userList.size()) {
-            pageSize = userList.size();
-        }
-        rspData.setRows(userList.subList(pageNum, pageSize));
-        rspData.setTotal(userList.size());
-        return rspData;
-    }
-
-    @Override
-    public List<SelectCarResponse> selectAllCar(SelectCarRequest request) {
-        CarListEx requestModel = BeanCopyUtils.copyBean(request,new CarListEx());
-        List<CarListEx> cars = carListMapper.selectAllCar(requestModel);
-        return (List<SelectCarResponse>) BeanCopyUtils.copyBeanList(cars, SelectCarResponse.class);
+        return cars;
     }
 
     @Override

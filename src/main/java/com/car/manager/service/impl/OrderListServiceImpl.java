@@ -33,34 +33,10 @@ public class OrderListServiceImpl implements OrderListService {
     private OrderListMapper orderListMapper;
 
     @Override
-    public TableDataInfo selectAllOrderPage(SelectOrderRequest request) {
-
+    public List<OrderListEx> selectAllOrder(SelectOrderRequest request) {
         OrderList requestModel = BeanCopyUtils.copyBean(request,new OrderList());
         List<OrderListEx> orders = orderListMapper.selectAllOrder(requestModel);
-        TableDataInfo rspData = new TableDataInfo();
-        List<OrderListEx> orderLists = new ArrayList<OrderListEx>(Arrays.asList(new OrderListEx[orders.size()]));
-        Collections.copy(orderLists, orders);
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
-            rspData.setRows(orderLists);
-            rspData.setTotal(orderLists.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
-        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
-        if (pageSize > orderLists.size()) {
-            pageSize = orderLists.size();
-        }
-        rspData.setRows(orderLists.subList(pageNum, pageSize));
-        rspData.setTotal(orderLists.size());
-        return rspData;
-    }
-
-    @Override
-    public List<SelectOrderResponse> selectAllOrder() {
-        List<OrderListEx> responseModel = orderListMapper.selectAllOrder(new OrderList());
-        List<SelectOrderResponse> response = (List<SelectOrderResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectOrderResponse.class);
-        return response;
+        return orders;
     }
 
     @Override

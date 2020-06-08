@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 public class SelectPersonalStatementResponse {
     private Integer id;
-
+    @Excel(name = "账单车号")
+    private String orderCarNumber;
     @Excel(name = "账单日期")
     private String statementDate;
 
@@ -52,5 +53,4 @@ public class SelectPersonalStatementResponse {
 
     private Integer orderCarId;
 
-    private String orderCarNumber;
 }

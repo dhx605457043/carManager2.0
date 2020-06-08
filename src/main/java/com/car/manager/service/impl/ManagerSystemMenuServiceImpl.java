@@ -7,7 +7,6 @@ import com.car.manager.controller.response.SelectManagerSystemMenuResponse;
 import com.car.manager.dao.ManagerSystemMenuMapper;
 import com.car.manager.entity.Ex.ManagerSystemMenuEx;
 import com.car.manager.entity.ManagerSystemMenu;
-import com.car.manager.entity.PersonalStatement;
 import com.car.manager.entity.Ztree;
 import com.car.manager.service.ManagerSystemMenuService;
 import com.car.manager.util.BeanCopyUtils;
@@ -60,12 +59,6 @@ public class ManagerSystemMenuServiceImpl implements ManagerSystemMenuService {
         return response;
     }
 
-//    @Override
-//    public boolean selectManagerSystemMenuByMenuName(SelectManagerSystemMenuRequest request) {
-//        ManagerSystemMenu requestModel = BeanCopyUtils.copyBean(request,new ManagerSystemMenu());
-//        String code = managerSystemMenuMapper.selectManagerSystemMenuByMenuName(requestModel);
-//        return code == null ? true : false;
-//    }
     /**
      * 校验菜单名称是否唯一
      *
@@ -116,7 +109,7 @@ public class ManagerSystemMenuServiceImpl implements ManagerSystemMenuService {
      */
     @Override
     public int deleteMenuById(Integer id) {
-        return managerSystemMenuMapper.deleteMenuById(id);
+        return managerSystemMenuMapper.deleteByPrimaryKey(id);
     }
 
     /**

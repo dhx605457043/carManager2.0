@@ -32,33 +32,9 @@ public class DriverListServiceImpl implements DriverListService {
     private DriverListMapper driverlistMapper;
 
     @Override
-    public TableDataInfo selectAllDriverPage(SelectDriverRequest request) {
-
-        DriverList requestModel = BeanCopyUtils.copyBean(request,new DriverList());
-        List<DriverList> drivers = driverlistMapper.selectAllDriver(requestModel);
-        TableDataInfo rspData = new TableDataInfo();
-        List<DriverList> driverList = new ArrayList<DriverList>(Arrays.asList(new DriverList[drivers.size()]));
-        Collections.copy(driverList, drivers);
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
-            rspData.setRows(driverList);
-            rspData.setTotal(driverList.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
-        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
-        if (pageSize > driverList.size()) {
-            pageSize = driverList.size();
-        }
-        rspData.setRows(driverList.subList(pageNum, pageSize));
-        rspData.setTotal(driverList.size());
-        return rspData;
-    }
-
-    @Override
-    public List<SelectDriverResponse> selectAllDriver() {
+    public List<DriverList> selectAllDriver(SelectDriverRequest request) {
         List<DriverList> drivers = driverlistMapper.selectAll();
-        return (List<SelectDriverResponse>) BeanCopyUtils.copyBeanList(drivers, SelectDriverResponse.class);
+        return drivers;
     }
 
     @Override

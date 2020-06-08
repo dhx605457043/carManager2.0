@@ -3,12 +3,15 @@ package com.car.manager.controller;
 
 import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
+import com.car.manager.controller.response.SelectOrderResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
+import com.car.manager.util.BeanCopyUtils;
 import com.car.manager.util.poi.ExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +54,8 @@ public class CarListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectCarRequest request) {
-        return carListService.selectAllCarPage(request);
+        startPage();
+        return getDataTable(carListService.selectAllCar(request));
     }
 
     /**
@@ -85,7 +89,7 @@ public class CarListController extends BaseController{
     public String edit(@PathVariable("id") Integer id, Model model) {
         SelectCarRequest request = new SelectCarRequest();
         request.setId(id);
-        model.addAttribute("driverResponses",driverListService.selectAllDriver());
+        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectDriverRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
         model.addAttribute("carResponse",carListService.selectCarById(request));
         model.addAttribute("licenseResponses",licensePlateAreaListService.selectAllCarLicense());
@@ -118,9 +122,10 @@ public class CarListController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SelectCarRequest request) {
-        List<SelectCarResponse> list = carListService.selectAllCar(request);
+        List<CarListEx> list = carListService.selectAllCar(request);
+        List<SelectCarResponse> response = (List<SelectCarResponse>) BeanCopyUtils.copyBeanList(list,SelectCarResponse.class);
         ExcelUtil<SelectCarResponse> util = new ExcelUtil<SelectCarResponse>(SelectCarResponse.class);
-        return util.exportExcel(list, "车辆列表");
+        return util.exportExcel(response, "车辆列表");
     }
 
 

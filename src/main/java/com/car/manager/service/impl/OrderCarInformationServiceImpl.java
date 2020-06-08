@@ -29,25 +29,10 @@ public class OrderCarInformationServiceImpl implements OrderCarInformationServic
     private OrderCarInformationMapper orderCarInformationMapper;
 
     @Override
-    public TableDataInfo selectAllOrderCarInformationPage(SelectOrderCarInformationRequest request) {
+    public List<OrderCarInformationEx> selectAllOrderCarInformation(SelectOrderCarInformationRequest request) {
         OrderCarInformationEx requestModel = BeanCopyUtils.copyBean(request,new OrderCarInformationEx());
         List<OrderCarInformationEx> responseModel = orderCarInformationMapper.selectAllOrderCarInformation(requestModel);
-        List<SelectOrderCarInformationResponse> responses = (List<SelectOrderCarInformationResponse>) BeanCopyUtils.copyBeanList(responseModel, SelectOrderCarInformationResponse.class);
-        TableDataInfo rspData = new TableDataInfo();
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
-            rspData.setRows(responses);
-            rspData.setTotal(responses.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
-        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
-        if (pageSize > responses.size()) {
-            pageSize = responses.size();
-        }
-        rspData.setRows(responses.subList(pageNum, pageSize));
-        rspData.setTotal(responses.size());
-        return rspData;
+        return responseModel;
     }
 
     @Override

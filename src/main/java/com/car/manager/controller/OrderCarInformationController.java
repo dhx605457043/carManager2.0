@@ -7,6 +7,7 @@ import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.OrderCarInformationService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +44,8 @@ public class OrderCarInformationController extends BaseController{
     @PostMapping("/orderCarInformationList")
     @ResponseBody
     public TableDataInfo orderCarInformationList (SelectOrderCarInformationRequest request) {
-        return orderCarInformationService.selectAllOrderCarInformationPage(request);
+        startPage();
+        return getDataTable(orderCarInformationService.selectAllOrderCarInformation(request));
     }
 
     /**
@@ -53,7 +55,7 @@ public class OrderCarInformationController extends BaseController{
      */
     @GetMapping("/toAddOrderCarInformation")
     public String toAdd(Model model) {
-        model.addAttribute("driverResponses",driverListService.selectAllDriver());
+        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectDriverRequest()));
         model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
 
@@ -79,7 +81,7 @@ public class OrderCarInformationController extends BaseController{
         SelectOrderCarInformationRequest request = new SelectOrderCarInformationRequest();
         request.setId(id);
         model.addAttribute("orderCarInformationResponse",orderCarInformationService.selectOrderCarInformationById(request));;
-        model.addAttribute("driverResponses",driverListService.selectAllDriver());
+        model.addAttribute("driverResponses",driverListService.selectAllDriver(new SelectDriverRequest()));
         model.addAttribute("carResponses",carListService.selectAllCar(new SelectCarRequest()));
         model.addAttribute("cargoResponses",cargoListService.selectAllCargo());
         return prefix + "/OrderCarInformationEdit";

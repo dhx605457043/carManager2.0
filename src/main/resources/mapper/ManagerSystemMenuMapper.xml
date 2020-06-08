@@ -81,7 +81,7 @@ ORDER BY
 		)
 	</insert>
 
-	<delete id="deleteMenuById" parameterType="Long">
+	<delete id="deleteMenuById" parameterType="java.lang.Integer">
 	    delete from manager_system_menu where id = #{id} or parent_id = #{id}
 	</delete>
 	<sql id="selectMenuVo">

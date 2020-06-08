@@ -15,17 +15,32 @@
             oil_cost as oilCost,
             text_cost as textCost,
             other_cost as otherCost,
-            remark,
             profit,
+            order_car_number as orderCarNumber,
             statement_type as statementType
         from personal_statement
+        <trim suffix="" suffixOverrides=",">
         <where>
-            order_car_number = #{orderCarNumber}
             <if test="statementDate != null and statementDate != ''">
-                and statement_date like concat('%', #{statementDate}, '%')
+                and statement_date like concat('%', #{statementDate}, '%'),
+            </if>
+            <if test="orderCarId != null and orderCarId != ''">
+                and order_car_id = #{orderCarId},
             </if>
         </where>
+        </trim>
+
         order by statement_date asc
+    </select>
+    <select id="selectAllPersonalStatementCar" resultType="com.car.manager.entity.PersonalStatement" parameterType="com.car.manager.entity.PersonalStatement">
+    SELECT
+        order_car_id as orderCarId,
+        car.vehicle_number as orderCarNumber
+    FROM
+        personal_statement
+	LEFT JOIN car_list car ON car.id=personal_statement.order_car_id
+    GROUP BY
+     order_car_id
     </select>
 
 </mapper>

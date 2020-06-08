@@ -5,8 +5,11 @@ import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.controller.response.SelectDriverResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.DriverList;
 import com.car.manager.service.DriverListService;
+import com.car.manager.util.BeanCopyUtils;
 import com.car.manager.util.poi.ExcelUtil;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +42,8 @@ public class DriverListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectDriverRequest request) {
-        return driverListService.selectAllDriverPage(request);
+        startPage();
+        return getDataTable(driverListService.selectAllDriver(request));
     }
     /**
      * 新增司机
@@ -100,8 +104,9 @@ public class DriverListController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export() {
-        List<SelectDriverResponse> list = driverListService.selectAllDriver();
+        List<DriverList> list = driverListService.selectAllDriver(new SelectDriverRequest());
+        List<SelectDriverResponse> response = (List<SelectDriverResponse>) BeanCopyUtils.copyBeanList(list,SelectDriverResponse.class);
         ExcelUtil<SelectDriverResponse> util = new ExcelUtil<SelectDriverResponse>(SelectDriverResponse.class);
-        return util.exportExcel(list, "司机列表");
+        return util.exportExcel(response, "司机列表");
     }
 }

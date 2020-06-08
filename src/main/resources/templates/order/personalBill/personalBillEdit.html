@@ -18,7 +18,18 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">过江车号：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="orderCarId" name="orderCarId">
+                                <option
+                                        th:each="car:${carResponses}"
+                                        th:value="${car.id}"
+                                        th:text="${car.vehicleNumber}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">运费：</label>
                         <div class="col-sm-9">
@@ -92,11 +103,11 @@
                         <label class="col-sm-3 control-label">结账状态：</label>
                         <div class="radio check-box">
                             <label>
-                                <input type="radio" value="是" id="statementType" name="statementType"> <i></i>是</label>
+                                <input type="radio" checked="${personalStatementResponse.statementType} != '否' ? 'checked',''" value="是" id="statementType" name="statementType"> <i></i>是</label>
                         </div>
                         <div class="radio check-box">
                             <label>
-                                <input type="radio" checked="" value="否" id="statementType" name="statementType"> <i></i>否</label>
+                                <input type="radio" checked="${personalStatementResponse.statementType} != '否' ? '','checked'"  value="否" id="statementType" name="statementType"> <i></i>否</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -122,6 +133,9 @@
         rules:{
             statementDate:{
                 required: true,
+            },
+            orderCarId:{
+                required:true,
             },
             freight:{
                 required: true,
@@ -169,6 +183,9 @@
             statementDate: {
                 required: "日期不能为空",
             },
+            orderCarId: {
+                required: "账单车号不能为空",
+            },
             freight: {
                 required: "运费不能为空",
             },
@@ -186,7 +203,6 @@
             },
             statementType: {
                 required: "结账状态不能为空",
-
             },
         },
         focusCleanup: false
@@ -194,6 +210,7 @@
     function submitHandler() {
         if ($.validate.form()) {
             var data = $('#form-personalStatement-personalStatementUpdate').serializeArray();
+            var carNumber = $("#orderCarNumber").find("option:selected").text();
 
             var freight = $("#freight").val();
             var driverCost = $("#driverCost").val();
@@ -210,7 +227,7 @@
             var profit = freight - driverCost - quarantineCost - chinaCost - koreaCost - insurance - carRepair - oilCost - textCost - otherCost;
             console.log(textCost);
             data.push({"name": "profit", "value": profit});
-            data.push({"name": "profit", "value": profit});
+            data.push({"name": "orderCarNumber", "value": carNumber});
 
             $.operate.save(prefix + "/updatePersonalStatement", data);
         } else  {

@@ -7,4 +7,6 @@ public class SelectPersonalStatementRequest {
     private Integer id;
     private String statementDate;
     private String orderCarNumber;
+    private int orderCarId;
+
 }

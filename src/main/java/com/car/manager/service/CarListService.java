@@ -3,6 +3,7 @@ package com.car.manager.service;
 import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.Ex.CarListEx;
 
 import java.util.List;
 
@@ -13,8 +14,8 @@ import java.util.List;
  * @since 2020-05-14 17:58:00
  */
 public interface CarListService {
-    List<SelectCarResponse> selectAllCar (SelectCarRequest request);
-    TableDataInfo selectAllCarPage (SelectCarRequest request);
+    List<CarListEx> selectAllCar (SelectCarRequest request);
+//    TableDataInfo selectAllCarPage (SelectCarRequest request);
     int insertCar (InsertCarRequest request);
     boolean selectCarByCarNumber (SelectCarRequest request);
     SelectCarResponse selectCarById (SelectCarRequest request);

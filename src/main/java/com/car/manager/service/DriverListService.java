@@ -7,6 +7,7 @@ import com.car.manager.controller.request.SelectDriverRequest;
 import com.car.manager.controller.request.UpdateDriverRequest;
 import com.car.manager.controller.response.SelectDriverResponse;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.DriverList;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ import java.util.List;
  * @since 2020-05-15 14:21:56
  */
 public interface DriverListService {
-    TableDataInfo selectAllDriverPage (SelectDriverRequest request);
-    List<SelectDriverResponse> selectAllDriver ();
+//    TableDataInfo selectAllDriverPage (SelectDriverRequest request);
+    List<DriverList> selectAllDriver (SelectDriverRequest request);
     int insertDriver (InsertDriverRequest request);
     boolean selectDriverByIDCard (SelectDriverRequest request);
     SelectDriverResponse selectDriverById (SelectDriverRequest request);

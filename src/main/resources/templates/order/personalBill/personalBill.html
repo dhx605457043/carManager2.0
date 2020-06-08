@@ -7,12 +7,25 @@
 <div class="container-div">
     <div class="row">
         <div class="col-sm-12 search-collapse">
-            <form id="formId">
+            <form id="role-form">
                 <div class="select-list">
                     <ul>
                         <li>
-                            <label>订单日期：</label>
-                            <input type="text" class="time-input" name="statementDate"/>
+                            账单车号：
+                            <select id="orderCarId" name="orderCarId">
+                            <option value="0">所有</option>
+                            <option
+                                    th:each="personalStatementCar:${personalStatementCars}"
+                                    th:text="${personalStatementCar.orderCarNumber}"
+                                    th:value="${personalStatementCar.orderCarId}">
+                            </option>
+                            </select>
+                        </li>
+                        <li class="select-time">
+                            <label>账单时间： </label>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
                         </li>
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -37,25 +50,17 @@
         </div>
     </div>
 </div>
-<div class="container-div">
-    <div class="row">
-        <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table"></table>
-        </div>
-    </div>
-</div>
+
 <!--<th:block th:include="include :: footer" />-->
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     var prefix = "/personalStatementManager";
-    var carNumber = [[${carNumber}]];
-    console.log(carNumber);
 
     // alert(value);
     $(function() {
         var options = {
-            url: prefix + "/list/" + [[${carNumber}]],
-            createUrl: prefix + "/toAddPersonalStatement/" + [[${carNumber}]],
+            url: prefix + "/list",
+            createUrl: prefix + "/toAddPersonalStatement",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
@@ -67,6 +72,10 @@
                 {
                     field: 'statementDate',
                     title: '账单日期'
+                },
+                {
+                    field: 'orderCarNumber',
+                    title: '账单车号'
                 },
                 {
                     field: 'freight',

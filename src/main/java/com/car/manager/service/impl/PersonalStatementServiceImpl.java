@@ -35,36 +35,17 @@ public class PersonalStatementServiceImpl implements PersonalStatementService {
     private PersonalStatementMapper personalStatementMapper;
 
     @Override
-    public TableDataInfo selectAllPersonalStatementPage(SelectPersonalStatementRequest request) {
+    public List<PersonalStatement> selectAllPersonalStatement(SelectPersonalStatementRequest request) {
         PersonalStatement requestModel = BeanCopyUtils.copyBean(request,new PersonalStatement());
-        List<PersonalStatement> personalStatements = personalStatementMapper.selectAllPersonalStatement(requestModel);
-        TableDataInfo rspData = new TableDataInfo();
-        List<PersonalStatement> personalStatementList = new ArrayList<PersonalStatement>(Arrays.asList(new PersonalStatement[personalStatements.size()]));
-        Collections.copy(personalStatementList, personalStatements);
-        PageDomain pageDomain = TableSupport.buildPageRequest();
-        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize()) {
-            rspData.setRows(personalStatementList);
-            rspData.setTotal(personalStatementList.size());
-            return rspData;
-        }
-        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
-        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
-        if (pageSize > personalStatementList.size()) {
-            pageSize = personalStatementList.size();
-        }
-        rspData.setRows(personalStatementList.subList(pageNum, pageSize));
-        rspData.setTotal(personalStatementList.size());
-        return rspData;
+//        Example example = new Example(PersonalStatement.class);
+//        example.setOrderByClause("statement_type");
+        List<PersonalStatement> responseModel = personalStatementMapper.selectAllPersonalStatement(requestModel);
+        return responseModel;
     }
 
     @Override
-    public List<SelectPersonalStatementResponse> selectAllPersonalStatement() {
-        Example example = new Example(PersonalStatement.class);
-//        example.createCriteria().an("id", requestModel.getId());
-        example.setOrderByClause("statement_type");
-        List<PersonalStatement> responseModel = personalStatementMapper.selectByExample(example);
-        List<SelectPersonalStatementResponse> response = (List<SelectPersonalStatementResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectPersonalStatementResponse.class);
-        return response;
+    public List<PersonalStatement> selectAllPersonalStatementCar() {
+        return personalStatementMapper.selectAllPersonalStatementCar();
     }
 
     @Override

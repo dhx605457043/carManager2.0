@@ -5,6 +5,7 @@ import com.car.manager.controller.request.SelectPersonalStatementRequest;
 import com.car.manager.controller.request.UpdatePersonalStatementRequest;
 import com.car.manager.controller.response.SelectPersonalStatementResponse;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.PersonalStatement;
 
 import java.util.List;
 
@@ -15,8 +16,9 @@ import java.util.List;
  * @since 2020-06-02 12:38:12
  */
 public interface PersonalStatementService {
-    TableDataInfo selectAllPersonalStatementPage(SelectPersonalStatementRequest request);
-    List<SelectPersonalStatementResponse> selectAllPersonalStatement ();
+//    TableDataInfo selectAllPersonalStatementPage(SelectPersonalStatementRequest request);
+    List<PersonalStatement> selectAllPersonalStatement (SelectPersonalStatementRequest request);
+    List<PersonalStatement> selectAllPersonalStatementCar ();
     int insertPersonalStatement (InsertPersonalStatementRequest request);
     SelectPersonalStatementResponse selectPersonalStatementById (SelectPersonalStatementRequest request);
     int updatePersonalStatement (UpdatePersonalStatementRequest request);

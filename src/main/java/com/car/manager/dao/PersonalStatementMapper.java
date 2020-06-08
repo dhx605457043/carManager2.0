@@ -16,5 +16,5 @@ import tk.mybatis.mapper.common.Mapper;
 public interface PersonalStatementMapper extends Mapper<PersonalStatement>, BaseMapper<PersonalStatement> {
 
     List<PersonalStatement>selectAllPersonalStatement(PersonalStatement personalStatement);
-
+    List<PersonalStatement> selectAllPersonalStatementCar();
 }

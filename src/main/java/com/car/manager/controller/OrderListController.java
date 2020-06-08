@@ -5,7 +5,9 @@ import com.car.manager.controller.response.SelectDriverResponse;
 import com.car.manager.controller.response.SelectOrderResponse;
 import com.car.manager.core.domain.AjaxResult;
 import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.entity.Ex.OrderListEx;
 import com.car.manager.service.*;
+import com.car.manager.util.BeanCopyUtils;
 import com.car.manager.util.poi.ExcelUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +46,8 @@ public class OrderListController extends BaseController{
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(SelectOrderRequest request) {
-        return orderListService.selectAllOrderPage(request);
+        startPage();
+        return getDataTable(orderListService.selectAllOrder(request));
     }
     /**
      * 新增订单
@@ -105,8 +108,9 @@ public class OrderListController extends BaseController{
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export() {
-        List<SelectOrderResponse> list = orderListService.selectAllOrder();
+        List<OrderListEx> list = orderListService.selectAllOrder(new SelectOrderRequest());
+        List<SelectOrderResponse> response = (List<SelectOrderResponse>) BeanCopyUtils.copyBeanList(list,SelectOrderResponse.class);
         ExcelUtil<SelectOrderResponse> util = new ExcelUtil<SelectOrderResponse>(SelectOrderResponse.class);
-        return util.exportExcel(list, "订单列表");
+        return util.exportExcel(response, "订单列表");
     }
 }
