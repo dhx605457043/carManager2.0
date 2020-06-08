@@ -54,15 +54,18 @@
             exportUrl: prefix + "/export",
             modalName: "车辆列表",
             showPageGo: true,
-            pageList:[5,10,15],
+            pageList:[5,10,15,20],
             columns: [
                 {
                     field: 'orderDate',
-                    title: '过江日期'
+                    title: '过江日期',
+                    sortable:true
+
                 },
                 {
                     field: 'orderCarNumber',
-                    title: '过江车号'
+                    title: '过江车号',
+                    sortable:true
                 },
                 {
                     field: 'consignorName',
