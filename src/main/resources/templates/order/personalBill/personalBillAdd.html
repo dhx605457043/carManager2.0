@@ -205,7 +205,7 @@
     function submitHandler() {
         if ($.validate.form()) {
             var data = $('#form-personalStatement-personalStatementAdd').serializeArray();
-            var carNumber = $("#orderCarNumber").find("option:selected").text();
+            var carNumber = $("#orderCarId").find("option:selected").text();
             var freight = $("#freight").val();
             var driverCost = $("#driverCost").val();
             var chinaCost = $("#chinaCost").val();

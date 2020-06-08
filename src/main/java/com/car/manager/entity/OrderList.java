@@ -1,12 +1,8 @@
 package com.car.manager.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import sun.util.calendar.BaseCalendar;
-import sun.util.calendar.LocalGregorianCalendar;
 
 import javax.persistence.Id;
 
