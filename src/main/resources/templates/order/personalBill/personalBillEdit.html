@@ -103,11 +103,11 @@
                         <label class="col-sm-3 control-label">结账状态：</label>
                         <div class="radio check-box">
                             <label>
-                                <input type="radio" checked="${personalStatementResponse.statementType} != '否' ? 'checked',''" value="是" id="statementType" name="statementType"> <i></i>是</label>
+                                <input type="radio" th:checked="${personalStatementResponse.statementType} == '是'" value="是" id="statementType" name="statementType"> <i></i>是</label>
                         </div>
                         <div class="radio check-box">
                             <label>
-                                <input type="radio" checked="${personalStatementResponse.statementType} != '否' ? '','checked'"  value="否" id="statementType" name="statementType"> <i></i>否</label>
+                                <input type="radio" th:checked="${personalStatementResponse.statementType} == '否'"  value="否" id="statementType" name="statementType"> <i></i>否</label>
                         </div>
                     </div>
                     <div class="form-group">

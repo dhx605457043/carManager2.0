@@ -121,8 +121,8 @@
 <th:block th:include="include :: footer" />
 <script type="text/javascript">
     var prefix = "/personalStatementManager"
-    // var carNumber = "[[${carNumber}]]";
-
+    var carid = $("#orderCarId").val();
+    console.log(carid);
     $("#form-personalStatement-personalStatementAdd").validate({
         onkeyup: false,
         rules:{

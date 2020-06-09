@@ -79,7 +79,7 @@ public class PersonalStatement implements Serializable {
     * 订单车辆id
     */
 //    @Excel(name = "车辆号码")
-    private int orderCarId;
+    private Integer orderCarId;
     /**
     * 订单车辆号码
     */
