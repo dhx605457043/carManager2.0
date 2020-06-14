@@ -16,18 +16,18 @@ public class ManagerApplication {
         SpringApplication.run(ManagerApplication.class, args);
     }
 
-//    @Bean
-//    public WebMvcConfigurer webMvcConfigurer() {
-//
-//        WebMvcConfigurer adapter = new WebMvcConfigurer() {
-//            @Override
-//            public void addViewControllers(ViewControllerRegistry registry) {
-//                registry.addViewController("/index").setViewName("");
-//
-//                registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//            }
-//        };
-//        return adapter;
-//    }
+    @Bean
+    public WebMvcConfigurer webMvcConfigurer() {
+
+        WebMvcConfigurer adapter = new WebMvcConfigurer() {
+            @Override
+            public void addViewControllers(ViewControllerRegistry registry) {
+                registry.addViewController("/text.html").setViewName("text");
+
+                registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+            }
+        };
+        return adapter;
+    }
 }
 
