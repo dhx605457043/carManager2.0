@@ -1,4 +1,4 @@
-package com.car.manager.core.page;
+package com.car.manager.util.core.page;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,11 +1,9 @@
 package com.car.manager.controller;
 
-import javax.servlet.http.HttpSession;
-
-import com.car.manager.core.domain.AjaxResult;
-import com.car.manager.core.page.PageDomain;
-import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.core.page.TableSupport;
+import com.car.manager.util.core.domain.AjaxResult;
+import com.car.manager.util.core.page.PageDomain;
+import com.car.manager.util.core.page.TableDataInfo;
+import com.car.manager.util.core.page.TableSupport;
 import com.car.manager.util.StringUtils;
 import com.car.manager.util.sql.SqlUtil;
 import org.slf4j.Logger;

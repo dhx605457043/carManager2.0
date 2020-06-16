@@ -2,9 +2,6 @@ package com.car.manager.service.impl;
 
 import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
-import com.car.manager.core.page.PageDomain;
-import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.core.page.TableSupport;
 import com.car.manager.dao.CarListMapper;
 import com.car.manager.entity.CarList;
 import com.car.manager.entity.Ex.CarListEx;
@@ -13,9 +10,6 @@ import com.car.manager.util.BeanCopyUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

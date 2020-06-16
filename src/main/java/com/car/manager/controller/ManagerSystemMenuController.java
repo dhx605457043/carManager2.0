@@ -4,7 +4,7 @@ import com.car.manager.controller.request.InsertManagerSystemMenuRequest;
 import com.car.manager.controller.request.SelectManagerSystemMenuRequest;
 import com.car.manager.controller.request.UpdateManagerSystemMenuRequest;
 import com.car.manager.controller.response.SelectManagerSystemMenuResponse;
-import com.car.manager.core.domain.AjaxResult;
+import com.car.manager.util.core.domain.AjaxResult;
 import com.car.manager.entity.Ztree;
 import com.car.manager.service.ManagerSystemMenuService;
 import org.springframework.stereotype.Controller;

@@ -2,7 +2,6 @@ package com.car.manager.service;
 
 import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
-import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.entity.Ex.CarListEx;
 
 import java.util.List;
