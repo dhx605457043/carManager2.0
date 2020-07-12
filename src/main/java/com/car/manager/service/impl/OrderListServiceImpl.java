@@ -5,9 +5,6 @@ import com.car.manager.controller.request.InsertOrderRequest;
 import com.car.manager.controller.request.SelectOrderRequest;
 import com.car.manager.controller.request.UpdateOrderRequest;
 import com.car.manager.controller.response.SelectOrderResponse;
-import com.car.manager.core.page.PageDomain;
-import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.core.page.TableSupport;
 import com.car.manager.dao.OrderListMapper;
 import com.car.manager.entity.Ex.OrderListEx;
 import com.car.manager.entity.OrderList;
@@ -16,9 +13,6 @@ import com.car.manager.util.BeanCopyUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

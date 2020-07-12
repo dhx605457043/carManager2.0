@@ -1,4 +1,4 @@
-package com.car.manager.core.domain;
+package com.car.manager.util.core.domain;
 
 import com.car.manager.util.StringUtils;
 

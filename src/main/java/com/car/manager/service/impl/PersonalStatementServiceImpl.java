@@ -3,14 +3,8 @@ package com.car.manager.service.impl;
 import com.car.manager.controller.request.InsertPersonalStatementRequest;
 import com.car.manager.controller.request.SelectPersonalStatementRequest;
 import com.car.manager.controller.request.UpdatePersonalStatementRequest;
-import com.car.manager.controller.response.SelectOrderResponse;
 import com.car.manager.controller.response.SelectPersonalStatementResponse;
-import com.car.manager.core.page.PageDomain;
-import com.car.manager.core.page.TableDataInfo;
-import com.car.manager.core.page.TableSupport;
 import com.car.manager.dao.PersonalStatementMapper;
-import com.car.manager.entity.Ex.OrderListEx;
-import com.car.manager.entity.OrderList;
 import com.car.manager.entity.PersonalStatement;
 import com.car.manager.service.PersonalStatementService;
 import com.car.manager.util.BeanCopyUtils;
@@ -18,9 +12,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

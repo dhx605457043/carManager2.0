@@ -3,21 +3,25 @@ package com.car.manager.controller;
 
 import com.car.manager.controller.request.*;
 import com.car.manager.controller.response.SelectCarResponse;
-import com.car.manager.controller.response.SelectOrderResponse;
-import com.car.manager.core.domain.AjaxResult;
-import com.car.manager.core.page.TableDataInfo;
+import com.car.manager.util.core.domain.AjaxResult;
+import com.car.manager.util.core.page.TableDataInfo;
 import com.car.manager.entity.Ex.CarListEx;
 import com.car.manager.service.CarListService;
 import com.car.manager.service.CargoListService;
 import com.car.manager.service.DriverListService;
 import com.car.manager.service.LicensePlateAreaListService;
 import com.car.manager.util.BeanCopyUtils;
+import com.car.manager.util.QiNiuCloudUtil;
 import com.car.manager.util.poi.ExcelUtil;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -128,5 +132,26 @@ public class CarListController extends BaseController{
         return util.exportExcel(response, "车辆列表");
     }
 
+    @PostMapping("/updatePhoto")
+    @ResponseBody
+    public AjaxResult uploadImg(@RequestParam String file, Model model) throws IOException {
 
+        JSONObject jsonObject = JSONObject.fromObject(file);
+        MultipartFile fileModel = (MultipartFile) JSONObject.toBean(jsonObject, MultipartFile.class);
+        byte[] bytes = fileModel.getBytes();
+
+        String imageName = fileModel.getOriginalFilename();
+
+        QiNiuCloudUtil qinNiuUtil = new QiNiuCloudUtil();
+        try {
+            //使用base64方式上传到七牛云
+
+            String url = qinNiuUtil.put64image(bytes, imageName);
+            model.addAttribute("imageName",url);
+            System.out.println(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AjaxResult.success();
+    }
 }

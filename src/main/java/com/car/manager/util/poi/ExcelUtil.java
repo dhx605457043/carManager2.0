@@ -23,7 +23,7 @@ import com.car.manager.util.Global;
 import com.car.manager.util.poi.Excel.Type;
 import com.car.manager.util.poi.Excel.ColumnType;
 
-import com.car.manager.core.domain.AjaxResult;
+import com.car.manager.util.core.domain.AjaxResult;
 import com.car.manager.util.StringUtils;
 import com.car.manager.util.text.Convert;
 import org.apache.poi.ss.usermodel.Cell;

@@ -4,7 +4,6 @@ import com.car.manager.controller.request.InsertPersonalStatementRequest;
 import com.car.manager.controller.request.SelectPersonalStatementRequest;
 import com.car.manager.controller.request.UpdatePersonalStatementRequest;
 import com.car.manager.controller.response.SelectPersonalStatementResponse;
-import com.car.manager.core.page.TableDataInfo;
 import com.car.manager.entity.PersonalStatement;
 
 import java.util.List;
