@@ -16,9 +16,10 @@ public class SelectOrderCarInformationResponse {
     private Integer driverId;
     private Integer carDriverId;
 
+    private Integer orderCargoId;
+
     private String driverPhoneNumber;
     private String driverIdCard;
-    private String orderCargoName;
     private Integer orderTonnage;
     private String vehicleNumber;
     private String orderDate;
