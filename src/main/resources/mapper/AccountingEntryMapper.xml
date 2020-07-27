@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.car.manager.dao.AccountingEntryDao">
+
+    <resultMap type="com.car.manager.entity.AccountingEntry" id="AccountingEntryMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="accountingEntryUserId" column="accounting_entry_user_id" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="OTHER"/>
+        <result property="billDate" column="bill_date" jdbcType="VARCHAR"/>
+        <result property="payUserId" column="pay_user_id" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="statementType" column="statement_type" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultType="com.car.manager.entity.Ex.AccountingEntryEx" parameterType="com.car.manager.entity.Ex.AccountingEntryEx" >
+        select
+         ae.id,
+        ae.accounting_entry_user_id as accountingEntryUserId,
+        dl1.driver_name as accountingEntryUserName,
+        ae.money,
+        ae.bill_date as billDate,
+        ae.pay_user_id as payUserId,
+        dl2.driver_name as payUserName,
+        ae.remark,
+        ae.statement_type as statementType
+
+        from accounting_entry ae
+        left join driver_list dl1 on dl1.id = ae.accounting_entry_user_id
+        left join driver_list dl2 on dl2.id = ae.pay_user_id
+        where ae.id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AccountingEntryMap">
+        select
+          id, accounting_entry_user_id, money, bill_date, pay_user_id, remark
+        from cm.accounting_entry
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultType="com.car.manager.entity.Ex.AccountingEntryEx" parameterType="com.car.manager.entity.Ex.AccountingEntryEx" >
+        select
+        ae.id,
+        ae.accounting_entry_user_id as accountingEntryUserId,
+        dl1.driver_name as accountingEntryUserName,
+        ae.money,
+        ae.bill_date as billDate,
+        ae.pay_user_id as payUserId,
+        dl2.driver_name as payUserName,
+        ae.remark,
+        ae.statement_type as statementType
+        from accounting_entry ae
+        left join driver_list dl1 on dl1.id = ae.accounting_entry_user_id
+        left join driver_list dl2 on dl2.id = ae.pay_user_id
+        <where>
+            <if test="id != null">
+                and ae.id = #{id}
+            </if>
+            <if test="accountingEntryUserId != null">
+                and ae.accounting_entry_user_id = #{accountingEntryUserId}
+            </if>
+            <if test="money != null">
+                and ae.money = #{money}
+            </if>
+            <if test="billDate != null and billDate != ''">
+                and ae.bill_date = #{billDate}
+            </if>
+            <if test="payUserId != null">
+                and ae.pay_user_id = #{payUserId}
+            </if>
+            <if test="remark != null and remark != ''">
+                and ae.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update cm.accounting_entry
+        <set>
+            <if test="accountingEntryUserId != null">
+                accounting_entry_user_id = #{accountingEntryUserId},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="billDate != null and billDate != ''">
+                bill_date = #{billDate},
+            </if>
+            <if test="payUserId != null">
+                pay_user_id = #{payUserId},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from cm.accounting_entry where id = #{id}
+    </delete>
+
+</mapper>

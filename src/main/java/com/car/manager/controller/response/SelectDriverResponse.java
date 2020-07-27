@@ -3,6 +3,9 @@ package com.car.manager.controller.response;
 import com.car.manager.util.poi.Excel;
 import lombok.Data;
 
+/**
+ * @author Tom
+ */
 @Data
 public class SelectDriverResponse {
     private Integer id;
@@ -14,4 +17,6 @@ public class SelectDriverResponse {
     private String driverAddress;
     @Excel(name = "司机身份证")
     private String driverIdCard;
+    private String role;
+
 }

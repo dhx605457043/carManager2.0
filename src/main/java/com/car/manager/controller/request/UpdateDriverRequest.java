@@ -9,4 +9,6 @@ public class UpdateDriverRequest {
     private String driverPhoneNumber;
     private String driverAddress;
     private String driverIdCard;
+    private String role;
+
 }

@@ -8,7 +8,8 @@
         driver_name as driverName,
         driver_address as driverAddress,
         driver_id_card as driverIdCard,
-        driver_phone_number as driverPhoneNumber
+        driver_phone_number as driverPhoneNumber,
+        role
         from driver_list
 
         <where>
@@ -20,6 +21,9 @@
             </if>
             <if test="driverName != null and driverName != ''">
                 and driver_name like concat('%', #{driverName}, '%')
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
             </if>
         </where>
     </select>

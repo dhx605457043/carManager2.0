@@ -20,5 +20,5 @@ public class DriverList implements Serializable {
     private String driverPhoneNumber;
     private String driverAddress;
     private String driverIdCard;
-
+private String role;
 }

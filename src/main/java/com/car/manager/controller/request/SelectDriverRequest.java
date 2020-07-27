@@ -8,4 +8,6 @@ public class SelectDriverRequest {
     private String driverIdCard;
     private String driverPhoneNumber;
     private String driverName;
+    private String role;
+
 }

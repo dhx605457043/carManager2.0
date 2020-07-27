@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增车辆')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-accountingEntry-accountingEntryAdd">
+        <div class="form-group">
+            <div class="col-sm-9">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">记账时间：</label>
+                        <div class="col-sm-9">
+                            <div class="input-group date"> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                                <input type="text" class="time-input" id="billDate" name="billDate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">记录人：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="accountingEntryUserId" name="accountingEntryUserId">
+                                <option
+                                        th:each="user:${users}"
+                                        th:text="${user.driverName}"
+                                        th:value="${user.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">支付者：</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="payUserId" name="payUserId">
+                                <option
+                                        th:each="user:${users}"
+                                        th:text="${user.driverName}"
+                                        th:value="${user.id}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">金额：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="money" id="money" class="form-control" placeholder="请输入金额">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">备注：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="remark" id="remark" class="form-control" placeholder="其他费用备注信息" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">结账状态：</label>
+                        <div class="radio check-box">
+                            <label>
+                                <input type="radio" value="是" id="statementType" name="statementType"> <i></i>是</label>
+                        </div>
+                        <div class="radio check-box">
+                            <label>
+                                <input type="radio" checked="" value="否" id="statementType" name="statementType"> <i></i>否</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:include="include :: footer" />
+<script type="text/javascript">
+    var prefix = "/accountingEntryManager"
+
+    $("#form-accountingEntry-accountingEntryAdd").validate({
+        onkeyup: false,
+        rules:{
+            billDate:{
+                required: true,
+                date:true,
+            },
+            accountingEntryUserId:{
+                required:true,
+            },
+            payUserId:{
+                required: true,
+            },
+            money:{
+                required: true,
+                digits:true,
+            },
+            remark:{
+            },
+            statementType:{
+                required: true,
+            }
+        },
+        messages: {
+            billDate: {
+                required: "日期不能为空",
+            },
+            accountingEntryUserId: {
+                required: "记录者不能为空",
+            },
+            payUserId: {
+                required: "支付者不能为空",
+            },
+            money: {
+                required: "金额不能为空",
+            },
+            statementType: {
+                required: "结账状态不能为空",
+            },
+        },
+        focusCleanup: false
+    });
+    function submitHandler() {
+        if ($.validate.form()) {
+            var data = $('#form-accountingEntry-accountingEntryAdd').serializeArray();
+
+            $.operate.save(prefix + "/addAccountingEntry", data);
+        } else  {
+            console.log("false");
+        }
+    }
+</script>
+</body>
+</html>

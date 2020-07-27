@@ -27,7 +27,8 @@ public class DriverListServiceImpl implements DriverListService {
 
     @Override
     public List<DriverList> selectAllDriver(SelectDriverRequest request) {
-        List<DriverList> drivers = driverlistMapper.selectAll();
+        DriverList requestModel = BeanCopyUtils.copyBean(request,new DriverList());
+        List<DriverList> drivers = driverlistMapper.selectAllDriver(requestModel);
         return drivers;
     }
 
