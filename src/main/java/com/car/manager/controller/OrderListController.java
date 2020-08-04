@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * (Orderlist)表控制层
+ * (OrderList)表控制层
  *
  * @author makejava
  * @since 2020-05-15 15:21:43

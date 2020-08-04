@@ -34,10 +34,9 @@ public class AccountingEntryServiceImpl implements AccountingEntryService {
     }
 
     @Override
-    public List<SelectAccountingEntryResponse> selectAllAccountingEntry(SelectAccountingEntryRequest request) {
+    public List<AccountingEntryEx> selectAllAccountingEntry(SelectAccountingEntryRequest request) {
         AccountingEntry requestModel = BeanCopyUtils.copyBean(request,new AccountingEntry());
-        List<AccountingEntryEx> responseModel = accountingEntryDao.queryAll(requestModel);
-        List<SelectAccountingEntryResponse> response = (List<SelectAccountingEntryResponse>) BeanCopyUtils.copyBeanList(responseModel,SelectAccountingEntryResponse.class);
+        List<AccountingEntryEx> response = accountingEntryDao.queryAll(requestModel);
         return response;
     }
 

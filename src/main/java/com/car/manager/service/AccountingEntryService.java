@@ -5,6 +5,8 @@ import com.car.manager.controller.request.SelectAccountingEntryRequest;
 import com.car.manager.controller.request.UpdateAccountingEntryRequest;
 import com.car.manager.controller.response.SelectAccountingEntryResponse;
 import com.car.manager.entity.AccountingEntry;
+import com.car.manager.entity.Ex.AccountingEntryEx;
+
 import java.util.List;
 
 /**
@@ -16,7 +18,7 @@ import java.util.List;
 public interface AccountingEntryService {
 
     SelectAccountingEntryResponse selectOne (SelectAccountingEntryRequest request);
-    List<SelectAccountingEntryResponse> selectAllAccountingEntry(SelectAccountingEntryRequest request);
+    List<AccountingEntryEx> selectAllAccountingEntry(SelectAccountingEntryRequest request);
 
     int insertAccountingEntry(InsertAccountingEntryRequest request);
 
